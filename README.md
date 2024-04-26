@@ -32,4 +32,4 @@ We encourage contributions from everyone who is interested in improving or enhan
 
 ## 📄 License
 
-This project is open-sourced under the MIT License which allows for wide dissemination and contribution.
+This project is open-sourced under the MIT License which allows for wide dissemination and contribution. See the [LICENSE](LICENSE) file for details
