@@ -15,7 +15,7 @@ val provider = GoogleFont.Provider(
     certificates = R.array.com_google_android_gms_fonts_certs
 )
 
-val fontName = GoogleFont("Pixelify Sans")
+val fontName = GoogleFont("Press Start 2P")
 
 val fontFamily = FontFamily(
     Font(
@@ -23,6 +23,7 @@ val fontFamily = FontFamily(
         fontProvider = provider
     )
 )
+
 // Set of Material typography styles to start with
 val Typography = Typography(
     bodyLarge = TextStyle(
@@ -38,15 +39,16 @@ val Typography = Typography(
         fontSize = 14.sp,
         lineHeight = 20.0.sp,
         letterSpacing = 0.2.sp
-    )
-    /* Other default text styles to override
+    ),
     titleLarge = TextStyle(
-        fontFamily = FontFamily.Default,
+        fontFamily = fontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 22.sp,
         lineHeight = 28.sp,
         letterSpacing = 0.sp
     ),
+    /* Other default text styles to override
+
     labelSmall = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Medium,
