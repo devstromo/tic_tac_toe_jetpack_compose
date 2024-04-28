@@ -2,7 +2,6 @@ package com.devstromo.advancedtictactoe.presentation
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,7 +18,7 @@ import androidx.compose.ui.unit.dp
 
 @SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
-fun BoardScreen() {
+fun GameScreen() {
     val typo = MaterialTheme.typography
     Column(
         modifier = Modifier
