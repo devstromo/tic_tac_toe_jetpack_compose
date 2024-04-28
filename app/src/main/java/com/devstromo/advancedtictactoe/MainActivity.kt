@@ -9,12 +9,16 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.devstromo.advancedtictactoe.di.appModule
 import com.devstromo.advancedtictactoe.presentation.GameScreen
+import com.devstromo.advancedtictactoe.presentation.GameViewModel
 import com.devstromo.advancedtictactoe.ui.theme.AdvancedTicTacToeTheme
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.startKoin
 
 class MainActivity : ComponentActivity() {
+
+    private val viewModel: GameViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         startKoin {
