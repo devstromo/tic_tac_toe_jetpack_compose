@@ -1,10 +1,11 @@
 package com.devstromo.advancedtictactoe.presentation
 
 import com.devstromo.advancedtictactoe.domain.CellState
+import com.devstromo.advancedtictactoe.domain.Player
 
 data class GameUiState(
     val isLoading: Boolean = true,
-    val isPlayingPlayerOne: Boolean = true,
+    val currentPlayer: Player = Player.PLAYER_1,
     val board: Array<Array<CellState>> = Array(3) {
         Array(
             3
@@ -18,7 +19,7 @@ data class GameUiState(
         other as GameUiState
 
         if (isLoading != other.isLoading) return false
-        if (isPlayingPlayerOne != other.isPlayingPlayerOne) return false
+        if (currentPlayer != other.currentPlayer) return false
         if (!board.contentDeepEquals(other.board)) return false
 
         return true
@@ -26,8 +27,9 @@ data class GameUiState(
 
     override fun hashCode(): Int {
         var result = isLoading.hashCode()
-        result = 31 * result + isPlayingPlayerOne.hashCode()
+        result = 31 * result + currentPlayer.hashCode()
         result = 31 * result + board.contentDeepHashCode()
         return result
     }
+
 }
