@@ -61,6 +61,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.compose.google.fonts)
     implementation(libs.koin.android)
+    implementation(libs.androidx.graphics.shapes.android)
     testImplementation(libs.jupiter.junit5)
     testRuntimeOnly(libs.jupiter.engine.junit5)
     androidTestImplementation(libs.androidx.junit)
