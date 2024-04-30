@@ -1,6 +1,7 @@
 package com.devstromo.advancedtictactoe.presentation.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -37,6 +38,16 @@ fun PlayerMarker(
                     bottomEnd = 20.dp,
                     bottomStart = 20.dp
                 )
+            )
+            .border(
+                width = 1.dp,
+                color = Color.White,
+                RoundedCornerShape(
+                    topStart = 50.dp,
+                    topEnd = 50.dp,
+                    bottomEnd = 20.dp,
+                    bottomStart = 20.dp
+                ),
             )
     ) {
         Box {
@@ -93,6 +104,11 @@ class PlayMakerPreviewParameterProvider : PreviewParameterProvider<PlayerMakerSt
         PlayerMakerState(
             playerMarketType = PlayerMarkerType.O,
             itemsCount = 2,
+        ),
+        PlayerMakerState(
+            playerMarketType = PlayerMarkerType.O,
+            itemsCount = 2,
+            isSelected = true
         ),
     )
 }
