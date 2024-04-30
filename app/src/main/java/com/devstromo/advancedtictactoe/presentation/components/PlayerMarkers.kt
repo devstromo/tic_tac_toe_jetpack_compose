@@ -17,15 +17,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import com.devstromo.advancedtictactoe.ui.theme.AdvancedTicTacToeTheme
 import com.devstromo.advancedtictactoe.ui.theme.kMainDarkThemeColor
 
 @Composable
 fun PlayerMarker(
-    playerMarketType: PlayerMarkerType = PlayerMarkerType.X,
-    itemsCount: Int = 0,
-    isSelected: Boolean = false
+    state: PlayMakerState = PlayMakerState()
 ) {
     Box(
         modifier = Modifier
@@ -46,7 +46,7 @@ fun PlayerMarker(
             Text(
                 modifier = Modifier
                     .align(Alignment.Center),
-                text = if (PlayerMarkerType.X == playerMarketType)
+                text = if (PlayerMarkerType.X == state.playerMarketType)
                     "X"
                 else
                     "O",
@@ -60,7 +60,7 @@ fun PlayerMarker(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(bottom = 10.dp),
-            text = "$itemsCount",
+            text = "${state.itemsCount}",
             style = TextStyle(
                 color = Color.White,
                 fontWeight = FontWeight.Bold,
@@ -72,8 +72,20 @@ fun PlayerMarker(
 
 @Preview
 @Composable
-private fun PlayerMarkerPreview() {
+private fun PlayerMarkerPreview(
+    @PreviewParameter(PlayMakerPreviewParameterProvider::class) state: PlayMakerState
+) {
     AdvancedTicTacToeTheme {
-        PlayerMarker()
+        PlayerMarker(state)
     }
+}
+
+class PlayMakerPreviewParameterProvider : PreviewParameterProvider<PlayMakerState> {
+    override val values = sequenceOf(
+        PlayMakerState(),
+        PlayMakerState(
+            playerMarketType = PlayerMarkerType.O,
+            itemsCount = 2,
+        ),
+    )
 }
