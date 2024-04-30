@@ -25,7 +25,7 @@ import com.devstromo.advancedtictactoe.ui.theme.kMainDarkThemeColor
 
 @Composable
 fun PlayerMarker(
-    state: PlayMakerState = PlayMakerState()
+    state: PlayerMakerState = PlayerMakerState()
 ) {
     Box(
         modifier = Modifier
@@ -73,17 +73,17 @@ fun PlayerMarker(
 @Preview
 @Composable
 private fun PlayerMarkerPreview(
-    @PreviewParameter(PlayMakerPreviewParameterProvider::class) state: PlayMakerState
+    @PreviewParameter(PlayMakerPreviewParameterProvider::class) state: PlayerMakerState
 ) {
     AdvancedTicTacToeTheme {
         PlayerMarker(state)
     }
 }
 
-class PlayMakerPreviewParameterProvider : PreviewParameterProvider<PlayMakerState> {
+class PlayMakerPreviewParameterProvider : PreviewParameterProvider<PlayerMakerState> {
     override val values = sequenceOf(
-        PlayMakerState(),
-        PlayMakerState(
+        PlayerMakerState(),
+        PlayerMakerState(
             playerMarketType = PlayerMarkerType.O,
             itemsCount = 2,
         ),
