@@ -32,7 +32,7 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-compose-google-fonts = { group = "androidx.compose.ui", name = "ui-text-google-fonts", version.ref = "googleFonts" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koinVersion" }
-androidx-graphics-shapes-android = { group = "androidx.graphics", name = "graphics-shapes-android ", version.ref = "graphicsShapesAndroid" }
+androidx-graphics-shapes-android = { group = "androidx.graphics", name = "graphics-shapes-android", version.ref = "graphicsShapesAndroid" }
 androidx-graphics-path-android = { group = "androidx.graphics", name = "graphics-path", version.ref = "graphicsPathAndroid" }
 androidx-graphics-core-android = { group = "androidx.graphics", name = "graphics-core", version.ref = "graphicsCoreAndroid" }
 
