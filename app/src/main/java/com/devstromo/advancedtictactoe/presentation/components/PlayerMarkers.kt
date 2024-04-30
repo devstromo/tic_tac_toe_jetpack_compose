@@ -3,33 +3,47 @@ package com.devstromo.advancedtictactoe.presentation.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithCache
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asComposePath
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.graphics.shapes.CornerRounding
 import androidx.graphics.shapes.RoundedPolygon
 import androidx.graphics.shapes.toPath
 import com.devstromo.advancedtictactoe.ui.theme.AdvancedTicTacToeTheme
+import com.devstromo.advancedtictactoe.ui.theme.kMainDarkThemeColor
 
 @Composable
 fun PlayerMarker(
     playerMarketType: PlayerMarkerType = PlayerMarkerType.X,
-    itemsCount: Int = 0
+    itemsCount: Int = 0,
+    isSelected: Boolean = false
 ) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally
+    Box(
+        modifier = Modifier
+            .width(40.dp)
+            .height(80.dp)
+            .background(
+                color = kMainDarkThemeColor,
+                shape = RoundedCornerShape(10.dp)
+            )
     ) {
-
         Box {
             Box(
                 modifier = Modifier
@@ -43,41 +57,26 @@ fun PlayerMarker(
                 text = if (PlayerMarkerType.X == playerMarketType)
                     "X"
                 else
-                    "O"
-
+                    "O",
+                style = TextStyle(
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold,
+                )
             )
         }
-        Box(
-            modifier = Modifier
-                .drawWithCache {
-                    val roundedPolygon = RoundedPolygon(
-                        numVertices = 4,
-                        radius = size.minDimension / 2,
-                        centerX = size.width / 2,
-                        centerY = size.height / 2,
-                        rounding = CornerRounding(
-                            size.minDimension / 10f,
-                            smoothing = 0.1f
-                        )
-                    )
-                    val roundedPolygonPath = roundedPolygon.toPath().asComposePath()
-                    onDrawBehind {
-                        drawPath(roundedPolygonPath, color = Color.Black)
-                    }
-                }
-                .graphicsLayer {
-                    rotationY = 35.0f
-                    rotationX = 12.0f
-                    cameraDistance = 12.dp.toPx()
-                }
-                .size(100.dp)
-        )
         Text(
-            text = "$itemsCount"
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(bottom = 10.dp),
+            text = "$itemsCount",
+            style = TextStyle(
+                color = Color.White,
+                fontWeight = FontWeight.Bold,
+            )
 
         )
-
     }
+
 }
 
 @Preview
