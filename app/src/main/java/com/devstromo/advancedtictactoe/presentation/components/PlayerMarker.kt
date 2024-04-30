@@ -34,6 +34,10 @@ fun PlayerMarker(
         bottomEnd = 20.dp,
         bottomStart = 20.dp
     )
+
+    val roundedShape = RoundedCornerShape(
+        50.dp
+    )
     Box(
         modifier = Modifier
             .width(40.dp)
@@ -56,10 +60,15 @@ fun PlayerMarker(
                     .size(40.dp)
                     .background(
                         Color.Red,
-                        shape = RoundedCornerShape(
-                            50.dp
-                        )
+                        shape = roundedShape
                     )
+                    .modifyIf(state.isSelected) {
+                        border(
+                            width = 1.dp,
+                            color = Color.White,
+                            roundedShape,
+                        )
+                    }
             )
             Text(
                 modifier = Modifier
