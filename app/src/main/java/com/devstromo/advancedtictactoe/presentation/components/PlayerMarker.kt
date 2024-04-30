@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
+import com.devstromo.advancedtictactoe.config.extensions.modifyIf
 import com.devstromo.advancedtictactoe.ui.theme.AdvancedTicTacToeTheme
 import com.devstromo.advancedtictactoe.ui.theme.kMainDarkThemeColor
 
@@ -41,11 +42,13 @@ fun PlayerMarker(
             .background(
                 color = kMainDarkThemeColor
             )
-            .border(
-                width = 1.dp,
-                color = Color.White,
-                shape,
-            )
+            .modifyIf(state.isSelected) {
+                border(
+                    width = 1.dp,
+                    color = Color.White,
+                    shape,
+                )
+            }
     ) {
         Box {
             Box(
