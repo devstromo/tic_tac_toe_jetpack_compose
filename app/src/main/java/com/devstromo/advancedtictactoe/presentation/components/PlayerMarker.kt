@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -26,28 +27,24 @@ import com.devstromo.advancedtictactoe.ui.theme.kMainDarkThemeColor
 fun PlayerMarker(
     state: PlayerMakerState = PlayerMakerState()
 ) {
+    val shape = RoundedCornerShape(
+        topStart = 50.dp,
+        topEnd = 50.dp,
+        bottomEnd = 20.dp,
+        bottomStart = 20.dp
+    )
     Box(
         modifier = Modifier
             .width(40.dp)
             .height(80.dp)
+            .clip(shape)
             .background(
-                color = kMainDarkThemeColor,
-                shape = RoundedCornerShape(
-                    topStart = 50.dp,
-                    topEnd = 50.dp,
-                    bottomEnd = 20.dp,
-                    bottomStart = 20.dp
-                )
+                color = kMainDarkThemeColor
             )
             .border(
                 width = 1.dp,
                 color = Color.White,
-                RoundedCornerShape(
-                    topStart = 50.dp,
-                    topEnd = 50.dp,
-                    bottomEnd = 20.dp,
-                    bottomStart = 20.dp
-                ),
+                shape,
             )
     ) {
         Box {
