@@ -22,7 +22,6 @@ class MainActivity : ComponentActivity() {
     private val viewModel: GameViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        WindowCompat.setDecorFitsSystemWindows(window, false)
         startKoin {
             androidLogger()
             androidContext(this@MainActivity)
