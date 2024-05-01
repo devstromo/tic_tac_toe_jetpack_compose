@@ -45,7 +45,10 @@ fun GameScreen() {
                 textAlign = TextAlign.Center,
             )
         }
-        Row {
+        Row(
+            modifier = Modifier
+                .padding(vertical = 10.dp)
+        ) {
             PlayerMarker(
                 state = PlayerMakerState(
                     PlayerMarkerType.X,
