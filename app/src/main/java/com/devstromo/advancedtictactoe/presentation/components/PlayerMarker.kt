@@ -80,7 +80,7 @@ fun PlayerMarker(
         )
         Text(
             modifier = Modifier
-                .padding(top = 20.dp)
+                .padding(top = 35.dp)
                 .align(Alignment.Center),
             text = if (PlayerMarkerType.X == state.playerMarketType)
                 "X"
