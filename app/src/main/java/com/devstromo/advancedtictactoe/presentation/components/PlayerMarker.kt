@@ -45,12 +45,12 @@ fun PlayerMarker(
     val roundedShape = RoundedCornerShape(
         50.dp
     )
-    val boxSize = 50.dp
+    val boxSize = 80.dp
     val drawable = painterResource(id = R.drawable.icon_1)
     Box(
         modifier = Modifier
             .width(boxSize)
-            .height(100.dp)
+            .height(160.dp)
             .clip(shape)
             .background(
                 color = kMainDarkThemeColor
@@ -80,13 +80,13 @@ fun PlayerMarker(
         )
         Text(
             modifier = Modifier
-                .padding(top = 35.dp)
+                .padding(top = 55.dp)
                 .align(Alignment.Center),
             text = if (PlayerMarkerType.X == state.playerMarketType)
                 "X"
             else
                 "O",
-            style = typo.bodyMedium.copy(
+            style = typo.titleLarge.copy(
                 color = Color.White,
                 fontWeight = FontWeight.Bold,
             )
@@ -96,10 +96,9 @@ fun PlayerMarker(
                 .align(Alignment.BottomCenter)
                 .padding(bottom = 2.dp),
             text = "${state.itemsCount}",
-            style = TextStyle(
+            style = typo.bodySmall.copy(
                 color = Color.White,
                 fontWeight = FontWeight.Bold,
-                fontSize = 10.sp
             )
         )
 
