@@ -45,7 +45,10 @@ fun GameScreen() {
         }
         Row {
             PlayerMarker(
-                state = PlayerMakerState(PlayerMarkerType.O)
+                state = PlayerMakerState(
+                    PlayerMarkerType.X,
+                    isSelected = true
+                )
             )
             PlayerMarker(
                 state = PlayerMakerState(PlayerMarkerType.O)
