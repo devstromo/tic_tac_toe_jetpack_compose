@@ -1,5 +1,7 @@
 package com.devstromo.advancedtictactoe.presentation.components
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
@@ -8,18 +10,30 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
+import com.devstromo.advancedtictactoe.R
 import com.devstromo.advancedtictactoe.config.extensions.modifyIf
 import com.devstromo.advancedtictactoe.ui.theme.AdvancedTicTacToeTheme
 import com.devstromo.advancedtictactoe.ui.theme.kMainDarkThemeColor
@@ -38,6 +52,7 @@ fun PlayerMarker(
     val roundedShape = RoundedCornerShape(
         50.dp
     )
+
     Box(
         modifier = Modifier
             .width(40.dp)
@@ -59,7 +74,7 @@ fun PlayerMarker(
                 modifier = Modifier
                     .size(40.dp)
                     .background(
-                        Color.Red,
+                        color = Color.Red,
                         shape = roundedShape
                     )
                     .modifyIf(state.isSelected) {
@@ -70,19 +85,20 @@ fun PlayerMarker(
                         )
                     }
             )
-            Text(
-                modifier = Modifier
-                    .align(Alignment.Center),
-                text = if (PlayerMarkerType.X == state.playerMarketType)
-                    "X"
-                else
-                    "O",
-                style = TextStyle(
-                    color = Color.White,
-                    fontWeight = FontWeight.Bold,
-                )
-            )
+
         }
+        Text(
+            modifier = Modifier
+                .align(Alignment.Center),
+            text = if (PlayerMarkerType.X == state.playerMarketType)
+                "X"
+            else
+                "O",
+            style = TextStyle(
+                color = Color.White,
+                fontWeight = FontWeight.Bold,
+            )
+        )
         Text(
             modifier = Modifier
                 .align(Alignment.BottomCenter)

@@ -15,6 +15,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.devstromo.advancedtictactoe.presentation.components.PlayerMakerState
+import com.devstromo.advancedtictactoe.presentation.components.PlayerMarker
+import com.devstromo.advancedtictactoe.presentation.components.PlayerMarkerType
 
 @SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
@@ -39,6 +42,15 @@ fun GameScreen() {
                 ),
                 textAlign = TextAlign.Center,
             )
+        }
+        Row {
+            PlayerMarker(
+                state = PlayerMakerState(PlayerMarkerType.O)
+            )
+            PlayerMarker(
+                state = PlayerMakerState(PlayerMarkerType.O)
+            )
+
         }
         GameStats()
         BoardContent()
