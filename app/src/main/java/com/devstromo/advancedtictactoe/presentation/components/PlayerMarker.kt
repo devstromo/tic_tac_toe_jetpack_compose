@@ -36,6 +36,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.devstromo.advancedtictactoe.R
 import com.devstromo.advancedtictactoe.config.extensions.modifyIf
 import com.devstromo.advancedtictactoe.ui.theme.AdvancedTicTacToeTheme
@@ -89,7 +90,7 @@ fun PlayerMarker(
         )
         Text(
             modifier = Modifier
-                .padding(top = 15.dp)
+                .padding(top = 20.dp)
                 .align(Alignment.Center),
             text = if (PlayerMarkerType.X == state.playerMarketType)
                 "X"
@@ -103,11 +104,12 @@ fun PlayerMarker(
         Text(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                ,
+                .padding(bottom = 2.dp),
             text = "${state.itemsCount}",
             style = TextStyle(
                 color = Color.White,
                 fontWeight = FontWeight.Bold,
+                fontSize = 10.sp
             )
         )
 
