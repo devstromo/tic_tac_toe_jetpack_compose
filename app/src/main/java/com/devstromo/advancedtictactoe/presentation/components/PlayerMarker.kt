@@ -5,6 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -16,10 +17,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.imageResource
@@ -52,7 +55,7 @@ fun PlayerMarker(
     val roundedShape = RoundedCornerShape(
         50.dp
     )
-
+    val drawable = painterResource(id = R.drawable.icon_1)
     Box(
         modifier = Modifier
             .width(40.dp)
@@ -69,26 +72,24 @@ fun PlayerMarker(
                 )
             }
     ) {
-        Box {
-            Box(
-                modifier = Modifier
-                    .size(40.dp)
-                    .background(
-                        color = Color.Red,
-                        shape = roundedShape
+        Image(
+            painterResource(R.drawable.icon_1),
+            contentDescription = "",
+            contentScale = ContentScale.Fit,
+            modifier = Modifier
+                .size(40.dp)
+                .clip(roundedShape)
+                .modifyIf(state.isSelected) {
+                    border(
+                        width = 1.dp,
+                        color = Color.White,
+                        roundedShape,
                     )
-                    .modifyIf(state.isSelected) {
-                        border(
-                            width = 1.dp,
-                            color = Color.White,
-                            roundedShape,
-                        )
-                    }
-            )
-
-        }
+                }
+        )
         Text(
             modifier = Modifier
+                .padding(top = 15.dp)
                 .align(Alignment.Center),
             text = if (PlayerMarkerType.X == state.playerMarketType)
                 "X"
@@ -102,13 +103,14 @@ fun PlayerMarker(
         Text(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .padding(bottom = 10.dp),
+                ,
             text = "${state.itemsCount}",
             style = TextStyle(
                 color = Color.White,
                 fontWeight = FontWeight.Bold,
             )
         )
+
     }
 
 }
