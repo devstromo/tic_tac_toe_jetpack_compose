@@ -61,14 +61,8 @@ fun GameScreen() {
             )
 
         }
-        GameStats()
         BoardContent()
     }
-}
-
-@Composable
-fun GameStats() {
-    Text(text = "Game Stats")
 }
 
 @Composable
