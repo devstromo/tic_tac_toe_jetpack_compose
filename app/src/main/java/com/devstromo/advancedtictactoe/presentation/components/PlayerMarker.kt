@@ -45,11 +45,12 @@ fun PlayerMarker(
     val roundedShape = RoundedCornerShape(
         50.dp
     )
+    val boxSize = 50.dp
     val drawable = painterResource(id = R.drawable.icon_1)
     Box(
         modifier = Modifier
-            .width(40.dp)
-            .height(80.dp)
+            .width(boxSize)
+            .height(100.dp)
             .clip(shape)
             .background(
                 color = kMainDarkThemeColor
@@ -63,11 +64,11 @@ fun PlayerMarker(
             }
     ) {
         Image(
-            painterResource(R.drawable.icon_1),
+            drawable,
             contentDescription = "",
             contentScale = ContentScale.Fit,
             modifier = Modifier
-                .size(40.dp)
+                .size(boxSize)
                 .clip(roundedShape)
                 .modifyIf(state.isSelected) {
                     border(
