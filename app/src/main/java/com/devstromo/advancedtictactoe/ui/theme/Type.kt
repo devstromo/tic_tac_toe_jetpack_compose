@@ -23,38 +23,25 @@ val fontFamily = FontFamily(
         fontProvider = provider
     )
 )
-
-// Set of Material typography styles to start with
+private val defaultTypography = Typography()
 val Typography = Typography(
-    bodyLarge = TextStyle(
-        fontFamily = fontFamily,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-        lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
-    ),
-    bodyMedium = TextStyle(
-        fontFamily = fontFamily,
-        fontWeight = FontWeight.Normal,
-        fontSize = 14.sp,
-        lineHeight = 20.0.sp,
-        letterSpacing = 0.2.sp
-    ),
-    titleLarge = TextStyle(
-        fontFamily = fontFamily,
-        fontWeight = FontWeight.Normal,
-        fontSize = 22.sp,
-        lineHeight = 28.sp,
-        letterSpacing = 0.sp
-    ),
-    /* Other default text styles to override
+    bodyLarge = defaultTypography.bodyLarge.copy(fontFamily = fontFamily),
+    bodyMedium = defaultTypography.bodyMedium.copy(fontFamily = fontFamily),
+    bodySmall = defaultTypography.bodySmall.copy(fontFamily = fontFamily),
 
-    labelSmall = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Medium,
-        fontSize = 11.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.5.sp
-    )
-    */
+    titleLarge = defaultTypography.titleLarge.copy(fontFamily = fontFamily),
+    titleMedium = defaultTypography.titleMedium.copy(fontFamily = fontFamily),
+    titleSmall = defaultTypography.titleSmall.copy(fontFamily = fontFamily),
+
+    displayLarge = defaultTypography.displayLarge.copy(fontFamily = fontFamily),
+    displayMedium = defaultTypography.displayMedium.copy(fontFamily = fontFamily),
+    displaySmall = defaultTypography.displaySmall.copy(fontFamily = fontFamily),
+
+    labelLarge = defaultTypography.labelLarge.copy(fontFamily = fontFamily),
+    labelMedium = defaultTypography.labelMedium.copy(fontFamily = fontFamily),
+    labelSmall = defaultTypography.labelSmall.copy(fontFamily = fontFamily),
+
+    headlineLarge = defaultTypography.headlineLarge.copy(fontFamily = fontFamily),
+    headlineMedium = defaultTypography.headlineMedium.copy(fontFamily = fontFamily),
+    headlineSmall = defaultTypography.headlineSmall.copy(fontFamily = fontFamily),
 )
