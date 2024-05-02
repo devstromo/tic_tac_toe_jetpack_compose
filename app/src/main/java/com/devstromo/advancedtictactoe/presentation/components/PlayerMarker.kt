@@ -29,6 +29,8 @@ import com.devstromo.advancedtictactoe.R
 import com.devstromo.advancedtictactoe.config.extensions.modifyIf
 import com.devstromo.advancedtictactoe.ui.theme.AdvancedTicTacToeTheme
 import com.devstromo.advancedtictactoe.ui.theme.kMainDarkThemeColor
+import com.devstromo.advancedtictactoe.ui.theme.kPlayerOMarkColor
+import com.devstromo.advancedtictactoe.ui.theme.kPlayerXMarkColor
 
 @Composable
 fun PlayerMarker(
@@ -47,6 +49,7 @@ fun PlayerMarker(
     )
     val boxSize = 80.dp
     val drawable = painterResource(id = R.drawable.icon_1)
+    val isPlayerOne = PlayerMarkerType.X == state.playerMarketType
     Box(
         modifier = Modifier
             .width(boxSize)
@@ -82,12 +85,12 @@ fun PlayerMarker(
             modifier = Modifier
                 .padding(top = 55.dp)
                 .align(Alignment.Center),
-            text = if (PlayerMarkerType.X == state.playerMarketType)
+            text = if (isPlayerOne)
                 "X"
             else
                 "O",
             style = typo.titleLarge.copy(
-                color = Color.White,
+                color = if (isPlayerOne) kPlayerXMarkColor else kPlayerOMarkColor,
                 fontWeight = FontWeight.Bold,
             )
         )

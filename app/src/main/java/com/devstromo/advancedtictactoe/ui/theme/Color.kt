@@ -12,5 +12,5 @@ val Pink40 = Color(0xFF7D5260)
 
 val kMainDarkThemeColor = Color(0xFF3F4E6B)
 val kSecondaryDarkThemeColor = Color(0xFF232C46)
-val kPlayerXMarkColor = Color(0xFF528920)
-val kPlayerOMarkColor = Color(0xFFFF9B8D)
+val kPlayerXMarkColor = Color(0xFFD8FFB4)
+val kPlayerOMarkColor = Color(0xFFFFDEDE)
