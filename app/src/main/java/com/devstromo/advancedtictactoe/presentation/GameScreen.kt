@@ -74,12 +74,11 @@ fun GameScreen() {
 @Composable
 fun BoardContent() {
     val color = MaterialTheme.colorScheme
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(
-                horizontal = 20.dp,
-                vertical = 20.dp
+                horizontal = 50.dp,
             )
             .background(
                 color = color.primary,
@@ -88,31 +87,31 @@ fun BoardContent() {
                 )
             )
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(
-                    vertical = 20.dp,
-                    horizontal = 20.dp
-                ),
-            horizontalArrangement = Arrangement.SpaceAround
-        ) {
-            BoardKeyBox(
-                onItemSelected = {
+        BoardRow(
+            onItemSelected = {}
+        )
+        BoardRow(
+            onItemSelected = {}
+        )
+        BoardRow(
+            onItemSelected = {}
+        )
+    }
+}
 
-                }
-            )
-            BoardKeyBox(
-                onItemSelected = {
-
-                }
-            )
-            BoardKeyBox(
-                onItemSelected = {
-
-                }
-            )
-        }
+@Composable
+fun BoardRow(
+    onItemSelected: () -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 10.dp),
+        horizontalArrangement = Arrangement.SpaceAround
+    ) {
+        BoardKeyBox(onItemSelected = onItemSelected)
+        BoardKeyBox(onItemSelected = onItemSelected)
+        BoardKeyBox(onItemSelected = onItemSelected)
     }
 }
 
