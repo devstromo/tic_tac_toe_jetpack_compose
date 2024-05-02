@@ -1,14 +1,20 @@
 package com.devstromo.advancedtictactoe.presentation
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -67,5 +73,64 @@ fun GameScreen() {
 
 @Composable
 fun BoardContent() {
-    Text(text = "Board Content")
+    val color = MaterialTheme.colorScheme
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                horizontal = 20.dp,
+                vertical = 20.dp
+            )
+            .background(
+                color = color.primary,
+                shape = RoundedCornerShape(
+                    20.dp
+                )
+            )
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(
+                    vertical = 20.dp,
+                    horizontal = 20.dp
+                ),
+            horizontalArrangement = Arrangement.SpaceAround
+        ) {
+            BoardKeyBox(
+                onItemSelected = {
+
+                }
+            )
+            BoardKeyBox(
+                onItemSelected = {
+
+                }
+            )
+            BoardKeyBox(
+                onItemSelected = {
+
+                }
+            )
+        }
+    }
+}
+
+@Composable
+fun BoardKeyBox(
+    onItemSelected: () -> Unit
+) {
+    val color = MaterialTheme.colorScheme
+    Box(
+        modifier = Modifier
+            .width(70.dp)
+            .height(70.dp)
+            .background(
+                color = color.secondary,
+                shape = RoundedCornerShape(
+                    10.dp
+                )
+            )
+            .clickable { onItemSelected },
+    )
 }
