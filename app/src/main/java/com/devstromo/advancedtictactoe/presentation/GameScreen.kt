@@ -137,6 +137,6 @@ fun BoardKeyBox(
                     10.dp
                 )
             )
-            .clickable { onItemSelected },
+            .clickable { onItemSelected() },
     )
 }
