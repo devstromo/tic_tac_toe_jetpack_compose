@@ -67,6 +67,7 @@ fun GameScreen() {
             )
 
         }
+        Spacer(modifier = Modifier.weight(1f))
         BoardContent()
     }
 }
@@ -78,7 +79,8 @@ fun BoardContent() {
         modifier = Modifier
             .fillMaxWidth()
             .padding(
-                horizontal = 50.dp,
+                vertical = 50.dp,
+                horizontal = 45.dp,
             )
             .background(
                 color = color.primary,
