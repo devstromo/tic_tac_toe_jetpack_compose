@@ -1,12 +1,14 @@
 package com.devstromo.advancedtictactoe.presentation
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -32,9 +34,7 @@ import com.devstromo.advancedtictactoe.presentation.components.PlayerMarkerType
 fun GameScreen() {
     val typo = MaterialTheme.typography
     Column(
-        modifier = Modifier
-            .fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(
             modifier = Modifier
@@ -52,13 +52,11 @@ fun GameScreen() {
             )
         }
         Row(
-            modifier = Modifier
-                .padding(vertical = 10.dp)
+            modifier = Modifier.padding(vertical = 10.dp)
         ) {
             PlayerMarker(
                 state = PlayerMakerState(
-                    PlayerMarkerType.X,
-                    isSelected = true
+                    PlayerMarkerType.X, isSelected = true
                 )
             )
             Spacer(modifier = Modifier.width(20.dp))
@@ -83,27 +81,33 @@ fun BoardContent() {
                 horizontal = 45.dp,
             )
             .background(
-                color = color.primary,
-                shape = RoundedCornerShape(
+                color = color.primary, shape = RoundedCornerShape(
                     20.dp
                 )
             )
     ) {
         BoardRow(
-            onItemSelected = {}
+            onItemSelected = {
+                Log.i("Board", "Pair $it")
+
+            }, positions = listOf(Pair(1, 1), Pair(1, 2), Pair(1, 3))
         )
         BoardRow(
-            onItemSelected = {}
+            onItemSelected = {
+                Log.i("Board", "Pair $it")
+            }, positions = listOf(Pair(2, 1), Pair(2, 2), Pair(2, 3))
         )
         BoardRow(
-            onItemSelected = {}
+            onItemSelected = {
+                Log.i("Board", "Pair $it")
+            }, positions = listOf(Pair(3, 1), Pair(3, 2), Pair(3, 3))
         )
     }
 }
 
 @Composable
 fun BoardRow(
-    onItemSelected: () -> Unit
+    onItemSelected: (Pair<Int, Int>) -> Unit, positions: List<Pair<Int, Int>> = emptyList()
 ) {
     Row(
         modifier = Modifier
@@ -111,15 +115,17 @@ fun BoardRow(
             .padding(vertical = 10.dp),
         horizontalArrangement = Arrangement.SpaceAround
     ) {
-        BoardKeyBox(onItemSelected = onItemSelected)
-        BoardKeyBox(onItemSelected = onItemSelected)
-        BoardKeyBox(onItemSelected = onItemSelected)
+        positions.forEach { position ->
+            BoardKeyBox(
+                onItemSelected = { onItemSelected(position) },
+            )
+        }
     }
 }
 
 @Composable
 fun BoardKeyBox(
-    onItemSelected: () -> Unit
+    onItemSelected: () -> Unit,
 ) {
     val color = MaterialTheme.colorScheme
     Box(
@@ -127,8 +133,7 @@ fun BoardKeyBox(
             .width(70.dp)
             .height(70.dp)
             .background(
-                color = color.secondary,
-                shape = RoundedCornerShape(
+                color = color.secondary, shape = RoundedCornerShape(
                     10.dp
                 )
             )
