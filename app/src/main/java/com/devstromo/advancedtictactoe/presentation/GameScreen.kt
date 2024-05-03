@@ -86,22 +86,17 @@ fun BoardContent() {
                 )
             )
     ) {
-        BoardRow(
-            onItemSelected = {
-                Log.i("Board", "Pair $it")
-
-            }, positions = listOf(Pair(1, 1), Pair(1, 2), Pair(1, 3))
-        )
-        BoardRow(
-            onItemSelected = {
-                Log.i("Board", "Pair $it")
-            }, positions = listOf(Pair(2, 1), Pair(2, 2), Pair(2, 3))
-        )
-        BoardRow(
-            onItemSelected = {
-                Log.i("Board", "Pair $it")
-            }, positions = listOf(Pair(3, 1), Pair(3, 2), Pair(3, 3))
-        )
+        for (row in 1..3) {
+            val positions = List(3) { col ->
+                Pair(row, col + 1)
+            }
+            BoardRow(
+                onItemSelected = { selectedPair ->
+                    Log.i("Board", "Pair $selectedPair")
+                },
+                positions = positions
+            )
+        }
     }
 }
 
