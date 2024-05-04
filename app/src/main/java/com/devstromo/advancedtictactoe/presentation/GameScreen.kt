@@ -84,7 +84,7 @@ fun BoardContent() {
             )
             .background(
                 color = color.primary, shape = RoundedCornerShape(
-                    20.dp
+                    15.dp
                 )
             )
     ) {
@@ -109,7 +109,7 @@ fun BoardRow(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 10.dp),
+            .padding(vertical = 5.dp),
         horizontalArrangement = Arrangement.SpaceAround
     ) {
         positions.forEach { position ->
@@ -127,8 +127,8 @@ fun BoardKeyBox(
     val color = MaterialTheme.colorScheme
     Box(
         modifier = Modifier
-            .width(70.dp)
-            .height(70.dp)
+            .width(80.dp)
+            .height(80.dp)
             .background(
                 color = color.secondary, shape = RoundedCornerShape(
                     10.dp
