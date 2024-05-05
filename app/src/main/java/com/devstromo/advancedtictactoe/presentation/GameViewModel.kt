@@ -11,6 +11,10 @@ class GameViewModel : ViewModel() {
     private val _state = MutableStateFlow(GameUiState())
     val uiState: StateFlow<GameUiState> = _state.asStateFlow()
 
+    fun onItemSelected() {
+
+    }
+
     fun checkForWinner(): Boolean {
         val board = _state.value.board
         val size = board.size  // Assuming a 3x3 board here

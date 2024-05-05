@@ -20,7 +20,6 @@ import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,7 +34,8 @@ import com.devstromo.advancedtictactoe.presentation.components.PlayerMarkerType
 @SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
 fun GameScreen(
-    state: GameUiState
+    state: GameUiState,
+    onItemSelected: () -> Unit,
 ) {
     val typo = MaterialTheme.typography
     Column(
