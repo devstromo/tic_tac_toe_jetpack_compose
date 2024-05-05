@@ -32,7 +32,9 @@ import com.devstromo.advancedtictactoe.presentation.components.PlayerMarkerType
 
 @SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
-fun GameScreen() {
+fun GameScreen(
+    viewModel: GameViewModel
+) {
     val typo = MaterialTheme.typography
     Column(
         modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally
