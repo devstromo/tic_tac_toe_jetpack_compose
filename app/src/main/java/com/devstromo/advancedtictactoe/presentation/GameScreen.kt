@@ -75,12 +75,16 @@ fun GameScreen(
 
         }
         Spacer(modifier = Modifier.weight(1f))
-        BoardContent()
+        BoardContent(
+            onItemSelected
+        )
     }
 }
 
 @Composable
-fun BoardContent() {
+fun BoardContent(
+    onItemSelected: () -> Unit,
+) {
     val color = MaterialTheme.colorScheme
     Column(
         modifier = Modifier
@@ -102,6 +106,7 @@ fun BoardContent() {
             BoardRow(
                 onItemSelected = { selectedPair ->
                     Log.i("Board", "Pair $selectedPair")
+                    onItemSelected()
                 },
                 positions = positions
             )
