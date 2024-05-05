@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.devstromo.advancedtictactoe.domain.Player
 import com.devstromo.advancedtictactoe.presentation.components.PlayerMakerState
 import com.devstromo.advancedtictactoe.presentation.components.PlayerMarker
 import com.devstromo.advancedtictactoe.presentation.components.PlayerMarkerType
@@ -36,6 +37,7 @@ fun GameScreen(
     viewModel: GameViewModel
 ) {
     val typo = MaterialTheme.typography
+    val uiState = viewModel.uiState.value
     Column(
         modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -59,12 +61,16 @@ fun GameScreen(
         ) {
             PlayerMarker(
                 state = PlayerMakerState(
-                    PlayerMarkerType.X, isSelected = true
+                    PlayerMarkerType.X,
+                    isSelected = uiState.currentPlayer == Player.PLAYER_1
                 )
             )
             Spacer(modifier = Modifier.width(20.dp))
             PlayerMarker(
-                state = PlayerMakerState(PlayerMarkerType.O)
+                state = PlayerMakerState(
+                    PlayerMarkerType.O,
+                    isSelected = uiState.currentPlayer == Player.PLAYER_2
+                )
             )
 
         }
