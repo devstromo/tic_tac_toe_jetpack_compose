@@ -4,11 +4,12 @@ import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import com.devstromo.advancedtictactoe.domain.CellState
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class GameViewModel : ViewModel() {
     private val _state = MutableStateFlow(GameUiState())
-    val uiState = _state.asStateFlow()
+    val uiState: StateFlow<GameUiState> = _state.asStateFlow()
 
     fun checkForWinner(): Boolean {
         val board = _state.value.board
