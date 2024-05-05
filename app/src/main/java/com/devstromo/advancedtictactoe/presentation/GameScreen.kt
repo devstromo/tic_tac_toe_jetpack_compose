@@ -20,6 +20,7 @@ import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,7 +38,7 @@ fun GameScreen(
     viewModel: GameViewModel
 ) {
     val typo = MaterialTheme.typography
-    val uiState = viewModel.uiState.value
+    val uiState = viewModel.uiState.collectAsState()
     Column(
         modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -62,14 +63,14 @@ fun GameScreen(
             PlayerMarker(
                 state = PlayerMakerState(
                     PlayerMarkerType.X,
-                    isSelected = uiState.currentPlayer == Player.PLAYER_1
+                    isSelected = uiState.value.currentPlayer == Player.PLAYER_1
                 )
             )
             Spacer(modifier = Modifier.width(20.dp))
             PlayerMarker(
                 state = PlayerMakerState(
                     PlayerMarkerType.O,
-                    isSelected = uiState.currentPlayer == Player.PLAYER_2
+                    isSelected = uiState.value.currentPlayer == Player.PLAYER_2
                 )
             )
 
