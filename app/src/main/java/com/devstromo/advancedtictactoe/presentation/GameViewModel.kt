@@ -3,16 +3,25 @@ package com.devstromo.advancedtictactoe.presentation
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import com.devstromo.advancedtictactoe.domain.CellState
+import com.devstromo.advancedtictactoe.domain.Player
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 
 class GameViewModel : ViewModel() {
     private val _state = MutableStateFlow(GameUiState())
     val uiState: StateFlow<GameUiState> = _state.asStateFlow()
 
     fun onItemSelected() {
-
+        _state.update {
+            it.copy(
+                currentPlayer = if (it.currentPlayer == Player.PLAYER_1)
+                    Player.PLAYER_2
+                else
+                    Player.PLAYER_1
+            )
+        }
     }
 
     fun checkForWinner(): Boolean {
