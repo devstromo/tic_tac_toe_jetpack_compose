@@ -6,5 +6,5 @@ import com.devstromo.advancedtictactoe.domain.Player
 data class GameUiState(
     val isLoading: Boolean = true,
     val currentPlayer: Player = Player.PLAYER_1,
-    val board: List<List<Player?>> = List(3) { MutableList(3) { null } },
+    val board: List<List<Player?>> = List(3) { MutableList(3) { Player.NONE } },
 )
