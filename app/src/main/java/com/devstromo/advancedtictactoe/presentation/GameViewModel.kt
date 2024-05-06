@@ -24,8 +24,9 @@ class GameViewModel : ViewModel() {
         }
     }
 
-    fun checkForWinner(board: List<List<Player>>): Boolean {
-        val size = board.size  // Assuming a 3x3 board here
+    fun checkForWinner(): Boolean {
+        val board = _state.value.board
+        val size = board.size
 
         // Check rows and columns for a win
         for (i in 0 until size) {
@@ -53,8 +54,7 @@ class GameViewModel : ViewModel() {
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-    internal fun updateStateForTesting(board: Array<Array<CellState>>) {
-        val state = GameUiState(isLoading = false, board = board)
-        _state.value = state
+    internal fun updateStateForTesting(board: List<List<Player>>) {
+        _state.value = _state.value.copy(board = board)
     }
 }
