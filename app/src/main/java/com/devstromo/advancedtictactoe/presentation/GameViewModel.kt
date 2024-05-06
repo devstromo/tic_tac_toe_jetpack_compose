@@ -24,25 +24,28 @@ class GameViewModel : ViewModel() {
         }
     }
 
-    fun checkForWinner(): Boolean {
-        val board = _state.value.board
+    fun checkForWinner(board: List<List<Player>>): Boolean {
         val size = board.size  // Assuming a 3x3 board here
 
-        // Check rows and columns
+        // Check rows and columns for a win
         for (i in 0 until size) {
-            if (board[i][0] != CellState.CLEAR && board[i][0] == board[i][1] && board[i][1] == board[i][2]) {
+            // Check if all cells in a row are the same and not NONE
+            if (board[i][0] != Player.NONE && board[i][0] == board[i][1] && board[i][1] == board[i][2]) {
                 return true  // Winner found in a row
             }
-            if (board[0][i] != CellState.CLEAR && board[0][i] == board[1][i] && board[1][i] == board[2][i]) {
+            // Check if all cells in a column are the same and not NONE
+            if (board[0][i] != Player.NONE && board[0][i] == board[1][i] && board[1][i] == board[2][i]) {
                 return true  // Winner found in a column
             }
         }
 
-        // Check diagonals
-        if (board[0][0] != CellState.CLEAR && board[0][0] == board[1][1] && board[1][1] == board[2][2]) {
+        // Check diagonals for a win
+        // Main diagonal
+        if (board[0][0] != Player.NONE && board[0][0] == board[1][1] && board[1][1] == board[2][2]) {
             return true  // Winner found in the main diagonal
         }
-        if (board[0][2] != CellState.CLEAR && board[0][2] == board[1][1] && board[1][1] == board[2][0]) {
+        // Anti-diagonal
+        if (board[0][2] != Player.NONE && board[0][2] == board[1][1] && board[1][1] == board[2][0]) {
             return true  // Winner found in the anti-diagonal
         }
 
