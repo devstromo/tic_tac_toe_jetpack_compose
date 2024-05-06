@@ -135,6 +135,7 @@ fun BoardRow(
 @Composable
 fun BoardKeyBox(
     onItemSelected: () -> Unit,
+    player: Player? = null,
 ) {
     val color = MaterialTheme.colorScheme
     Box(
@@ -147,6 +148,7 @@ fun BoardKeyBox(
                 )
             )
             .clickable(
+                enabled = player == null,
                 onClick = onItemSelected,
                 indication = rememberRipple(
                     bounded = true,
@@ -157,5 +159,16 @@ fun BoardKeyBox(
                     MutableInteractionSource()
                 }
             ),
-    )
+    ) {
+        Text(
+            text = when (player) {
+                Player.PLAYER_1 -> "X"
+                Player.PLAYER_2 -> "O"
+                else -> ""
+            },
+            style = MaterialTheme.typography.titleSmall,
+            modifier = Modifier.align(Alignment.Center),
+            color = color.onSecondary
+        )
+    }
 }
