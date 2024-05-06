@@ -76,7 +76,8 @@ fun GameScreen(
         }
         Spacer(modifier = Modifier.weight(1f))
         BoardContent(
-            onItemSelected
+            onItemSelected,
+            boardState = state.board
         )
     }
 }
@@ -84,6 +85,7 @@ fun GameScreen(
 @Composable
 fun BoardContent(
     onItemSelected: () -> Unit,
+    boardState: List<List<Player?>>,
 ) {
     val color = MaterialTheme.colorScheme
     Column(
@@ -108,7 +110,8 @@ fun BoardContent(
                     Log.i("Board", "Pair $selectedPair")
                     onItemSelected()
                 },
-                positions = positions
+                positions = positions,
+                rowState = boardState[row]
             )
         }
     }
@@ -116,7 +119,9 @@ fun BoardContent(
 
 @Composable
 fun BoardRow(
-    onItemSelected: (Pair<Int, Int>) -> Unit, positions: List<Pair<Int, Int>> = emptyList()
+    onItemSelected: (Pair<Int, Int>) -> Unit,
+    positions: List<Pair<Int, Int>> = emptyList(),
+    rowState: List<Player?>
 ) {
     Row(
         modifier = Modifier
