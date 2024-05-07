@@ -101,7 +101,7 @@ fun BoardContent(
                 )
             )
     ) {
-        for (row in 1..3) {
+        for (row in 0..2) {
             val positions = List(3) { col ->
                 Pair(row, col + 1)
             }
