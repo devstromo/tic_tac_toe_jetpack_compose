@@ -13,14 +13,34 @@ class GameViewModel : ViewModel() {
     private val _state = MutableStateFlow(GameUiState())
     val uiState: StateFlow<GameUiState> = _state.asStateFlow()
 
+
     fun onItemSelected(first: Int, second: Int) {
-        _state.update {
-            it.copy(
-                currentPlayer = if (it.currentPlayer == Player.PLAYER_1)
-                    Player.PLAYER_2
-                else
-                    Player.PLAYER_1
-            )
+        _state.update { currentState ->
+            if (currentState.board[first][second] == Player.NONE) {
+                // The cell is empty, proceed to mark it and switch players.
+                val newBoard = currentState.board.mapIndexed { rowIndex, row ->
+                    if (rowIndex == first) {
+                        row.toMutableList().apply {
+                            this[second] = currentState.currentPlayer
+                        }
+                    } else {
+                        row.toList()  // Just convert to a new List to avoid mutation
+                    }
+                }
+
+                // Switch current player
+                val nextPlayer =
+                    if (currentState.currentPlayer == Player.PLAYER_1) Player.PLAYER_2 else Player.PLAYER_1
+
+                // Update the state with the new board and next player
+                currentState.copy(
+                    board = newBoard,
+                    currentPlayer = nextPlayer
+                )
+            } else {
+                // The cell is not empty, do not update the board or switch players.
+                currentState
+            }
         }
     }
 
