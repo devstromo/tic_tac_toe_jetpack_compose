@@ -103,7 +103,7 @@ fun BoardContent(
     ) {
         for (row in 0..2) {
             val positions = List(3) { col ->
-                Pair(row, col + 1)
+                Pair(row, col)
             }
             BoardRow(
                 onItemSelected = { selectedPair ->
