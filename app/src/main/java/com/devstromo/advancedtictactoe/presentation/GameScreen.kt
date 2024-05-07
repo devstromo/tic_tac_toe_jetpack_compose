@@ -35,7 +35,7 @@ import com.devstromo.advancedtictactoe.presentation.components.PlayerMarkerType
 @Composable
 fun GameScreen(
     state: GameUiState,
-    onItemSelected: () -> Unit,
+    onItemSelected: (Int, Int) -> Unit,
 ) {
     val typo = MaterialTheme.typography
     Column(
@@ -84,7 +84,7 @@ fun GameScreen(
 
 @Composable
 fun BoardContent(
-    onItemSelected: () -> Unit,
+    onItemSelected: (Int, Int) -> Unit,
     boardState: List<List<Player?>>,
 ) {
     val color = MaterialTheme.colorScheme
@@ -108,7 +108,7 @@ fun BoardContent(
             BoardRow(
                 onItemSelected = { selectedPair ->
                     Log.i("Board", "Pair $selectedPair")
-                    onItemSelected()
+                    onItemSelected(selectedPair.first, selectedPair.second)
                 },
                 positions = positions,
                 rowState = boardState[row]

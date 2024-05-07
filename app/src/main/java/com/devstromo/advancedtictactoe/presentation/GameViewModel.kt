@@ -13,7 +13,7 @@ class GameViewModel : ViewModel() {
     private val _state = MutableStateFlow(GameUiState())
     val uiState: StateFlow<GameUiState> = _state.asStateFlow()
 
-    fun onItemSelected() {
+    fun onItemSelected(first: Int, second: Int) {
         _state.update {
             it.copy(
                 currentPlayer = if (it.currentPlayer == Player.PLAYER_1)
