@@ -23,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -134,9 +135,13 @@ fun BoardRow(
             .padding(vertical = 5.dp),
         horizontalArrangement = Arrangement.SpaceAround
     ) {
-        positions.forEach { position ->
+        positions.forEach { pair ->
             BoardKeyBox(
-                onItemSelected = { onItemSelected(position) },
+                onItemSelected = { onItemSelected(pair) },
+                player = if (rowState[pair.second] == Player.NONE)
+                    null
+                else
+                    rowState[pair.second]
             )
         }
     }
@@ -178,7 +183,7 @@ fun BoardKeyBox(
             },
             style = MaterialTheme.typography.titleSmall,
             modifier = Modifier.align(Alignment.Center),
-            color = color.onSecondary
+            color = Color.Red
         )
     }
 }
