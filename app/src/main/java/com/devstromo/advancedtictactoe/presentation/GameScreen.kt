@@ -34,10 +34,13 @@ import com.devstromo.advancedtictactoe.presentation.components.PlayerMarkerType
 @SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
 fun GameScreen(
+    viewModel: GameViewModel,
     state: GameUiState,
     onItemSelected: (Int, Int) -> Unit,
 ) {
     val typo = MaterialTheme.typography
+    val player1Moves = viewModel.countPlayer1Moves()
+    val player2Moves = viewModel.countPlayer2Moves()
     Column(
         modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -62,14 +65,16 @@ fun GameScreen(
             PlayerMarker(
                 state = PlayerMakerState(
                     PlayerMarkerType.X,
-                    isSelected = state.currentPlayer == Player.PLAYER_1
+                    isSelected = state.currentPlayer == Player.PLAYER_1,
+                    itemsCount = player1Moves
                 )
             )
             Spacer(modifier = Modifier.width(20.dp))
             PlayerMarker(
                 state = PlayerMakerState(
                     PlayerMarkerType.O,
-                    isSelected = state.currentPlayer == Player.PLAYER_2
+                    isSelected = state.currentPlayer == Player.PLAYER_2,
+                    itemsCount = player2Moves
                 )
             )
 

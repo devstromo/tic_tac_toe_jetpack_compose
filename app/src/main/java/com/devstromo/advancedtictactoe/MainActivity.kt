@@ -36,6 +36,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     GameScreen(
+                        viewModel = viewModel,
                         state = state,
                         onItemSelected = viewModel::onItemSelected
                     )

@@ -44,6 +44,30 @@ class GameViewModel : ViewModel() {
         }
     }
 
+    // Method to count Player 1's moves
+    fun countPlayer1Moves(): Int {
+        return countPlayerMoves(Player.PLAYER_1)
+    }
+
+    // Method to count Player 2's moves
+    fun countPlayer2Moves(): Int {
+        return countPlayerMoves(Player.PLAYER_2)
+    }
+
+    // Helper method to count moves for a specific player
+    private fun countPlayerMoves(player: Player): Int {
+        val board = _state.value.board
+        var count = 0
+        board.forEach { row ->
+            row.forEach { cell ->
+                if (cell == player) {
+                    count++
+                }
+            }
+        }
+        return count
+    }
+
     fun checkForWinner(): Boolean {
         val board = _state.value.board
         val size = board.size
