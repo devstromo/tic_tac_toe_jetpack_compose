@@ -28,6 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.devstromo.advancedtictactoe.domain.Player
+import com.devstromo.advancedtictactoe.presentation.components.CustomButton
 import com.devstromo.advancedtictactoe.presentation.components.PlayerMakerState
 import com.devstromo.advancedtictactoe.presentation.components.PlayerMarker
 import com.devstromo.advancedtictactoe.presentation.components.PlayerMarkerType
@@ -87,6 +88,14 @@ fun GameScreen(
             onItemSelected,
             boardState = state.board
         )
+        Column {
+            CustomButton(
+                text = "Restart"
+            )
+            CustomButton(
+                text = "Rules"
+            )
+        }
     }
 }
 
