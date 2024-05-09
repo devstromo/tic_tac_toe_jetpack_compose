@@ -19,6 +19,7 @@ fun CustomButton(
     modifier: Modifier = Modifier,
     text: String = "",
     onClick: () -> Unit,
+    isEnable: Boolean = true,
 ) {
     val typo = MaterialTheme.typography
     Button(
@@ -30,7 +31,8 @@ fun CustomButton(
                     10.dp
                 )
             ),
-        onClick = onClick
+        onClick = onClick,
+        enabled = isEnable
     ) {
         if (text.isNotBlank()) {
             Text(
