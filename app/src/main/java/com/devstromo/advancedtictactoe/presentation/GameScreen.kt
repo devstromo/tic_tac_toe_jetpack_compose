@@ -153,6 +153,7 @@ fun BoardRow(
 fun BoardKeyBox(
     onItemSelected: () -> Unit,
     player: Player? = null,
+    isClickable: Boolean = true
 ) {
     val color = MaterialTheme.colorScheme
     Box(
@@ -165,7 +166,7 @@ fun BoardKeyBox(
                 )
             )
             .clickable(
-                enabled = player == null,
+                enabled = player == null && isClickable,
                 onClick = onItemSelected,
                 indication = rememberRipple(
                     bounded = true,
