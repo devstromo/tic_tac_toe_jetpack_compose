@@ -46,7 +46,10 @@ fun GameScreen(
     val player1Moves = viewModel.countPlayer1Moves()
     val player2Moves = viewModel.countPlayer2Moves()
     Column(
-        modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(bottom = 30.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(
             modifier = Modifier
@@ -88,10 +91,16 @@ fun GameScreen(
             onItemSelected,
             boardState = state.board
         )
-        Column {
+        Column(
+            modifier = Modifier
+                .padding(
+                    horizontal = 20.dp,
+                )
+        ) {
             CustomButton(
                 text = "Restart"
             )
+            Spacer(modifier = Modifier.height(10.dp))
             CustomButton(
                 text = "Rules"
             )
