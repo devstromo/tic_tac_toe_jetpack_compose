@@ -22,7 +22,8 @@ class GameViewModel : ViewModel() {
                 newBoard[first] = newBoard[first].toMutableList().apply {
                     this[second] = currentState.currentPlayer
                 }
-                val nextPlayer = if (currentState.currentPlayer == Player.PLAYER_1) Player.PLAYER_2 else Player.PLAYER_1
+                val nextPlayer =
+                    if (currentState.currentPlayer == Player.PLAYER_1) Player.PLAYER_2 else Player.PLAYER_1
                 val isGameOver = checkForWinner() || checkForFullBoard(newBoard)
 
                 currentState.copy(
@@ -34,6 +35,23 @@ class GameViewModel : ViewModel() {
                 currentState
             }
         }
+    }
+
+    fun resetGame() {
+        _state.update { currentState ->
+            currentState.copy(
+                board = List(3) { MutableList(3) { Player.NONE } },
+                currentPlayer = Player.PLAYER_1,
+                isGameOver = false
+            )
+        }
+    }
+
+    fun canResetGame(): Boolean {
+        return _state.value.board
+            .any { players ->
+                players.any { player -> player != Player.NONE }
+            }
     }
 
     // Method to count Player 1's moves
