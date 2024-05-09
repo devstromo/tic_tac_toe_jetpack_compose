@@ -178,13 +178,18 @@ fun BoardKeyBox(
             ),
     ) {
         Text(
+
             text = when (player) {
                 Player.PLAYER_1 -> "X"
                 Player.PLAYER_2 -> "O"
                 else -> ""
             },
-            style = MaterialTheme.typography.headlineLarge,
-            modifier = Modifier.align(Alignment.Center),
+            style = MaterialTheme.typography.displaySmall.copy(
+                textAlign = TextAlign.Center
+            ),
+            modifier = Modifier
+                .padding(top = 20.dp, start = 5.dp)
+                .align(Alignment.Center),
             color = when (player) {
                 Player.PLAYER_1 -> kPlayerXMarkColor
                 Player.PLAYER_2 -> kPlayerOMarkColor
