@@ -102,6 +102,7 @@ fun GameScreen(
             CustomButton(
                 text = "Restart"
             )
+            Spacer(modifier = Modifier.height(10.dp))
             CustomButton(
                 text = "Rules"
             )
