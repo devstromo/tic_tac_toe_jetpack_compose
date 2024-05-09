@@ -183,7 +183,7 @@ fun BoardKeyBox(
                 Player.PLAYER_2 -> "O"
                 else -> ""
             },
-            style = MaterialTheme.typography.titleSmall,
+            style = MaterialTheme.typography.headlineLarge,
             modifier = Modifier.align(Alignment.Center),
             color = when (player) {
                 Player.PLAYER_1 -> kPlayerXMarkColor
