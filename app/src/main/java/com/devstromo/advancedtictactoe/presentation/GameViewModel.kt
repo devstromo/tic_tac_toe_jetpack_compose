@@ -15,17 +15,20 @@ class GameViewModel : ViewModel() {
 
     fun onItemSelected(first: Int, second: Int) {
         _state.update { currentState ->
-            if (currentState.board[first][second] == Player.NONE) {
+            if (currentState.isGameOver) {
+                currentState
+            } else if (currentState.board[first][second] == Player.NONE) {
                 val newBoard = currentState.board.toMutableList()
                 newBoard[first] = newBoard[first].toMutableList().apply {
                     this[second] = currentState.currentPlayer
                 }
+                val nextPlayer = if (currentState.currentPlayer == Player.PLAYER_1) Player.PLAYER_2 else Player.PLAYER_1
+                val isGameOver = checkForWinner() || checkForFullBoard(newBoard)
 
-                val nextPlayer =
-                    if (currentState.currentPlayer == Player.PLAYER_1) Player.PLAYER_2 else Player.PLAYER_1
-                return@update currentState.copy(
+                currentState.copy(
                     board = newBoard,
-                    currentPlayer = nextPlayer
+                    currentPlayer = nextPlayer,
+                    isGameOver = isGameOver
                 )
             } else {
                 currentState
@@ -84,6 +87,10 @@ class GameViewModel : ViewModel() {
         }
 
         return false  // No winner found
+    }
+
+    private fun checkForFullBoard(board: List<List<Player?>>): Boolean {
+        return board.all { row -> row.all { it != Player.NONE } }
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
