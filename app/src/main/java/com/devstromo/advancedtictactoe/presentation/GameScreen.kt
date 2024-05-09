@@ -94,6 +94,7 @@ fun GameScreen(
 fun BoardContent(
     onItemSelected: (Int, Int) -> Unit,
     boardState: List<List<Player?>>,
+    isGameOver: Boolean = false
 ) {
     val color = MaterialTheme.colorScheme
     Column(
@@ -119,7 +120,8 @@ fun BoardContent(
                     onItemSelected(selectedPair.first, selectedPair.second)
                 },
                 positions = positions,
-                rowState = boardState[row]
+                rowState = boardState[row],
+                isGameOver = isGameOver
             )
         }
     }
@@ -129,7 +131,8 @@ fun BoardContent(
 fun BoardRow(
     onItemSelected: (Pair<Int, Int>) -> Unit,
     positions: List<Pair<Int, Int>> = emptyList(),
-    rowState: List<Player?>
+    rowState: List<Player?>,
+    isGameOver: Boolean
 ) {
     Row(
         modifier = Modifier
@@ -143,7 +146,8 @@ fun BoardRow(
                 player = if (rowState[pair.second] == Player.NONE)
                     null
                 else
-                    rowState[pair.second]
+                    rowState[pair.second],
+                isClickable = !isGameOver
             )
         }
     }
