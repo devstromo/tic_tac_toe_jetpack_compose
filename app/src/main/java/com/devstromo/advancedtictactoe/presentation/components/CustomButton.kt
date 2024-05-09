@@ -17,7 +17,8 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun CustomButton(
     modifier: Modifier = Modifier,
-    text: String = ""
+    text: String = "",
+    onClick: () -> Unit,
 ) {
     val typo = MaterialTheme.typography
     Button(
@@ -29,7 +30,7 @@ fun CustomButton(
                     10.dp
                 )
             ),
-        onClick = { /*TODO*/ }
+        onClick = onClick
     ) {
         if (text.isNotBlank()) {
             Text(

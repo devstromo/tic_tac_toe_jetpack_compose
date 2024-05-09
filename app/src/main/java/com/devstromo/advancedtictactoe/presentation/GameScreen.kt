@@ -100,11 +100,13 @@ fun GameScreen(
                 )
         ) {
             CustomButton(
-                text = "Restart"
+                text = "Restart",
+                onClick = {}
             )
             Spacer(modifier = Modifier.height(10.dp))
             CustomButton(
-                text = "Rules"
+                text = "Rules",
+                onClick = {}
             )
         }
     }
