@@ -184,7 +184,7 @@ fun BoardKeyBox(
                 Player.PLAYER_2 -> "O"
                 else -> ""
             },
-            style = MaterialTheme.typography.displaySmall.copy(
+            style = MaterialTheme.typography.displayMedium.copy(
                 textAlign = TextAlign.Center
             ),
             modifier = Modifier
