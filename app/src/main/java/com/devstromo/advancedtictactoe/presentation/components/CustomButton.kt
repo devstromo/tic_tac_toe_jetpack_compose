@@ -21,7 +21,7 @@ fun CustomButton(
         modifier = modifier
             .fillMaxWidth()
             .background(
-                color = Color.Red,
+                color = Color.Transparent,
                 shape = RoundedCornerShape(
                     10.dp
                 )
@@ -31,7 +31,9 @@ fun CustomButton(
         if (text.isNotBlank()) {
             Text(
                 text = text,
-                style = typo.bodyMedium
+                style = typo.bodyMedium.copy(
+                    color = Color.White
+                )
             )
         }
     }

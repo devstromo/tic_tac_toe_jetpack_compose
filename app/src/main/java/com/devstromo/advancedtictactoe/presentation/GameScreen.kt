@@ -91,16 +91,17 @@ fun GameScreen(
             onItemSelected,
             boardState = state.board
         )
+        Spacer(modifier = Modifier.weight(1f))
         Column(
             modifier = Modifier
+                .fillMaxWidth()
                 .padding(
-                    horizontal = 20.dp,
+                    horizontal = 45.dp,
                 )
         ) {
             CustomButton(
                 text = "Restart"
             )
-            Spacer(modifier = Modifier.height(10.dp))
             CustomButton(
                 text = "Rules"
             )
@@ -119,7 +120,6 @@ fun BoardContent(
         modifier = Modifier
             .fillMaxWidth()
             .padding(
-                vertical = 50.dp,
                 horizontal = 45.dp,
             )
             .background(
