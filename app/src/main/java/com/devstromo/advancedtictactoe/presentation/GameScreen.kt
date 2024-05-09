@@ -31,6 +31,8 @@ import com.devstromo.advancedtictactoe.domain.Player
 import com.devstromo.advancedtictactoe.presentation.components.PlayerMakerState
 import com.devstromo.advancedtictactoe.presentation.components.PlayerMarker
 import com.devstromo.advancedtictactoe.presentation.components.PlayerMarkerType
+import com.devstromo.advancedtictactoe.ui.theme.kPlayerOMarkColor
+import com.devstromo.advancedtictactoe.ui.theme.kPlayerXMarkColor
 
 @SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
@@ -183,7 +185,11 @@ fun BoardKeyBox(
             },
             style = MaterialTheme.typography.titleSmall,
             modifier = Modifier.align(Alignment.Center),
-            color = Color.Red
+            color = when (player) {
+                Player.PLAYER_1 -> kPlayerXMarkColor
+                Player.PLAYER_2 -> kPlayerOMarkColor
+                else -> Color.Transparent
+            }
         )
     }
 }
