@@ -16,23 +16,32 @@ class GameViewModel : ViewModel() {
     fun onItemSelected(first: Int, second: Int) {
         _state.update { currentState ->
             if (currentState.isGameOver) {
-                currentState
-            } else if (currentState.board[first][second] == Player.NONE) {
-                val newBoard = currentState.board.toMutableList()
-                newBoard[first] = newBoard[first].toMutableList().apply {
-                    this[second] = currentState.currentPlayer
-                }
-                val nextPlayer =
-                    if (currentState.currentPlayer == Player.PLAYER_1) Player.PLAYER_2 else Player.PLAYER_1
-                val isGameOver = checkForWinner() || checkForFullBoard(newBoard)
-
-                currentState.copy(
-                    board = newBoard,
-                    currentPlayer = nextPlayer,
-                    isGameOver = isGameOver
-                )
+                currentState  // If game is over, do not allow any changes
             } else {
-                currentState
+                val cell = currentState.board[first][second]
+                if (cell == Player.NONE) {  // Only allow changes if cell is empty
+                    val newBoard = currentState.board.toMutableList()
+                    newBoard[first] = newBoard[first].toMutableList().apply {
+                        this[second] = currentState.currentPlayer
+                    }
+
+                    // Check if the move results in a win or the board is full immediately after the move
+                    val isGameOver =
+                        checkForWinner(newBoard.toList()) || checkForFullBoard(newBoard)
+
+                    // Update player before setting game over state
+                    val nextPlayer = if (!isGameOver) {
+                        if (currentState.currentPlayer == Player.PLAYER_1) Player.PLAYER_2 else Player.PLAYER_1
+                    } else currentState.currentPlayer  // Do not switch players if the game is over
+
+                    currentState.copy(
+                        board = newBoard,
+                        currentPlayer = nextPlayer,
+                        isGameOver = isGameOver
+                    )
+                } else {
+                    currentState  // If the cell is not empty, do not update
+                }
             }
         }
     }
@@ -78,8 +87,7 @@ class GameViewModel : ViewModel() {
         return count
     }
 
-    fun checkForWinner(): Boolean {
-        val board = _state.value.board
+    fun checkForWinner(board: List<List<Player>>): Boolean {
         val size = board.size
 
         // Check rows and columns for a win
