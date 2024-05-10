@@ -7,14 +7,14 @@ import org.junit.jupiter.api.Test
 
 class GameViewModelTest {
     @Test
-    fun testCheckForWinner_noWinner() {
+    fun testCheckForWinnerShouldWinWithNoWin() {
         val viewModel = GameViewModel()
         viewModel.updateStateForTesting(List(3) { List(3) { Player.NONE } })
         assertFalse(viewModel.checkForWinner())
     }
 
     @Test
-    fun testCheckForWinner_rowWin() {
+    fun testCheckForWinnerShouldWinWithRowWin() {
         val viewModel = GameViewModel()
         viewModel.updateStateForTesting(
             listOf(
@@ -27,7 +27,7 @@ class GameViewModelTest {
     }
 
     @Test
-    fun testCheckForWinner_columnWin() {
+    fun testCheckForWinnerShouldWinWithColumnWin() {
         val viewModel = GameViewModel()
         viewModel.updateStateForTesting(
             listOf(
@@ -40,7 +40,7 @@ class GameViewModelTest {
     }
 
     @Test
-    fun testCheckForWinner_diagonalWin() {
+    fun testCheckForWinnerShouldWinWithDiagonal() {
         val viewModel = GameViewModel()
         viewModel.updateStateForTesting(
             listOf(
@@ -52,4 +52,44 @@ class GameViewModelTest {
         assertTrue(viewModel.checkForWinner())
     }
 
+    @Test
+    fun testCheckIfCanResetShouldNotReset() {
+        val viewModel = GameViewModel()
+        viewModel.updateStateForTesting(
+            listOf(
+                listOf(Player.PLAYER_1, Player.NONE, Player.NONE),
+                listOf(Player.NONE, Player.NONE, Player.NONE),
+                listOf(Player.NONE, Player.NONE, Player.NONE)
+            )
+        )
+        assertTrue(viewModel.canResetGame())
+    }
+
+    @Test
+    fun testCheckIfCanResetShouldReset() {
+        val viewModel = GameViewModel()
+        viewModel.updateStateForTesting(
+            listOf(
+                listOf(Player.PLAYER_1, Player.NONE, Player.NONE),
+                listOf(Player.NONE, Player.NONE, Player.NONE),
+                listOf(Player.NONE, Player.NONE, Player.NONE)
+            )
+        )
+        assertTrue(viewModel.canResetGame())
+    }
+
+    @Test
+    fun testResetShouldResetTheBoard() {
+        val viewModel = GameViewModel()
+        viewModel.updateStateForTesting(
+            listOf(
+                listOf(Player.PLAYER_1, Player.NONE, Player.NONE),
+                listOf(Player.NONE, Player.NONE, Player.NONE),
+                listOf(Player.NONE, Player.NONE, Player.NONE)
+            )
+        )
+        assertTrue(viewModel.canResetGame())
+        viewModel.resetGame()
+        assertFalse(viewModel.canResetGame())
+    }
 }
