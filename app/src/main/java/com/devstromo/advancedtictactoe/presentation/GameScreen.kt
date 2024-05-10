@@ -101,12 +101,14 @@ fun GameScreen(
         ) {
             CustomButton(
                 text = "Reset Game",
-                onClick = {}
+                onClick = {},
+                isEnable = viewModel.canResetGame()
             )
             Spacer(modifier = Modifier.height(10.dp))
             CustomButton(
                 text = "Rules",
-                onClick = {}
+                onClick = {},
+                isEnable = false
             )
         }
     }
