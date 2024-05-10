@@ -108,7 +108,6 @@ fun GameScreen(
             CustomButton(
                 text = "Rules",
                 onClick = {},
-                isEnable = false
             )
         }
     }

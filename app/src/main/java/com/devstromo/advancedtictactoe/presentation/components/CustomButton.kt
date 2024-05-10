@@ -24,13 +24,8 @@ fun CustomButton(
     val typo = MaterialTheme.typography
     Button(
         modifier = modifier
-            .fillMaxWidth()
-            .background(
-                color = Color.Transparent,
-                shape = RoundedCornerShape(
-                    10.dp
-                )
-            ),
+            .fillMaxWidth(),
+        shape = RoundedCornerShape(25),
         onClick = onClick,
         enabled = isEnable
     ) {
