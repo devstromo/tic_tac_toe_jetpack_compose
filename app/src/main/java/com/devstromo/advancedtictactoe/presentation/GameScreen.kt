@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.devstromo.advancedtictactoe.domain.Player
 import com.devstromo.advancedtictactoe.presentation.components.CustomButton
 import com.devstromo.advancedtictactoe.presentation.components.PlayerMakerState
@@ -38,6 +39,7 @@ import com.devstromo.advancedtictactoe.ui.theme.kPlayerXMarkColor
 @SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
 fun GameScreen(
+    navController: NavController,
     viewModel: GameViewModel,
     state: GameUiState,
     onItemSelected: (Int, Int) -> Unit,

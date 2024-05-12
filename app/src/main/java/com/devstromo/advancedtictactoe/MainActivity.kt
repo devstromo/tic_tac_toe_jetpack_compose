@@ -9,7 +9,11 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.devstromo.advancedtictactoe.di.appModule
+import com.devstromo.advancedtictactoe.navigation.Screen
 import com.devstromo.advancedtictactoe.presentation.GameScreen
 import com.devstromo.advancedtictactoe.presentation.GameViewModel
 import com.devstromo.advancedtictactoe.ui.theme.AdvancedTicTacToeTheme
@@ -21,6 +25,7 @@ import org.koin.core.context.startKoin
 class MainActivity : ComponentActivity() {
 
     private val viewModel: GameViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         startKoin {
@@ -31,15 +36,26 @@ class MainActivity : ComponentActivity() {
         setContent {
             AdvancedTicTacToeTheme {
                 val state by viewModel.uiState.collectAsState()
+                val navController = rememberNavController()
+
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    GameScreen(
-                        viewModel = viewModel,
-                        state = state,
-                        onItemSelected = viewModel::onItemSelected
-                    )
+
+                    NavHost(
+                        navController = navController,
+                        startDestination = Screen.Game.route
+                    ) {
+                        composable(route = Screen.Game.route) {
+                            GameScreen(
+                                navController = navController,
+                                viewModel = viewModel,
+                                state = state,
+                                onItemSelected = viewModel::onItemSelected
+                            )
+                        }
+                    }
                 }
             }
         }
