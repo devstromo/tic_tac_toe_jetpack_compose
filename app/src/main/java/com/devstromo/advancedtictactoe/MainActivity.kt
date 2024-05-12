@@ -16,6 +16,7 @@ import com.devstromo.advancedtictactoe.di.appModule
 import com.devstromo.advancedtictactoe.navigation.Screen
 import com.devstromo.advancedtictactoe.presentation.GameScreen
 import com.devstromo.advancedtictactoe.presentation.GameViewModel
+import com.devstromo.advancedtictactoe.presentation.initial.InitialScreen
 import com.devstromo.advancedtictactoe.ui.theme.AdvancedTicTacToeTheme
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -45,8 +46,11 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(
                         navController = navController,
-                        startDestination = Screen.Game.route
+                        startDestination = Screen.Initial.route
                     ) {
+                        composable(route = Screen.Initial.route) {
+                            InitialScreen(navController = navController)
+                        }
                         composable(route = Screen.Game.route) {
                             GameScreen(
                                 navController = navController,
@@ -55,6 +59,7 @@ class MainActivity : ComponentActivity() {
                                 onItemSelected = viewModel::onItemSelected
                             )
                         }
+
                     }
                 }
             }
