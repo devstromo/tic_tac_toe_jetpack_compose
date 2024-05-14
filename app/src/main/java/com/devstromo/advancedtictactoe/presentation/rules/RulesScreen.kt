@@ -29,7 +29,7 @@ fun RulesScreen(
                 .fillMaxWidth()
                 .align(Alignment.TopStart)
         ) {
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = { navController.popBackStack() }) {
                 Icon(
                     Icons.Filled.ArrowBack,
                     contentDescription = "Favorite",
