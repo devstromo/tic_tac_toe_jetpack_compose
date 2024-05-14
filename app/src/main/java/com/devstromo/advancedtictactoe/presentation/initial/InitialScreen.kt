@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -46,6 +47,14 @@ fun InitialScreen(
             onClick = {
                 navController.navigate(route = Screen.Game.route)
             },
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        CustomButton(
+            text = "Rules",
+            onClick = {
+                navController.navigate(route = Screen.Game.route)
+            },
+            isEnable = false
         )
     }
 }
