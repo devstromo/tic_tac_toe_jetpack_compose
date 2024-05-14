@@ -52,9 +52,8 @@ fun InitialScreen(
         CustomButton(
             text = "Rules",
             onClick = {
-                navController.navigate(route = Screen.Game.route)
+                navController.navigate(route = Screen.Rules.route)
             },
-            isEnable = false
         )
     }
 }
