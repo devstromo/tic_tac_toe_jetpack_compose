@@ -29,6 +29,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.devstromo.advancedtictactoe.domain.Player
+import com.devstromo.advancedtictactoe.navigation.Screen
 import com.devstromo.advancedtictactoe.presentation.components.CustomButton
 import com.devstromo.advancedtictactoe.presentation.components.PlayerMakerState
 import com.devstromo.advancedtictactoe.presentation.components.PlayerMarker
@@ -109,7 +110,7 @@ fun GameScreen(
             Spacer(modifier = Modifier.height(10.dp))
             CustomButton(
                 text = "Rules",
-                onClick = {},
+                onClick = { navController.navigate(Screen.Rules.route) },
             )
         }
     }
