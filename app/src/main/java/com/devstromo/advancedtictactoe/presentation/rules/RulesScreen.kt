@@ -64,9 +64,11 @@ fun RulesScreen(
         }
         Column(
             modifier = Modifier
-                .align(Alignment.Center),
-
-            ) {
+                .align(Alignment.Center)
+                .padding(
+                    horizontal = 25.dp
+                ),
+        ) {
             Text(text = "Game Rules")
             RuleInfo(
                 header = "Win",
