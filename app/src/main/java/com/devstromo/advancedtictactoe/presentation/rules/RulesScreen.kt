@@ -87,15 +87,15 @@ fun RulesScreen(
                         top = 10.dp
                     ),
                 header = "Win",
-                subtitle = "Rule to win"
+                subtitle = "Place three of your marks in a horizontal, vertical, or diagonal row."
             )
             RuleInfo(
                 header = "Defeat",
-                subtitle = "How to defeat"
+                subtitle = "Allow the opponent to place three marks in a row."
             )
             RuleInfo(
                 header = "Draw",
-                subtitle = "Draw conditions"
+                subtitle = "All cells are filled without any player having three marks in a row."
             )
         }
     }
