@@ -68,7 +68,18 @@ fun RulesScreen(
 
             ) {
             Text(text = "Game Rules")
-
+            RuleInfo(
+                header = "Win",
+                subtitle = "Rule to win"
+            )
+            RuleInfo(
+                header = "Defeat",
+                subtitle = "How to defeat"
+            )
+            RuleInfo(
+                header = "Draw",
+                subtitle = "Draw conditions"
+            )
         }
     }
 }
