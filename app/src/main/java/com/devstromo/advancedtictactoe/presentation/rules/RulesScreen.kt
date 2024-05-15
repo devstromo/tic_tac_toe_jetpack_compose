@@ -14,6 +14,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Star
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -65,12 +66,26 @@ fun RulesScreen(
         Column(
             modifier = Modifier
                 .align(Alignment.Center)
+                .fillMaxWidth()
                 .padding(
                     horizontal = 25.dp
                 ),
         ) {
-            Text(text = "Game Rules")
+            Text(
+                text = "Game Rules",
+                style = typos.titleLarge.copy(
+                    fontWeight = FontWeight.Bold,
+                )
+            )
+            Divider(
+                modifier = Modifier
+                    .height(1.dp)
+            )
             RuleInfo(
+                modifier = Modifier
+                    .padding(
+                        top = 10.dp
+                    ),
                 header = "Win",
                 subtitle = "Rule to win"
             )
