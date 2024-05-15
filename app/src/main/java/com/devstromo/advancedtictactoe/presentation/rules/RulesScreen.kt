@@ -104,7 +104,7 @@ fun RuleInfo(
         ) {
             Text(
                 text = header,
-                style = typos.titleLarge.copy(
+                style = typos.titleMedium.copy(
                     fontWeight = FontWeight.Bold,
                 )
             )
