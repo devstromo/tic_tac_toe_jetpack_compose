@@ -25,9 +25,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.devstromo.advancedtictactoe.R
 import com.devstromo.advancedtictactoe.presentation.components.GradientDivider
 
 @Composable
@@ -133,7 +135,7 @@ fun RuleInfo(
             modifier = Modifier
                 .weight(1f)
                 .padding(end = 10.dp),
-            imageVector = Icons.Rounded.Star,
+            painter = painterResource(id = R.drawable.ic_defeat),
             contentDescription = ""
         )
         Column(
