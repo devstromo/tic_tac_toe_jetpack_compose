@@ -141,7 +141,8 @@ fun RuleInfo(
             painter = painterResource(
                 id = iconId
             ),
-            contentDescription = ""
+            contentDescription = "",
+            tint = Color.Unspecified
         )
         Column(
             modifier = Modifier.weight(3.5f)
