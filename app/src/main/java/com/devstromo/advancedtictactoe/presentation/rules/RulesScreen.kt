@@ -22,10 +22,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.devstromo.advancedtictactoe.presentation.components.GradientDivider
 
 @Composable
 fun RulesScreen(
@@ -79,25 +81,35 @@ fun RulesScreen(
             )
             Divider(
                 modifier = Modifier
-                    .height(1.dp)
+                    .width(50.dp)
+                    .padding(
+                        top = 10.dp,
+                        bottom = 20.dp
+                    )
+                    .height(2.dp)
             )
             RuleInfo(
-                modifier = Modifier
-                    .padding(
-                        vertical = 10.dp
-                    ),
                 header = "Win",
                 subtitle = "Place three of your marks in a horizontal, vertical, or diagonal row."
+            )
+            GradientDivider(
+                Modifier
+                    .padding(
+                        vertical = 10.dp
+                    )
             )
             RuleInfo(
                 header = "Defeat",
                 subtitle = "Allow the opponent to place three marks in a row."
             )
-            RuleInfo(
+            GradientDivider(
                 Modifier
                     .padding(
                         vertical = 10.dp
-                    ),
+                    )
+            )
+            RuleInfo(
+
                 header = "Draw",
                 subtitle = "All cells are filled without any player having three marks in a row."
             )
