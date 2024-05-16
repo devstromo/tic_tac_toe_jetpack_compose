@@ -84,7 +84,7 @@ fun RulesScreen(
             RuleInfo(
                 modifier = Modifier
                     .padding(
-                        top = 10.dp
+                        vertical = 10.dp
                     ),
                 header = "Win",
                 subtitle = "Place three of your marks in a horizontal, vertical, or diagonal row."
@@ -94,6 +94,10 @@ fun RulesScreen(
                 subtitle = "Allow the opponent to place three marks in a row."
             )
             RuleInfo(
+                Modifier
+                    .padding(
+                        vertical = 10.dp
+                    ),
                 header = "Draw",
                 subtitle = "All cells are filled without any player having three marks in a row."
             )
