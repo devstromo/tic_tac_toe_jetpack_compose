@@ -1,6 +1,7 @@
 package com.devstromo.advancedtictactoe.presentation.rules
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -125,10 +126,13 @@ fun RuleInfo(
 ) {
     val typos = MaterialTheme.typography
     Row(
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.Start
     ) {
         Icon(
-            modifier = Modifier.weight(1f),
+            modifier = Modifier
+                .weight(1f)
+                .padding(end = 10.dp),
             imageVector = Icons.Rounded.Star,
             contentDescription = ""
         )
