@@ -16,10 +16,18 @@ val provider = GoogleFont.Provider(
 )
 
 val fontName = GoogleFont("Press Start 2P")
+val labelFontName = GoogleFont("Poppins")
 
 val fontFamily = FontFamily(
     Font(
         googleFont = fontName,
+        fontProvider = provider
+    )
+)
+
+val labelFontFamily = FontFamily(
+    Font(
+        googleFont = labelFontName,
         fontProvider = provider
     )
 )
@@ -37,9 +45,9 @@ val Typography = Typography(
     displayMedium = defaultTypography.displayMedium.copy(fontFamily = fontFamily),
     displaySmall = defaultTypography.displaySmall.copy(fontFamily = fontFamily),
 
-    labelLarge = defaultTypography.labelLarge.copy(fontFamily = fontFamily),
-    labelMedium = defaultTypography.labelMedium.copy(fontFamily = fontFamily),
-    labelSmall = defaultTypography.labelSmall.copy(fontFamily = fontFamily),
+    labelLarge = defaultTypography.labelLarge.copy(fontFamily = labelFontFamily),
+    labelMedium = defaultTypography.labelMedium.copy(fontFamily = labelFontFamily),
+    labelSmall = defaultTypography.labelSmall.copy(fontFamily = labelFontFamily),
 
     headlineLarge = defaultTypography.headlineLarge.copy(fontFamily = fontFamily),
     headlineMedium = defaultTypography.headlineMedium.copy(fontFamily = fontFamily),
