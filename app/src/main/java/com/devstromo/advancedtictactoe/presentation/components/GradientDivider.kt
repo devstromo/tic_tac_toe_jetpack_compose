@@ -21,9 +21,9 @@ fun GradientDivider(
             .background(
                 brush = Brush.horizontalGradient(
                     colors = listOf(
-                        Color.White.copy(alpha = 0.0f),
+                        Color.White.copy(alpha = 0.1f),
                         Color.White,
-                        Color.White.copy(alpha = 0.0f)
+                        Color.White.copy(alpha = 0.1f)
                     )
                 )
             )
