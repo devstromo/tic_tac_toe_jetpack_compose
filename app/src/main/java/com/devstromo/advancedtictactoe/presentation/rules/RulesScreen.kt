@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.devstromo.advancedtictactoe.R
@@ -50,8 +51,8 @@ fun RulesScreen(
         ) {
             IconButton(
                 modifier = Modifier
-                    .height(60.dp)
-                    .width(60.dp)
+                    .height(45.dp)
+                    .width(45.dp)
                     .background(
                         color = color.primary,
                         shape = RoundedCornerShape(25)
@@ -64,7 +65,7 @@ fun RulesScreen(
                     contentDescription = "Favorite",
                     tint = color.secondary,
                     modifier = Modifier
-                        .size(48.dp)
+                        .size(40.dp)
                 )
             }
         }
@@ -128,6 +129,7 @@ fun RuleInfo(
     header: String,
     subtitle: String,
     iconId: Int = R.drawable.ic_defeat,
+    iconSize: Dp = 28.dp
 ) {
     val typos = MaterialTheme.typography
     Row(
@@ -136,8 +138,9 @@ fun RuleInfo(
     ) {
         Icon(
             modifier = Modifier
-                .weight(1f)
-                .padding(end = 10.dp),
+                .size(iconSize)
+                .padding(end = 10.dp)
+                .weight(1f),
             painter = painterResource(
                 id = iconId
             ),
