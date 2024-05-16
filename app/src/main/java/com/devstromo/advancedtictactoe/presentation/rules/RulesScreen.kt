@@ -93,7 +93,8 @@ fun RulesScreen(
             )
             RuleInfo(
                 header = "Win",
-                subtitle = "Place three of your marks in a horizontal, vertical, or diagonal row."
+                subtitle = "Place three of your marks in a horizontal, vertical, or diagonal row.",
+                iconId = R.drawable.ic_win
             )
             GradientDivider(
                 Modifier
@@ -103,7 +104,8 @@ fun RulesScreen(
             )
             RuleInfo(
                 header = "Defeat",
-                subtitle = "Allow the opponent to place three marks in a row."
+                subtitle = "Allow the opponent to place three marks in a row.",
+                iconId = R.drawable.ic_defeat
             )
             GradientDivider(
                 Modifier
@@ -112,9 +114,9 @@ fun RulesScreen(
                     )
             )
             RuleInfo(
-
                 header = "Draw",
-                subtitle = "All cells are filled without any player having three marks in a row."
+                subtitle = "All cells are filled without any player having three marks in a row.",
+                iconId = R.drawable.ic_draw
             )
         }
     }
@@ -125,6 +127,7 @@ fun RuleInfo(
     modifier: Modifier = Modifier,
     header: String,
     subtitle: String,
+    iconId: Int = R.drawable.ic_defeat,
 ) {
     val typos = MaterialTheme.typography
     Row(
@@ -135,7 +138,9 @@ fun RuleInfo(
             modifier = Modifier
                 .weight(1f)
                 .padding(end = 10.dp),
-            painter = painterResource(id = R.drawable.ic_defeat),
+            painter = painterResource(
+                id = iconId
+            ),
             contentDescription = ""
         )
         Column(
