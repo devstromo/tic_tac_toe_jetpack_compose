@@ -117,7 +117,7 @@ fun RuleInfo(
             contentDescription = ""
         )
         Column(
-            modifier = Modifier.weight(3f)
+            modifier = Modifier.weight(3.5f)
         ) {
             Text(
                 text = header,
@@ -132,7 +132,7 @@ fun RuleInfo(
         }
         Box(
             modifier = Modifier
-                .weight(2f)
+                .weight(1.5f)
                 .background(color = Color.Red)
         ) {
 
