@@ -52,10 +52,8 @@ fun GameScreen(
     val typo = MaterialTheme.typography
     val player1Moves = viewModel.countPlayer1Moves()
     val player2Moves = viewModel.countPlayer2Moves()
-    // State to manage dialog visibility
     val showDialog = remember { mutableStateOf(false) }
 
-    // Trigger the dialog when the game ends
     LaunchedEffect(state.isGameOver) {
         if (state.isGameOver) {
             showDialog.value = true
@@ -79,11 +77,25 @@ fun GameScreen(
                 )
             },
             confirmButton = {
-                Button(onClick = {
-                    showDialog.value = false
-                    viewModel.resetGame()
-                }) {
-                    Text("OK")
+                Button(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    shape = RoundedCornerShape(25),
+                    onClick = {
+                        showDialog.value = false
+                        viewModel.resetGame()
+                    }
+                ) {
+                    Text(
+                        modifier = Modifier
+                            .align(Alignment.CenterVertically)
+                            .padding(top = 10.dp),
+                        text = "Reset Game",
+                        textAlign = TextAlign.Center,
+                        style = typo.bodyLarge.copy(
+                            color = Color.White
+                        )
+                    )
                 }
             }
         )
