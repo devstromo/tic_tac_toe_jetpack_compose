@@ -70,7 +70,9 @@ fun GameScreen(
             text = {
                 Text(
                     text = if (viewModel.checkForWinner(state.board)) {
-                        "Player ${state.currentPlayer} wins!"
+                        if (state.currentPlayer == Player.PLAYER_1) {
+                            "You win!"
+                        } else "Your opponent wins!"
                     } else {
                         "It's a draw!"
                     }
