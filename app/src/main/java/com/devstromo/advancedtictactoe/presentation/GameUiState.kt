@@ -4,8 +4,11 @@ import com.devstromo.advancedtictactoe.domain.CellState
 import com.devstromo.advancedtictactoe.domain.Player
 
 data class GameUiState(
-    val isLoading: Boolean = true,
+    val board: List<MutableList<Player>> = List(3) { MutableList(3) { Player.NONE } },
     val currentPlayer: Player = Player.PLAYER_1,
-    val board: List<List<Player>> = List(3) { MutableList(3) { Player.NONE } },
-    val isGameOver: Boolean = false
+    val isGameOver: Boolean = false,
+    val player1Moves: MutableList<Pair<Int, Int>> = mutableListOf(),
+    val player2Moves: MutableList<Pair<Int, Int>> = mutableListOf(),
+    val player1MoveCount: Int = 0,
+    val player2MoveCount: Int = 0
 )
