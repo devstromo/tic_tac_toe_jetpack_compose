@@ -9,10 +9,13 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.devstromo.advancedtictactoe.di.appModule
+import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.navigation.Screen
 import com.devstromo.advancedtictactoe.presentation.GameScreen
 import com.devstromo.advancedtictactoe.presentation.GameViewModel
@@ -52,7 +55,16 @@ class MainActivity : ComponentActivity() {
                         composable(route = Screen.Initial.route) {
                             InitialScreen(navController = navController)
                         }
-                        composable(route = Screen.Game.route) {
+                        composable(
+                            route = Screen.Game.route,
+                            arguments = listOf(navArgument("gameMode") {
+                                type = NavType.StringType
+                            })
+                        ) { backStackEntry ->
+                            val gameMode = backStackEntry.arguments?.getString("gameMode")?.let {
+                                GameMode.valueOf(it)
+                            } ?: GameMode.CLASSIC
+                            viewModel.updateGameMode(gameMode)
                             GameScreen(
                                 navController = navController,
                                 viewModel = viewModel,
@@ -69,4 +81,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-

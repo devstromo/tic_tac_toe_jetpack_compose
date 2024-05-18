@@ -15,6 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.navigation.Screen
 import com.devstromo.advancedtictactoe.presentation.components.CustomButton
 
@@ -43,9 +44,16 @@ fun InitialScreen(
         )
         Spacer(modifier = Modifier.weight(1f))
         CustomButton(
-            text = "Play",
+            text = "1v1 Classic Mode",
             onClick = {
-                navController.navigate(route = Screen.Game.route)
+                navController.navigate(route = Screen.Game.createRoute(GameMode.CLASSIC))
+            },
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        CustomButton(
+            text = "1v1 Advanced Mode",
+            onClick = {
+                navController.navigate(route = Screen.Game.createRoute(GameMode.ADVANCED))
             },
         )
         Spacer(modifier = Modifier.height(10.dp))

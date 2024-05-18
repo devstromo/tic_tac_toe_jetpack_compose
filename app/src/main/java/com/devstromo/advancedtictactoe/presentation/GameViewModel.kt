@@ -14,6 +14,12 @@ class GameViewModel : ViewModel() {
     private val _state = MutableStateFlow(GameUiState())
     val uiState: StateFlow<GameUiState> = _state.asStateFlow()
 
+    fun updateGameMode(newGameMode: GameMode) {
+        _state.update { currentState ->
+            currentState.copy(gameMode = newGameMode)
+        }
+    }
+
     fun onItemSelected(first: Int, second: Int) {
         _state.update { currentState ->
             if (currentState.isGameOver) {
@@ -143,12 +149,6 @@ class GameViewModel : ViewModel() {
         }
 
         return false  // No winner found
-    }
-
-    fun updateGameMode(newGameMode: GameMode) {
-        _state.update { currentState ->
-            currentState.copy(gameMode = newGameMode)
-        }
     }
 
     private fun checkForFullBoard(board: List<List<Player?>>): Boolean {
