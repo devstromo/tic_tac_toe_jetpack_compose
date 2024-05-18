@@ -44,14 +44,14 @@ fun InitialScreen(
         )
         Spacer(modifier = Modifier.weight(1f))
         CustomButton(
-            text = "1v1 Classic Mode",
+            text = "Classic",
             onClick = {
                 navController.navigate(route = Screen.Game.createRoute(GameMode.CLASSIC))
             },
         )
         Spacer(modifier = Modifier.height(10.dp))
         CustomButton(
-            text = "1v1 Advanced Mode",
+            text = "1v1 Advance",
             onClick = {
                 navController.navigate(route = Screen.Game.createRoute(GameMode.ADVANCED))
             },
