@@ -1,6 +1,6 @@
 package com.devstromo.advancedtictactoe.presentation
 
-import com.devstromo.advancedtictactoe.domain.CellState
+import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.domain.Player
 
 data class GameUiState(
@@ -10,5 +10,6 @@ data class GameUiState(
     val player1Moves: MutableList<Pair<Int, Int>> = mutableListOf(),
     val player2Moves: MutableList<Pair<Int, Int>> = mutableListOf(),
     val player1MoveCount: Int = 0,
-    val player2MoveCount: Int = 0
+    val player2MoveCount: Int = 0,
+    val gameMode: GameMode = GameMode.CLASSIC
 )
