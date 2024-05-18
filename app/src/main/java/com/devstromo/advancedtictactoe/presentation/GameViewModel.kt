@@ -54,7 +54,9 @@ class GameViewModel : ViewModel() {
                     }
 
                     // Check if the move results in a win immediately after the move
-                    val isGameOver = checkForWinner(newBoard.toList())
+                    val newBoardAsList = newBoard.toList()
+                    val isGameOver =
+                        checkForWinner(newBoardAsList) || checkForFullBoard(newBoardAsList)
 
                     // Update player before setting game over state
                     val nextPlayer = if (!isGameOver) {
@@ -150,7 +152,7 @@ class GameViewModel : ViewModel() {
         return false  // No winner found
     }
 
-    private fun checkForFullBoard(board: List<MutableList<Player?>>): Boolean {
+    private fun checkForFullBoard(board: List<MutableList<Player>>): Boolean {
         return board.all { row -> row.all { it != Player.NONE } }
     }
 
