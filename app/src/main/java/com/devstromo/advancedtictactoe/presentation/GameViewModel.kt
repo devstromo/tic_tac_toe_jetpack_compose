@@ -3,6 +3,7 @@ package com.devstromo.advancedtictactoe.presentation
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import com.devstromo.advancedtictactoe.domain.CellState
+import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.domain.Player
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -25,9 +26,30 @@ class GameViewModel : ViewModel() {
                         this[second] = currentState.currentPlayer
                     }
 
-                    // Check if the move results in a win or the board is full immediately after the move
-                    val isGameOver =
-                        checkForWinner(newBoard.toList()) || checkForFullBoard(newBoard)
+                    // Update move count and moves list
+                    val updatedPlayer1Moves = currentState.player1Moves.toMutableList()
+                    val updatedPlayer2Moves = currentState.player2Moves.toMutableList()
+                    var updatedPlayer1MoveCount = currentState.player1MoveCount
+                    var updatedPlayer2MoveCount = currentState.player2MoveCount
+
+                    if (currentState.currentPlayer == Player.PLAYER_1) {
+                        updatedPlayer1Moves.add(Pair(first, second))
+                        updatedPlayer1MoveCount++
+                        if (currentState.gameMode == GameMode.ADVANCED && updatedPlayer1MoveCount > 3) {
+                            val oldestMove = updatedPlayer1Moves.removeAt(0)
+                            newBoard[oldestMove.first][oldestMove.second] = Player.NONE
+                        }
+                    } else {
+                        updatedPlayer2Moves.add(Pair(first, second))
+                        updatedPlayer2MoveCount++
+                        if (currentState.gameMode == GameMode.ADVANCED && updatedPlayer2MoveCount > 3) {
+                            val oldestMove = updatedPlayer2Moves.removeAt(0)
+                            newBoard[oldestMove.first][oldestMove.second] = Player.NONE
+                        }
+                    }
+
+                    // Check if the move results in a win immediately after the move
+                    val isGameOver = checkForWinner(newBoard.toList())
 
                     // Update player before setting game over state
                     val nextPlayer = if (!isGameOver) {
@@ -37,7 +59,11 @@ class GameViewModel : ViewModel() {
                     currentState.copy(
                         board = newBoard,
                         currentPlayer = nextPlayer,
-                        isGameOver = isGameOver
+                        isGameOver = isGameOver,
+                        player1Moves = updatedPlayer1Moves,
+                        player2Moves = updatedPlayer2Moves,
+                        player1MoveCount = updatedPlayer1MoveCount,
+                        player2MoveCount = updatedPlayer2MoveCount
                     )
                 } else {
                     currentState  // If the cell is not empty, do not update
@@ -51,7 +77,11 @@ class GameViewModel : ViewModel() {
             currentState.copy(
                 board = List(3) { MutableList(3) { Player.NONE } },
                 currentPlayer = Player.PLAYER_1,
-                isGameOver = false
+                isGameOver = false,
+                player1Moves = mutableListOf(),
+                player2Moves = mutableListOf(),
+                player1MoveCount = 0,
+                player2MoveCount = 0
             )
         }
     }
@@ -113,6 +143,12 @@ class GameViewModel : ViewModel() {
         }
 
         return false  // No winner found
+    }
+
+    fun updateGameMode(newGameMode: GameMode) {
+        _state.update { currentState ->
+            currentState.copy(gameMode = newGameMode)
+        }
     }
 
     private fun checkForFullBoard(board: List<List<Player?>>): Boolean {
