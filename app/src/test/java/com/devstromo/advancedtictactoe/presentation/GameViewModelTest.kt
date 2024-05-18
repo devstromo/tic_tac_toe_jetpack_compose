@@ -8,7 +8,7 @@ class GameViewModelTest {
     @Test
     fun testCheckForWinnerShouldWinWithNoWin() {
         val viewModel = GameViewModel()
-        val board = List(3) { List(3) { Player.NONE } }
+        val board = List(3) { MutableList(3) { Player.NONE } }
         viewModel.updateStateForTesting(board)
         assertFalse(viewModel.checkForWinner(board))
     }
@@ -17,9 +17,9 @@ class GameViewModelTest {
     fun testCheckForWinnerShouldWinWithRowWin() {
         val viewModel = GameViewModel()
         val board = listOf(
-            listOf(Player.PLAYER_1, Player.PLAYER_1, Player.PLAYER_1),
-            listOf(Player.NONE, Player.NONE, Player.NONE),
-            listOf(Player.NONE, Player.NONE, Player.NONE)
+            mutableListOf(Player.PLAYER_1, Player.PLAYER_1, Player.PLAYER_1),
+            mutableListOf(Player.NONE, Player.NONE, Player.NONE),
+            mutableListOf(Player.NONE, Player.NONE, Player.NONE)
         )
         viewModel.updateStateForTesting(
             board
@@ -31,9 +31,9 @@ class GameViewModelTest {
     fun testCheckForWinnerShouldWinWithColumnWin() {
         val viewModel = GameViewModel()
         val board =  listOf(
-            listOf(Player.PLAYER_1, Player.NONE, Player.NONE),
-            listOf(Player.PLAYER_1, Player.NONE, Player.NONE),
-            listOf(Player.PLAYER_1, Player.NONE, Player.NONE)
+            mutableListOf(Player.PLAYER_1, Player.NONE, Player.NONE),
+            mutableListOf(Player.PLAYER_1, Player.NONE, Player.NONE),
+            mutableListOf(Player.PLAYER_1, Player.NONE, Player.NONE)
         )
         viewModel.updateStateForTesting(
             board
@@ -45,9 +45,9 @@ class GameViewModelTest {
     fun testCheckForWinnerShouldWinWithDiagonal() {
         val viewModel = GameViewModel()
         val board = listOf(
-            listOf(Player.PLAYER_1, Player.NONE, Player.NONE),
-            listOf(Player.NONE, Player.PLAYER_1, Player.NONE),
-            listOf(Player.NONE, Player.NONE, Player.PLAYER_1)
+            mutableListOf(Player.PLAYER_1, Player.NONE, Player.NONE),
+            mutableListOf(Player.NONE, Player.PLAYER_1, Player.NONE),
+            mutableListOf(Player.NONE, Player.NONE, Player.PLAYER_1)
         )
         viewModel.updateStateForTesting(
             board
@@ -60,9 +60,9 @@ class GameViewModelTest {
         val viewModel = GameViewModel()
         viewModel.updateStateForTesting(
             listOf(
-                listOf(Player.PLAYER_1, Player.NONE, Player.NONE),
-                listOf(Player.NONE, Player.NONE, Player.NONE),
-                listOf(Player.NONE, Player.NONE, Player.NONE)
+                mutableListOf(Player.PLAYER_1, Player.NONE, Player.NONE),
+                mutableListOf(Player.NONE, Player.NONE, Player.NONE),
+                mutableListOf(Player.NONE, Player.NONE, Player.NONE)
             )
         )
         assertTrue(viewModel.canResetGame())
@@ -73,9 +73,9 @@ class GameViewModelTest {
         val viewModel = GameViewModel()
         viewModel.updateStateForTesting(
             listOf(
-                listOf(Player.PLAYER_1, Player.NONE, Player.NONE),
-                listOf(Player.NONE, Player.NONE, Player.NONE),
-                listOf(Player.NONE, Player.NONE, Player.NONE)
+                mutableListOf(Player.PLAYER_1, Player.NONE, Player.NONE),
+                mutableListOf(Player.NONE, Player.NONE, Player.NONE),
+                mutableListOf(Player.NONE, Player.NONE, Player.NONE)
             )
         )
         assertTrue(viewModel.canResetGame())
@@ -86,9 +86,9 @@ class GameViewModelTest {
         val viewModel = GameViewModel()
         viewModel.updateStateForTesting(
             listOf(
-                listOf(Player.PLAYER_1, Player.NONE, Player.NONE),
-                listOf(Player.NONE, Player.NONE, Player.NONE),
-                listOf(Player.NONE, Player.NONE, Player.NONE)
+                mutableListOf(Player.PLAYER_1, Player.NONE, Player.NONE),
+                mutableListOf(Player.NONE, Player.NONE, Player.NONE),
+                mutableListOf(Player.NONE, Player.NONE, Player.NONE)
             )
         )
         assertTrue(viewModel.canResetGame())
