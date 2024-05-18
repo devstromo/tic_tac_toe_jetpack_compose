@@ -2,7 +2,6 @@ package com.devstromo.advancedtictactoe.presentation
 
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
-import com.devstromo.advancedtictactoe.domain.CellState
 import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.domain.Player
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -151,7 +150,7 @@ class GameViewModel : ViewModel() {
         return false  // No winner found
     }
 
-    private fun checkForFullBoard(board: List<List<Player?>>): Boolean {
+    private fun checkForFullBoard(board: List<MutableList<Player?>>): Boolean {
         return board.all { row -> row.all { it != Player.NONE } }
     }
 
