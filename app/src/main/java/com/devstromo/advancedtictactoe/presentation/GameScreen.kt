@@ -50,8 +50,6 @@ fun GameScreen(
     onItemSelected: (Int, Int) -> Unit,
 ) {
     val typo = MaterialTheme.typography
-    val player1Moves = viewModel.countPlayer1Moves()
-    val player2Moves = viewModel.countPlayer2Moves()
     val showDialog = remember { mutableStateOf(false) }
 
     LaunchedEffect(state.isGameOver) {
@@ -112,7 +110,6 @@ fun GameScreen(
                 .padding(top = 10.dp),
             horizontalArrangement = Arrangement.Center,
         ) {
-
             Text(
                 text = "Tic-Tac-Toe",
                 style = typo.titleLarge.copy(
@@ -128,7 +125,7 @@ fun GameScreen(
                 state = PlayerMakerState(
                     PlayerMarkerType.X,
                     isSelected = state.currentPlayer == Player.PLAYER_1,
-                    itemsCount = player1Moves
+                    itemsCount = state.player1MoveCount
                 )
             )
             Spacer(modifier = Modifier.width(20.dp))
@@ -136,15 +133,15 @@ fun GameScreen(
                 state = PlayerMakerState(
                     PlayerMarkerType.O,
                     isSelected = state.currentPlayer == Player.PLAYER_2,
-                    itemsCount = player2Moves
+                    itemsCount = state.player2MoveCount
                 )
             )
-
         }
         Spacer(modifier = Modifier.weight(1f))
         BoardContent(
             onItemSelected,
-            boardState = state.board
+            boardState = state.board,
+            isGameOver = state.isGameOver
         )
         Spacer(modifier = Modifier.weight(1f))
         Column(

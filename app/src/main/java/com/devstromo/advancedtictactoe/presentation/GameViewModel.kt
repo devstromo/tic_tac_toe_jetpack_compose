@@ -120,7 +120,7 @@ class GameViewModel : ViewModel() {
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-    internal fun updateStateForTesting(board: List<List<Player>>) {
+    internal fun updateStateForTesting(board: List<MutableList<Player>>) {
         _state.value = _state.value.copy(board = board)
     }
 }
