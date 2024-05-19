@@ -14,11 +14,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.ArrowBack
+import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -50,6 +56,7 @@ fun GameScreen(
     onItemSelected: (Int, Int) -> Unit,
 ) {
     val typo = MaterialTheme.typography
+    val color = MaterialTheme.colorScheme
     val showDialog = remember { mutableStateOf(false) }
 
     LaunchedEffect(state.isGameOver) {
@@ -109,8 +116,29 @@ fun GameScreen(
                 .fillMaxWidth()
                 .padding(top = 10.dp),
             horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically,
         ) {
+            IconButton(
+                modifier = Modifier
+                    .height(45.dp)
+                    .width(45.dp)
+                    .background(
+                        color = Color.Transparent,
+                    ),
+
+                onClick = { navController.navigate(route = Screen.Initial.route) },
+            ) {
+                Icon(
+                    Icons.Rounded.Home,
+                    contentDescription = "Favorite",
+                    tint = Color.White,
+                    modifier = Modifier
+                        .size(40.dp)
+                )
+            }
             Text(
+                modifier = Modifier
+                    .padding(top = 10.dp),
                 text = "Tic-Tac-Toe",
                 style = typo.titleLarge.copy(
                     fontWeight = FontWeight.Bold
