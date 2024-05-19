@@ -34,8 +34,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.toLowerCase
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.devstromo.advancedtictactoe.domain.Player
@@ -46,6 +48,7 @@ import com.devstromo.advancedtictactoe.presentation.components.PlayerMarker
 import com.devstromo.advancedtictactoe.presentation.components.PlayerMarkerType
 import com.devstromo.advancedtictactoe.ui.theme.kPlayerOMarkColor
 import com.devstromo.advancedtictactoe.ui.theme.kPlayerXMarkColor
+import java.util.Locale
 
 @SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
@@ -115,7 +118,6 @@ fun GameScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 10.dp),
-            horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically,
         ) {
             IconButton(
@@ -125,26 +127,34 @@ fun GameScreen(
                     .background(
                         color = Color.Transparent,
                     ),
-
                 onClick = { navController.navigate(route = Screen.Initial.route) },
             ) {
                 Icon(
                     Icons.Rounded.Home,
-                    contentDescription = "Favorite",
+                    contentDescription = "Home",
                     tint = Color.White,
                     modifier = Modifier
                         .size(40.dp)
                 )
             }
-            Text(
-                modifier = Modifier
-                    .padding(top = 10.dp),
-                text = "Tic-Tac-Toe",
-                style = typo.titleLarge.copy(
-                    fontWeight = FontWeight.Bold
-                ),
-                textAlign = TextAlign.Center,
-            )
+            Spacer(modifier = Modifier.weight(1f)) // Spacer to push the title to the center
+            Box(
+                modifier = Modifier.weight(3f),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = state.gameMode.name.lowercase(Locale.ROOT).replaceFirstChar {
+                        if (it.isLowerCase()) it.titlecase(
+                            Locale.ROOT
+                        ) else it.toString()
+                    },
+                    style = typo.titleLarge.copy(
+                        fontWeight = FontWeight.Bold
+                    ),
+                    textAlign = TextAlign.Center,
+                )
+            }
+            Spacer(modifier = Modifier.weight(1f)) // Spacer to balance the row
         }
         Row(
             modifier = Modifier.padding(vertical = 10.dp)
