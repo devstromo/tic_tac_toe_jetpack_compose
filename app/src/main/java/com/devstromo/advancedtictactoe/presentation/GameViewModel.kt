@@ -42,13 +42,15 @@ class GameViewModel : ViewModel() {
                         updatedPlayer1Moves.add(Pair(first, second))
                         updatedPlayer1MoveCount++
                         if (currentState.gameMode == GameMode.ADVANCED && updatedPlayer1MoveCount > 3) {
-                            nextMoveToRemove = updatedPlayer1Moves.first()
+                            val oldestMove = updatedPlayer1Moves.removeAt(0)
+                            newBoard[oldestMove.first][oldestMove.second] = Player.NONE
                         }
                     } else {
                         updatedPlayer2Moves.add(Pair(first, second))
                         updatedPlayer2MoveCount++
                         if (currentState.gameMode == GameMode.ADVANCED && updatedPlayer2MoveCount > 3) {
-                            nextMoveToRemove = updatedPlayer2Moves.first()
+                            val oldestMove = updatedPlayer2Moves.removeAt(0)
+                            newBoard[oldestMove.first][oldestMove.second] = Player.NONE
                         }
                     }
 
@@ -56,6 +58,16 @@ class GameViewModel : ViewModel() {
                     val newBoardAsList = newBoard.toList()
                     val isGameOver =
                         checkForWinner(newBoardAsList) || checkForFullBoard(newBoardAsList)
+
+                    // Set the next move to be removed
+                    if (!isGameOver && currentState.gameMode == GameMode.ADVANCED && (updatedPlayer1MoveCount > 2 && updatedPlayer2MoveCount > 2)) {
+                        nextMoveToRemove = if (currentState.currentPlayer == Player.PLAYER_1) {
+                            updatedPlayer2Moves.firstOrNull()
+
+                        } else {
+                            updatedPlayer1Moves.firstOrNull()
+                        }
+                    }
 
                     // Update player before setting game over state
                     val nextPlayer = if (!isGameOver) {
@@ -162,3 +174,4 @@ class GameViewModel : ViewModel() {
         _state.value = _state.value.copy(board = board)
     }
 }
+
