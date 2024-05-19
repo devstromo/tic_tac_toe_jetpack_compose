@@ -36,20 +36,19 @@ class GameViewModel : ViewModel() {
                     val updatedPlayer2Moves = currentState.player2Moves.toMutableList()
                     var updatedPlayer1MoveCount = currentState.player1MoveCount
                     var updatedPlayer2MoveCount = currentState.player2MoveCount
+                    var nextMoveToRemove: Pair<Int, Int>? = null
 
                     if (currentState.currentPlayer == Player.PLAYER_1) {
                         updatedPlayer1Moves.add(Pair(first, second))
                         updatedPlayer1MoveCount++
                         if (currentState.gameMode == GameMode.ADVANCED && updatedPlayer1MoveCount > 3) {
-                            val oldestMove = updatedPlayer1Moves.removeAt(0)
-                            newBoard[oldestMove.first][oldestMove.second] = Player.NONE
+                            nextMoveToRemove = updatedPlayer1Moves.first()
                         }
                     } else {
                         updatedPlayer2Moves.add(Pair(first, second))
                         updatedPlayer2MoveCount++
                         if (currentState.gameMode == GameMode.ADVANCED && updatedPlayer2MoveCount > 3) {
-                            val oldestMove = updatedPlayer2Moves.removeAt(0)
-                            newBoard[oldestMove.first][oldestMove.second] = Player.NONE
+                            nextMoveToRemove = updatedPlayer2Moves.first()
                         }
                     }
 
@@ -70,7 +69,8 @@ class GameViewModel : ViewModel() {
                         player1Moves = updatedPlayer1Moves,
                         player2Moves = updatedPlayer2Moves,
                         player1MoveCount = updatedPlayer1MoveCount,
-                        player2MoveCount = updatedPlayer2MoveCount
+                        player2MoveCount = updatedPlayer2MoveCount,
+                        nextMoveToRemove = nextMoveToRemove
                     )
                 } else {
                     currentState  // If the cell is not empty, do not update
@@ -88,7 +88,8 @@ class GameViewModel : ViewModel() {
                 player1Moves = mutableListOf(),
                 player2Moves = mutableListOf(),
                 player1MoveCount = 0,
-                player2MoveCount = 0
+                player2MoveCount = 0,
+                nextMoveToRemove = null
             )
         }
     }

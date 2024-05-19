@@ -141,7 +141,8 @@ fun GameScreen(
         BoardContent(
             onItemSelected,
             boardState = state.board,
-            isGameOver = state.isGameOver
+            isGameOver = state.isGameOver,
+            nextMoveToRemove = state.nextMoveToRemove
         )
         Spacer(modifier = Modifier.weight(1f))
         Column(
@@ -169,7 +170,8 @@ fun GameScreen(
 fun BoardContent(
     onItemSelected: (Int, Int) -> Unit,
     boardState: List<List<Player?>>,
-    isGameOver: Boolean = false
+    isGameOver: Boolean = false,
+    nextMoveToRemove: Pair<Int, Int>? = null
 ) {
     val color = MaterialTheme.colorScheme
     Column(
@@ -195,7 +197,8 @@ fun BoardContent(
                 },
                 positions = positions,
                 rowState = boardState[row],
-                isGameOver = isGameOver
+                isGameOver = isGameOver,
+                nextMoveToRemove = nextMoveToRemove
             )
         }
     }
@@ -206,7 +209,8 @@ fun BoardRow(
     onItemSelected: (Pair<Int, Int>) -> Unit,
     positions: List<Pair<Int, Int>> = emptyList(),
     rowState: List<Player?>,
-    isGameOver: Boolean
+    isGameOver: Boolean,
+    nextMoveToRemove: Pair<Int, Int>? = null
 ) {
     Row(
         modifier = Modifier
@@ -221,7 +225,8 @@ fun BoardRow(
                     null
                 else
                     rowState[pair.second],
-                isClickable = !isGameOver
+                isClickable = !isGameOver,
+                isNextToRemove = nextMoveToRemove == pair
             )
         }
     }
@@ -231,15 +236,17 @@ fun BoardRow(
 fun BoardKeyBox(
     onItemSelected: () -> Unit,
     player: Player? = null,
-    isClickable: Boolean = true
+    isClickable: Boolean = true,
+    isNextToRemove: Boolean = false
 ) {
     val color = MaterialTheme.colorScheme
+    val alpha = if (isNextToRemove) 0.5f else 1f
     Box(
         modifier = Modifier
             .width(80.dp)
             .height(80.dp)
             .background(
-                color = color.secondary, shape = RoundedCornerShape(
+                color = color.secondary.copy(alpha = alpha), shape = RoundedCornerShape(
                     10.dp
                 )
             )
@@ -257,7 +264,6 @@ fun BoardKeyBox(
             ),
     ) {
         Text(
-
             text = when (player) {
                 Player.PLAYER_1 -> "X"
                 Player.PLAYER_2 -> "O"

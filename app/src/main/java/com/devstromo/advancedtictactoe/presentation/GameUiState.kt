@@ -11,5 +11,6 @@ data class GameUiState(
     val player2Moves: MutableList<Pair<Int, Int>> = mutableListOf(),
     val player1MoveCount: Int = 0,
     val player2MoveCount: Int = 0,
-    val gameMode: GameMode = GameMode.CLASSIC
+    val gameMode: GameMode = GameMode.CLASSIC,
+    val nextMoveToRemove: Pair<Int, Int>? = null
 )
