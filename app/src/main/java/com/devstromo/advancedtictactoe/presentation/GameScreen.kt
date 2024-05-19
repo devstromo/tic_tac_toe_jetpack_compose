@@ -122,6 +122,7 @@ fun GameScreen(
         ) {
             IconButton(
                 modifier = Modifier
+                    .padding(start = 20.dp)
                     .height(45.dp)
                     .width(45.dp)
                     .background(
@@ -139,7 +140,9 @@ fun GameScreen(
             }
             Spacer(modifier = Modifier.weight(1f)) // Spacer to push the title to the center
             Box(
-                modifier = Modifier.weight(3f),
+                modifier = Modifier
+                    .weight(5f)
+                    .padding(top = 10.dp),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
