@@ -18,15 +18,21 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
@@ -37,6 +43,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.toLowerCase
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -50,6 +57,7 @@ import com.devstromo.advancedtictactoe.ui.theme.kPlayerOMarkColor
 import com.devstromo.advancedtictactoe.ui.theme.kPlayerXMarkColor
 import java.util.Locale
 
+@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
 fun GameScreen(
@@ -61,7 +69,7 @@ fun GameScreen(
     val typo = MaterialTheme.typography
     val color = MaterialTheme.colorScheme
     val showDialog = remember { mutableStateOf(false) }
-
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     LaunchedEffect(state.isGameOver) {
         if (state.isGameOver) {
             showDialog.value = true
@@ -114,51 +122,44 @@ fun GameScreen(
             .padding(bottom = 30.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 10.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            IconButton(
-                modifier = Modifier
-                    .padding(start = 20.dp)
-                    .height(45.dp)
-                    .width(45.dp)
-                    .background(
-                        color = Color.Transparent,
-                    ),
-                onClick = { navController.navigate(route = Screen.Initial.route) },
-            ) {
-                Icon(
-                    Icons.Rounded.Home,
-                    contentDescription = "Home",
-                    tint = Color.White,
-                    modifier = Modifier
-                        .size(40.dp)
-                )
-            }
-            Spacer(modifier = Modifier.weight(1f)) // Spacer to push the title to the center
-            Box(
-                modifier = Modifier
-                    .weight(5f)
-                    .padding(top = 10.dp),
-                contentAlignment = Alignment.Center
-            ) {
+        CenterAlignedTopAppBar(
+            colors = TopAppBarDefaults.topAppBarColors(
+                containerColor = Color.Transparent,
+                titleContentColor = Color.White,
+            ),
+            title = {
                 Text(
-                    text = state.gameMode.name.lowercase(Locale.ROOT).replaceFirstChar {
+                    state.gameMode.name.lowercase(Locale.ROOT).replaceFirstChar {
                         if (it.isLowerCase()) it.titlecase(
                             Locale.ROOT
                         ) else it.toString()
                     },
-                    style = typo.titleLarge.copy(
-                        fontWeight = FontWeight.Bold
-                    ),
-                    textAlign = TextAlign.Center,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
-            }
-            Spacer(modifier = Modifier.weight(1f)) // Spacer to balance the row
-        }
+            },
+            navigationIcon = {
+                IconButton(
+                    modifier = Modifier
+                        .padding(start = 20.dp)
+                        .height(45.dp)
+                        .width(45.dp)
+                        .background(
+                            color = Color.Transparent,
+                        ),
+                    onClick = { navController.navigate(route = Screen.Initial.route) },
+                ) {
+                    Icon(
+                        Icons.Rounded.Home,
+                        contentDescription = "Home",
+                        tint = Color.White,
+                        modifier = Modifier
+                            .size(40.dp)
+                    )
+                }
+            },
+            scrollBehavior = scrollBehavior,
+        )
         Row(
             modifier = Modifier.padding(vertical = 10.dp)
         ) {
