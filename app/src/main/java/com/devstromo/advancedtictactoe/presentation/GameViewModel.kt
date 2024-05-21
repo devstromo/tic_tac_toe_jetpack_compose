@@ -1,5 +1,7 @@
 package com.devstromo.advancedtictactoe.presentation
 
+import android.content.Context
+import android.media.MediaPlayer
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import com.devstromo.advancedtictactoe.domain.GameMode
@@ -12,6 +14,7 @@ import kotlinx.coroutines.flow.update
 class GameViewModel : ViewModel() {
     private val _state = MutableStateFlow(GameUiState())
     val uiState: StateFlow<GameUiState> = _state.asStateFlow()
+    private var mediaPlayer: MediaPlayer? = null
 
     fun updateGameMode(newGameMode: GameMode) {
         _state.update { currentState ->
@@ -111,6 +114,12 @@ class GameViewModel : ViewModel() {
             .any { players ->
                 players.any { player -> player != Player.NONE }
             }
+    }
+
+    fun playSound(context: Context, soundResId: Int) {
+        mediaPlayer?.release()
+        mediaPlayer = MediaPlayer.create(context, soundResId)
+        mediaPlayer?.start()
     }
 
     // Method to count Player 1's moves
