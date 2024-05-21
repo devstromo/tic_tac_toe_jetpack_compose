@@ -16,6 +16,11 @@ class GameViewModel : ViewModel() {
     val uiState: StateFlow<GameUiState> = _state.asStateFlow()
     private var mediaPlayer: MediaPlayer? = null
 
+    override fun onCleared() {
+        super.onCleared()
+        mediaPlayer?.release()
+    }
+
     fun updateGameMode(newGameMode: GameMode) {
         _state.update { currentState ->
             currentState.copy(gameMode = newGameMode)
