@@ -282,7 +282,8 @@ fun BoardKeyBox(
             .width(80.dp)
             .height(80.dp)
             .background(
-                color = color.secondary.copy(alpha = alpha), shape = RoundedCornerShape(
+                color = color.secondary,
+                shape = RoundedCornerShape(
                     10.dp
                 )
             )
@@ -312,8 +313,8 @@ fun BoardKeyBox(
                 .padding(top = 20.dp, start = 5.dp)
                 .align(Alignment.Center),
             color = when (player) {
-                Player.PLAYER_1 -> kPlayerXMarkColor
-                Player.PLAYER_2 -> kPlayerOMarkColor
+                Player.PLAYER_1 -> kPlayerXMarkColor.copy(alpha)
+                Player.PLAYER_2 -> kPlayerOMarkColor.copy(alpha)
                 else -> Color.Transparent
             }
         )
