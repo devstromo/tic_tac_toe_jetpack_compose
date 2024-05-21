@@ -1,6 +1,7 @@
 package com.devstromo.advancedtictactoe.presentation
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -37,10 +38,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.devstromo.advancedtictactoe.R
 import com.devstromo.advancedtictactoe.domain.Player
 import com.devstromo.advancedtictactoe.navigation.Screen
 import com.devstromo.advancedtictactoe.presentation.components.CustomButton
@@ -61,6 +64,7 @@ fun GameScreen(
     onItemSelected: (Int, Int) -> Unit,
 ) {
     val typo = MaterialTheme.typography
+    val context = LocalContext.current
     val showDialog = remember { mutableStateOf(false) }
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     LaunchedEffect(state.isGameOver) {
@@ -177,7 +181,9 @@ fun GameScreen(
             onItemSelected,
             boardState = state.board,
             isGameOver = state.isGameOver,
-            nextMoveToRemove = state.nextMoveToRemove
+            nextMoveToRemove = state.nextMoveToRemove,
+            viewModel = viewModel,
+            context = context
         )
         Spacer(modifier = Modifier.weight(1f))
         Column(
@@ -206,7 +212,9 @@ fun BoardContent(
     onItemSelected: (Int, Int) -> Unit,
     boardState: List<List<Player?>>,
     isGameOver: Boolean = false,
-    nextMoveToRemove: Pair<Int, Int>? = null
+    nextMoveToRemove: Pair<Int, Int>? = null,
+    viewModel: GameViewModel,
+    context: Context
 ) {
     val color = MaterialTheme.colorScheme
     Column(
@@ -233,7 +241,9 @@ fun BoardContent(
                 positions = positions,
                 rowState = boardState[row],
                 isGameOver = isGameOver,
-                nextMoveToRemove = nextMoveToRemove
+                nextMoveToRemove = nextMoveToRemove,
+                viewModel = viewModel,
+                context = context
             )
         }
     }
@@ -245,15 +255,22 @@ fun BoardRow(
     positions: List<Pair<Int, Int>> = emptyList(),
     rowState: List<Player?>,
     isGameOver: Boolean,
-    nextMoveToRemove: Pair<Int, Int>? = null
+    nextMoveToRemove: Pair<Int, Int>? = null,
+    viewModel: GameViewModel,
+    context: Context
 ) {
+    val soundResources = listOf(
+        R.raw.sound_1, R.raw.sound_2, R.raw.sound_3,
+        R.raw.sound_4, R.raw.sound_5, R.raw.sound_6,
+        R.raw.sound_7, R.raw.sound_8, R.raw.sound_9
+    )
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 5.dp),
         horizontalArrangement = Arrangement.SpaceAround
     ) {
-        positions.forEach { pair ->
+        positions.forEachIndexed { index, pair ->
             BoardKeyBox(
                 onItemSelected = { onItemSelected(pair) },
                 player = if (rowState[pair.second] == Player.NONE)
@@ -261,7 +278,10 @@ fun BoardRow(
                 else
                     rowState[pair.second],
                 isClickable = !isGameOver,
-                isNextToRemove = nextMoveToRemove == pair
+                isNextToRemove = nextMoveToRemove == pair,
+                soundResId = soundResources[index],
+                viewModel = viewModel,
+                context = context
             )
         }
     }
@@ -272,7 +292,10 @@ fun BoardKeyBox(
     onItemSelected: () -> Unit,
     player: Player? = null,
     isClickable: Boolean = true,
-    isNextToRemove: Boolean = false
+    isNextToRemove: Boolean = false,
+    soundResId: Int,
+    viewModel: GameViewModel,
+    context: Context
 ) {
     val color = MaterialTheme.colorScheme
     val alpha = if (isNextToRemove) 0.5f else 1f
@@ -281,14 +304,16 @@ fun BoardKeyBox(
             .width(80.dp)
             .height(80.dp)
             .background(
-                color = color.secondary,
-                shape = RoundedCornerShape(
+                color = color.secondary.copy(alpha = alpha), shape = RoundedCornerShape(
                     10.dp
                 )
             )
             .clickable(
                 enabled = player == null && isClickable,
-                onClick = onItemSelected,
+                onClick = {
+                    onItemSelected()
+                    viewModel.playSound(context, soundResId)
+                },
                 indication = rememberRipple(
                     bounded = true,
                     radius = 70.dp,
@@ -312,8 +337,8 @@ fun BoardKeyBox(
                 .padding(top = 20.dp, start = 5.dp)
                 .align(Alignment.Center),
             color = when (player) {
-                Player.PLAYER_1 -> kPlayerXMarkColor.copy(alpha)
-                Player.PLAYER_2 -> kPlayerOMarkColor.copy(alpha)
+                Player.PLAYER_1 -> kPlayerXMarkColor
+                Player.PLAYER_2 -> kPlayerOMarkColor
                 else -> Color.Transparent
             }
         )
