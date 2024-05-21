@@ -61,7 +61,6 @@ fun GameScreen(
     onItemSelected: (Int, Int) -> Unit,
 ) {
     val typo = MaterialTheme.typography
-    val color = MaterialTheme.colorScheme
     val showDialog = remember { mutableStateOf(false) }
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     LaunchedEffect(state.isGameOver) {
