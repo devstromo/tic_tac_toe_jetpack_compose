@@ -124,6 +124,7 @@ class GameViewModel : ViewModel() {
     fun playSound(context: Context, soundResId: Int) {
         mediaPlayer?.release()
         mediaPlayer = MediaPlayer.create(context, soundResId)
+        mediaPlayer?.setVolume(.2f, .2f)
         mediaPlayer?.start()
     }
 
