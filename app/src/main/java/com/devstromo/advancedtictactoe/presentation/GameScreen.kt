@@ -224,7 +224,8 @@ fun BoardContent(
                 horizontal = 45.dp,
             )
             .background(
-                color = color.primary, shape = RoundedCornerShape(
+                color = color.primary,
+                shape = RoundedCornerShape(
                     15.dp
                 )
             )
