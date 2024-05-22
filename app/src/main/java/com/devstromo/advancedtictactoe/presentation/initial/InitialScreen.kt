@@ -58,6 +58,13 @@ fun InitialScreen(
         )
         Spacer(modifier = Modifier.height(10.dp))
         CustomButton(
+            text = "Solo Play",
+            onClick = {
+                navController.navigate(route = Screen.Game.createRoute(GameMode.BOT))
+            },
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        CustomButton(
             text = "Rules",
             onClick = {
                 navController.navigate(route = Screen.Rules.route)
