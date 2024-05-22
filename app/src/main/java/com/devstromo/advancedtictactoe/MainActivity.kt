@@ -39,7 +39,10 @@ class MainActivity : ComponentActivity() {
             modules(appModule)
         }
         setContent {
-            AdvancedTicTacToeTheme {
+            AdvancedTicTacToeTheme(
+                darkTheme = true,
+                dynamicColor = false
+            ) {
                 val state by viewModel.uiState.collectAsState()
                 val navController = rememberNavController()
 
