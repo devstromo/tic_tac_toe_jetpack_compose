@@ -27,7 +27,6 @@ class GameViewModel : ViewModel() {
         }
     }
 
-
     fun onItemSelected(first: Int, second: Int) {
         _state.update { currentState ->
             if (currentState.isGameOver) {
@@ -36,11 +35,19 @@ class GameViewModel : ViewModel() {
                 val cell = currentState.board[first][second]
                 if (cell == Player.NONE) {  // Only allow changes if cell is empty
                     val newState = makeMove(currentState, first, second, currentState.currentPlayer)
-                    if (newState.gameMode == GameMode.BOT && !newState.isGameOver) {
-                        val botMove = calculateBestMove(newState.board)
-                        makeMove(newState, botMove.first, botMove.second, Player.PLAYER_2)
+
+                    // Apply advanced mode logic if applicable
+                    var advancedState = newState
+                    if (newState.gameMode == GameMode.ADVANCED && !newState.isGameOver) {
+                        advancedState = handleAdvancedMode(newState)
+                    }
+
+                    // If it's bot mode and it's Player 1's turn, make bot move
+                    if (advancedState.gameMode == GameMode.BOT && !advancedState.isGameOver && advancedState.currentPlayer == Player.PLAYER_2) {
+                        val botMove = calculateBestMove(advancedState.board)
+                        makeMove(advancedState, botMove.first, botMove.second, Player.PLAYER_2)
                     } else {
-                        newState
+                        advancedState
                     }
                 } else {
                     currentState  // If the cell is not empty, do not update
@@ -158,6 +165,37 @@ class GameViewModel : ViewModel() {
         )
     }
 
+    //TODO fix this advanced mode
+    private fun handleAdvancedMode(state: GameUiState): GameUiState {
+        val newBoard = state.board.toMutableList()
+        val updatedPlayer1Moves = state.player1Moves.toMutableList()
+        val updatedPlayer2Moves = state.player2Moves.toMutableList()
+
+        if (state.player1MoveCount > 3) {
+            val oldestMove = updatedPlayer1Moves.removeAt(0)
+            newBoard[oldestMove.first][oldestMove.second] = Player.NONE
+        }
+        if (state.player2MoveCount > 3) {
+            val oldestMove = updatedPlayer2Moves.removeAt(0)
+            newBoard[oldestMove.first][oldestMove.second] = Player.NONE
+        }
+        var nextMoveToRemove: Pair<Int, Int>? = null
+        if (state.player1MoveCount > 2 && state.player2MoveCount > 2) {
+            nextMoveToRemove = if (state.currentPlayer == Player.PLAYER_1) {
+                updatedPlayer1Moves.firstOrNull()
+            } else {
+                updatedPlayer2Moves.firstOrNull()
+            }
+        }
+
+        return state.copy(
+            board = newBoard,
+            player1Moves = updatedPlayer1Moves,
+            player2Moves = updatedPlayer2Moves,
+            nextMoveToRemove = nextMoveToRemove,
+        )
+    }
+
     private fun calculateBestMove(board: List<MutableList<Player>>): Pair<Int, Int> {
         var bestMove = Pair(-1, -1)
         var bestValue = Int.MIN_VALUE
@@ -230,10 +268,9 @@ class GameViewModel : ViewModel() {
     }
 
     fun canResetGame(): Boolean {
-        return _state.value.board
-            .any { players ->
-                players.any { player -> player != Player.NONE }
-            }
+        return _state.value.board.any { row ->
+            row.any { cell -> cell != Player.NONE }
+        }
     }
 
     fun playSound(context: Context, soundResId: Int) {
@@ -246,32 +283,26 @@ class GameViewModel : ViewModel() {
     fun checkForWinner(board: List<List<Player>>): Boolean {
         val size = board.size
 
-        // Check rows and columns for a win
         for (i in 0 until size) {
-            // Check if all cells in a row are the same and not NONE
             if (board[i][0] != Player.NONE && board[i][0] == board[i][1] && board[i][1] == board[i][2]) {
-                return true  // Winner found in a row
+                return true
             }
-            // Check if all cells in a column are the same and not NONE
             if (board[0][i] != Player.NONE && board[0][i] == board[1][i] && board[1][i] == board[2][i]) {
-                return true  // Winner found in a column
+                return true
             }
         }
 
-        // Check diagonals for a win
-        // Main diagonal
         if (board[0][0] != Player.NONE && board[0][0] == board[1][1] && board[1][1] == board[2][2]) {
-            return true  // Winner found in the main diagonal
+            return true
         }
-        // Anti-diagonal
         if (board[0][2] != Player.NONE && board[0][2] == board[1][1] && board[1][1] == board[2][0]) {
-            return true  // Winner found in the anti-diagonal
+            return true
         }
 
-        return false  // No winner found
+        return false
     }
 
-    private fun checkForFullBoard(board: List<MutableList<Player>>): Boolean {
+    private fun checkForFullBoard(board: List<List<Player>>): Boolean {
         return board.all { row -> row.all { it != Player.NONE } }
     }
 
@@ -280,4 +311,3 @@ class GameViewModel : ViewModel() {
         _state.value = _state.value.copy(board = board)
     }
 }
-
