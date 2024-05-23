@@ -153,31 +153,12 @@ class GameViewModel : ViewModel() {
         }
 
         return if (isMaximizing) {
-            var best = Int.MIN_VALUE
-            for (i in board.indices) {
-                for (j in board[i].indices) {
-                    if (board[i][j] == Player.NONE) {
-                        board[i][j] = Player.PLAYER_2
-                        best = maxOf(best, minimax(board, depth + 1, !isMaximizing))
-                        board[i][j] = Player.NONE
-                    }
-                }
-            }
-            best
+            getMaximizedScore(board, depth)
         } else {
-            var best = Int.MAX_VALUE
-            for (i in board.indices) {
-                for (j in board[i].indices) {
-                    if (board[i][j] == Player.NONE) {
-                        board[i][j] = Player.PLAYER_1
-                        best = minOf(best, minimax(board, depth + 1, !isMaximizing))
-                        board[i][j] = Player.NONE
-                    }
-                }
-            }
-            best
+            getMinimizedScore(board, depth)
         }
     }
+
 
     fun resetGame() {
         _state.update { currentState ->
@@ -231,6 +212,34 @@ class GameViewModel : ViewModel() {
 
     private fun checkForFullBoard(board: List<List<Player>>): Boolean {
         return board.all { row -> row.all { it != Player.NONE } }
+    }
+
+    private fun getMaximizedScore(board: List<MutableList<Player>>, depth: Int): Int {
+        var best = Int.MIN_VALUE
+        for (i in board.indices) {
+            for (j in board[i].indices) {
+                if (board[i][j] == Player.NONE) {
+                    board[i][j] = Player.PLAYER_2
+                    best = maxOf(best, minimax(board, depth + 1, false))
+                    board[i][j] = Player.NONE
+                }
+            }
+        }
+        return best
+    }
+
+    private fun getMinimizedScore(board: List<MutableList<Player>>, depth: Int): Int {
+        var best = Int.MAX_VALUE
+        for (i in board.indices) {
+            for (j in board[i].indices) {
+                if (board[i][j] == Player.NONE) {
+                    board[i][j] = Player.PLAYER_1
+                    best = minOf(best, minimax(board, depth + 1, true))
+                    board[i][j] = Player.NONE
+                }
+            }
+        }
+        return best
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
