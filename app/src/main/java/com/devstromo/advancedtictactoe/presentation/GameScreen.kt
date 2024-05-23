@@ -267,7 +267,7 @@ fun BoardRow(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 5.dp),
+            .padding(vertical = 5.dp, horizontal = 10.dp),
         horizontalArrangement = Arrangement.SpaceAround
     ) {
         positions.forEachIndexed { index, pair ->
