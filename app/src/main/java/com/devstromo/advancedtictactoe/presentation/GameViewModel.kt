@@ -171,11 +171,11 @@ class GameViewModel : ViewModel() {
         val updatedPlayer1Moves = state.player1Moves.toMutableList()
         val updatedPlayer2Moves = state.player2Moves.toMutableList()
 
-        if (state.player1MoveCount > 3) {
+        if (state.player1MoveCount > 3 && state.currentPlayer == Player.PLAYER_2) {
             val oldestMove = updatedPlayer1Moves.removeAt(0)
             newBoard[oldestMove.first][oldestMove.second] = Player.NONE
         }
-        if (state.player2MoveCount > 3) {
+        if (state.player2MoveCount > 3 && state.currentPlayer == Player.PLAYER_1) {
             val oldestMove = updatedPlayer2Moves.removeAt(0)
             newBoard[oldestMove.first][oldestMove.second] = Player.NONE
         }
