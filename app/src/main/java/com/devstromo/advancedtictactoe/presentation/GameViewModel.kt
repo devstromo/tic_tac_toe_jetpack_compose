@@ -112,7 +112,6 @@ class GameViewModel : ViewModel() {
         return state.gameMode == GameMode.BOT && !state.isGameOver && state.currentPlayer == Player.PLAYER_2
     }
 
-
     private fun makeMove(state: GameUiState, first: Int, second: Int, player: Player): GameUiState {
         val newBoard = state.board.toMutableList()
         newBoard[first] = newBoard[first].toMutableList().apply {
