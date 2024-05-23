@@ -30,31 +30,88 @@ class GameViewModel : ViewModel() {
     fun onItemSelected(first: Int, second: Int) {
         _state.update { currentState ->
             if (currentState.isGameOver) {
-                currentState  // If game is over, do not allow any changes
-            } else {
-                val cell = currentState.board[first][second]
-                if (cell == Player.NONE) {  // Only allow changes if cell is empty
-                    val newState = makeMove(currentState, first, second, currentState.currentPlayer)
-
-                    // Apply advanced mode logic if applicable
-                    var advancedState = newState
-                    if (newState.gameMode == GameMode.ADVANCED && !newState.isGameOver) {
-                        advancedState = handleAdvancedMode(newState)
-                    }
-
-                    // If it's bot mode and it's Player 1's turn, make bot move
-                    if (advancedState.gameMode == GameMode.BOT && !advancedState.isGameOver && advancedState.currentPlayer == Player.PLAYER_2) {
-                        val botMove = calculateBestMove(advancedState.board)
-                        makeMove(advancedState, botMove.first, botMove.second, Player.PLAYER_2)
-                    } else {
-                        advancedState
-                    }
-                } else {
-                    currentState  // If the cell is not empty, do not update
-                }
+                return@update currentState
             }
+
+            val cell = currentState.board[first][second]
+            if (cell != Player.NONE) {
+                return@update currentState
+            }
+
+            var newState = makeMove(currentState, first, second, currentState.currentPlayer)
+            newState = applyAdvancedModeLogicIfNeeded(newState)
+
+            if (shouldBotMove(newState)) {
+                val botMove = calculateBestMove(newState.board)
+                newState = makeMove(newState, botMove.first, botMove.second, Player.PLAYER_2)
+            }
+
+            newState
         }
     }
+
+    fun resetGame() {
+        _state.update { currentState ->
+            currentState.copy(
+                board = List(3) { MutableList(3) { Player.NONE } },
+                currentPlayer = Player.PLAYER_1,
+                isGameOver = false,
+                player1Moves = mutableListOf(),
+                player2Moves = mutableListOf(),
+                player1MoveCount = 0,
+                player2MoveCount = 0,
+                nextMoveToRemove = null
+            )
+        }
+    }
+
+    fun canResetGame(): Boolean {
+        return _state.value.board.any { row ->
+            row.any { cell -> cell != Player.NONE }
+        }
+    }
+
+    fun playSound(context: Context, soundResId: Int) {
+        mediaPlayer?.release()
+        mediaPlayer = MediaPlayer.create(context, soundResId)
+        mediaPlayer?.setVolume(.2f, .2f)
+        mediaPlayer?.start()
+    }
+
+    fun checkForWinner(board: List<List<Player>>): Boolean {
+        val size = board.size
+
+        for (i in 0 until size) {
+            if (board[i][0] != Player.NONE && board[i][0] == board[i][1] && board[i][1] == board[i][2]) {
+                return true
+            }
+            if (board[0][i] != Player.NONE && board[0][i] == board[1][i] && board[1][i] == board[2][i]) {
+                return true
+            }
+        }
+
+        if (board[0][0] != Player.NONE && board[0][0] == board[1][1] && board[1][1] == board[2][2]) {
+            return true
+        }
+        if (board[0][2] != Player.NONE && board[0][2] == board[1][1] && board[1][1] == board[2][0]) {
+            return true
+        }
+
+        return false
+    }
+
+    private fun applyAdvancedModeLogicIfNeeded(state: GameUiState): GameUiState {
+        return if (state.gameMode == GameMode.ADVANCED && !state.isGameOver) {
+            handleAdvancedMode(state)
+        } else {
+            state
+        }
+    }
+
+    private fun shouldBotMove(state: GameUiState): Boolean {
+        return state.gameMode == GameMode.BOT && !state.isGameOver && state.currentPlayer == Player.PLAYER_2
+    }
+
 
     private fun makeMove(state: GameUiState, first: Int, second: Int, player: Player): GameUiState {
         val newBoard = state.board.toMutableList()
@@ -157,57 +214,6 @@ class GameViewModel : ViewModel() {
         } else {
             getMinimizedScore(board, depth)
         }
-    }
-
-
-    fun resetGame() {
-        _state.update { currentState ->
-            currentState.copy(
-                board = List(3) { MutableList(3) { Player.NONE } },
-                currentPlayer = Player.PLAYER_1,
-                isGameOver = false,
-                player1Moves = mutableListOf(),
-                player2Moves = mutableListOf(),
-                player1MoveCount = 0,
-                player2MoveCount = 0,
-                nextMoveToRemove = null
-            )
-        }
-    }
-
-    fun canResetGame(): Boolean {
-        return _state.value.board.any { row ->
-            row.any { cell -> cell != Player.NONE }
-        }
-    }
-
-    fun playSound(context: Context, soundResId: Int) {
-        mediaPlayer?.release()
-        mediaPlayer = MediaPlayer.create(context, soundResId)
-        mediaPlayer?.setVolume(.2f, .2f)
-        mediaPlayer?.start()
-    }
-
-    fun checkForWinner(board: List<List<Player>>): Boolean {
-        val size = board.size
-
-        for (i in 0 until size) {
-            if (board[i][0] != Player.NONE && board[i][0] == board[i][1] && board[i][1] == board[i][2]) {
-                return true
-            }
-            if (board[0][i] != Player.NONE && board[0][i] == board[1][i] && board[1][i] == board[2][i]) {
-                return true
-            }
-        }
-
-        if (board[0][0] != Player.NONE && board[0][0] == board[1][1] && board[1][1] == board[2][2]) {
-            return true
-        }
-        if (board[0][2] != Player.NONE && board[0][2] == board[1][1] && board[1][1] == board[2][0]) {
-            return true
-        }
-
-        return false
     }
 
     private fun checkForFullBoard(board: List<List<Player>>): Boolean {
