@@ -56,7 +56,6 @@ import com.devstromo.advancedtictactoe.ui.theme.kPlayerOMarkColor
 import com.devstromo.advancedtictactoe.ui.theme.kPlayerXMarkColor
 import java.util.Locale
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
@@ -218,8 +217,8 @@ fun BoardContent(
         modifier = Modifier.fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
-        val boardSize = maxWidth * 0.9f
-        val keySize = boardSize / 3
+        val boardSize = maxWidth * 0.8f
+        val keySize = (boardSize - 30.dp) / 3
 
         Column(
             modifier = Modifier
@@ -282,6 +281,9 @@ fun BoardRow(
                 viewModel = viewModel,
                 context = context
             )
+            if (index < positions.size - 1) {
+                Spacer(modifier = Modifier.width(5.dp)) // Space between key boxes
+            }
         }
     }
 }
