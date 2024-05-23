@@ -56,78 +56,6 @@ class GameViewModel : ViewModel() {
         }
     }
 
-//    fun onItemSelected(first: Int, second: Int) {
-//        _state.update { currentState ->
-//            if (currentState.isGameOver) {
-//                currentState  // If game is over, do not allow any changes
-//            } else {
-//                val cell = currentState.board[first][second]
-//                if (cell == Player.NONE) {  // Only allow changes if cell is empty
-//                    val newBoard = currentState.board.toMutableList()
-//                    newBoard[first] = newBoard[first].toMutableList().apply {
-//                        this[second] = currentState.currentPlayer
-//                    }
-//
-//                    // Update move count and moves list
-//                    val updatedPlayer1Moves = currentState.player1Moves.toMutableList()
-//                    val updatedPlayer2Moves = currentState.player2Moves.toMutableList()
-//                    var updatedPlayer1MoveCount = currentState.player1MoveCount
-//                    var updatedPlayer2MoveCount = currentState.player2MoveCount
-//                    var nextMoveToRemove: Pair<Int, Int>? = null
-//
-//                    if (currentState.currentPlayer == Player.PLAYER_1) {
-//                        updatedPlayer1Moves.add(Pair(first, second))
-//                        updatedPlayer1MoveCount++
-//                        if (currentState.gameMode == GameMode.ADVANCED && updatedPlayer1MoveCount > 3) {
-//                            val oldestMove = updatedPlayer1Moves.removeAt(0)
-//                            newBoard[oldestMove.first][oldestMove.second] = Player.NONE
-//                        }
-//                    } else {
-//                        updatedPlayer2Moves.add(Pair(first, second))
-//                        updatedPlayer2MoveCount++
-//                        if (currentState.gameMode == GameMode.ADVANCED && updatedPlayer2MoveCount > 3) {
-//                            val oldestMove = updatedPlayer2Moves.removeAt(0)
-//                            newBoard[oldestMove.first][oldestMove.second] = Player.NONE
-//                        }
-//                    }
-//
-//                    // Check if the move results in a win immediately after the move
-//                    val newBoardAsList = newBoard.toList()
-//                    val isGameOver =
-//                        checkForWinner(newBoardAsList) || checkForFullBoard(newBoardAsList)
-//
-//                    // Set the next move to be removed
-//                    if (!isGameOver && currentState.gameMode == GameMode.ADVANCED && (updatedPlayer1MoveCount > 2 && updatedPlayer2MoveCount > 2)) {
-//                        nextMoveToRemove = if (currentState.currentPlayer == Player.PLAYER_1) {
-//                            updatedPlayer2Moves.firstOrNull()
-//
-//                        } else {
-//                            updatedPlayer1Moves.firstOrNull()
-//                        }
-//                    }
-//
-//                    // Update player before setting game over state
-//                    val nextPlayer = if (!isGameOver) {
-//                        if (currentState.currentPlayer == Player.PLAYER_1) Player.PLAYER_2 else Player.PLAYER_1
-//                    } else currentState.currentPlayer  // Do not switch players if the game is over
-//
-//                    currentState.copy(
-//                        board = newBoard,
-//                        currentPlayer = nextPlayer,
-//                        isGameOver = isGameOver,
-//                        player1Moves = updatedPlayer1Moves,
-//                        player2Moves = updatedPlayer2Moves,
-//                        player1MoveCount = updatedPlayer1MoveCount,
-//                        player2MoveCount = updatedPlayer2MoveCount,
-//                        nextMoveToRemove = nextMoveToRemove
-//                    )
-//                } else {
-//                    currentState  // If the cell is not empty, do not update
-//                }
-//            }
-//        }
-//    }
-
     private fun makeMove(state: GameUiState, first: Int, second: Int, player: Player): GameUiState {
         val newBoard = state.board.toMutableList()
         newBoard[first] = newBoard[first].toMutableList().apply {
@@ -165,7 +93,6 @@ class GameViewModel : ViewModel() {
         )
     }
 
-    //TODO fix this advanced mode
     private fun handleAdvancedMode(state: GameUiState): GameUiState {
         val newBoard = state.board.toMutableList()
         val updatedPlayer1Moves = state.player1Moves.toMutableList()
