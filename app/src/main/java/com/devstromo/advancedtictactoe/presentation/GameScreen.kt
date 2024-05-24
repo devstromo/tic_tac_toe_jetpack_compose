@@ -324,6 +324,10 @@ fun BoardKeyBox(
         contentAlignment = Alignment.Center
     ) {
         Text(
+            modifier = Modifier.padding(
+                top = keySize * .18f,
+                start = keySize * .08f,
+            ),
             text = when (player) {
                 Player.PLAYER_1 -> "X"
                 Player.PLAYER_2 -> "O"
