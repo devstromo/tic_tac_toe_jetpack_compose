@@ -32,7 +32,16 @@ import com.devstromo.advancedtictactoe.ui.theme.kPlayerXMarkColor
 
 @Composable
 fun PlayerMarker(
-    state: PlayerMakerState = PlayerMakerState()
+    state: PlayerMakerState = PlayerMakerState(),
+    isBot: Boolean = false,
+    animalIcons: List<Int> = listOf(
+        R.drawable.ic_alpaca,
+        R.drawable.ic_bat,
+        R.drawable.ic_butterfly,
+        R.drawable.ic_crocodile,
+        R.drawable.ic_crow,
+        R.drawable.ic_deer,
+    )
 ) {
     val typo = MaterialTheme.typography
     val shape = RoundedCornerShape(
@@ -42,31 +51,33 @@ fun PlayerMarker(
         bottomStart = 20.dp
     )
 
-    val roundedShape = RoundedCornerShape(
-        50.dp
-    )
+    val roundedShape = RoundedCornerShape(50.dp)
     val boxSize = 80.dp
-    val drawable = painterResource(id = R.drawable.icon_1)
+    val drawable = if (isBot) {
+        painterResource(id = R.drawable.ic_robot)
+    } else {
+        val randomIconId = animalIcons.random()
+        painterResource(id = randomIconId)
+    }
     val isPlayerOne = PlayerMarkerType.X == state.playerMarketType
+
     Box(
         modifier = Modifier
             .width(boxSize)
             .height(160.dp)
             .clip(shape)
-            .background(
-                color = kMainDarkThemeColor
-            )
+            .background(color = kMainDarkThemeColor)
             .modifyIf(state.isSelected) {
                 border(
                     width = 1.dp,
                     color = Color.White,
-                    shape,
+                    shape
                 )
             }
     ) {
         Image(
-            drawable,
-            contentDescription = "",
+            painter = drawable,
+            contentDescription = null,
             contentScale = ContentScale.Fit,
             modifier = Modifier
                 .size(boxSize)
@@ -75,7 +86,7 @@ fun PlayerMarker(
                     border(
                         width = 1.dp,
                         color = Color.White,
-                        roundedShape,
+                        roundedShape
                     )
                 }
         )
@@ -83,13 +94,10 @@ fun PlayerMarker(
             modifier = Modifier
                 .padding(top = 55.dp)
                 .align(Alignment.Center),
-            text = if (isPlayerOne)
-                "X"
-            else
-                "O",
+            text = if (isPlayerOne) "X" else "O",
             style = typo.titleLarge.copy(
                 color = if (isPlayerOne) kPlayerXMarkColor else kPlayerOMarkColor,
-                fontWeight = FontWeight.Bold,
+                fontWeight = FontWeight.Bold
             )
         )
         Text(
@@ -99,12 +107,10 @@ fun PlayerMarker(
             text = "${state.itemsCount}",
             style = typo.bodySmall.copy(
                 color = Color.White,
-                fontWeight = FontWeight.Bold,
+                fontWeight = FontWeight.Bold
             )
         )
-
     }
-
 }
 
 @Preview
