@@ -60,7 +60,9 @@ class GameViewModel : ViewModel() {
                 player2Moves = mutableListOf(),
                 player1MoveCount = 0,
                 player2MoveCount = 0,
-                nextMoveToRemove = null
+                nextMoveToRemove = null,
+                player1IconId = -1,
+                player2IconId = -1,
             )
         }
     }
