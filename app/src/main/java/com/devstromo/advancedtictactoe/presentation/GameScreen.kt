@@ -309,7 +309,7 @@ fun BoardKeyBox(
                 shape = RoundedCornerShape(10.dp)
             )
             .clickable(
-                enabled = player == null && isClickable,
+                enabled = isClickable,
                 onClick = {
                     onItemSelected()
                     viewModel.playSound(context, soundResId)
