@@ -4,6 +4,7 @@ import android.content.Context
 import android.media.MediaPlayer
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
+import com.devstromo.advancedtictactoe.R
 import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.domain.Player
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,6 +16,14 @@ class GameViewModel : ViewModel() {
     private val _state = MutableStateFlow(GameUiState())
     val uiState: StateFlow<GameUiState> = _state.asStateFlow()
     private var mediaPlayer: MediaPlayer? = null
+    private val animalsIcons = listOf(
+        R.drawable.ic_alpaca,
+        R.drawable.ic_bat,
+        R.drawable.ic_butterfly,
+        R.drawable.ic_crocodile,
+        R.drawable.ic_crow,
+        R.drawable.ic_deer,
+    )
 
     override fun onCleared() {
         super.onCleared()
@@ -23,7 +32,11 @@ class GameViewModel : ViewModel() {
 
     fun updateGameMode(newGameMode: GameMode) {
         _state.update { currentState ->
-            currentState.copy(gameMode = newGameMode)
+            currentState.copy(
+                gameMode = newGameMode,
+                player1IconId = getPlayer1Icon(),
+                player2IconId = getPlayer2Icon(newGameMode)
+            )
         }
     }
 
@@ -100,6 +113,17 @@ class GameViewModel : ViewModel() {
         }
 
         return false
+    }
+
+    private fun getPlayer1Icon(): Int {
+        return animalsIcons.random()
+    }
+
+    private fun getPlayer2Icon(gameMode: GameMode): Int {
+        return if (gameMode == GameMode.BOT)
+            R.drawable.ic_robot
+        else
+            animalsIcons.random()
     }
 
     private fun applyAdvancedModeLogicIfNeeded(state: GameUiState): GameUiState {
