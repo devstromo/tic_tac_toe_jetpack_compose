@@ -46,7 +46,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.devstromo.advancedtictactoe.R
-import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.domain.Player
 import com.devstromo.advancedtictactoe.navigation.Screen
 import com.devstromo.advancedtictactoe.presentation.components.CustomButton

@@ -14,8 +14,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.devstromo.advancedtictactoe.data.PlayerIconsGenerator.generatePlayer1Icon
-import com.devstromo.advancedtictactoe.data.PlayerIconsGenerator.generatePlayer2Icon
 import com.devstromo.advancedtictactoe.di.appModule
 import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.navigation.Screen
