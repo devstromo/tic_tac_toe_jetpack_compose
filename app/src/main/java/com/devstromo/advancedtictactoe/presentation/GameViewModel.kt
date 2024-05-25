@@ -4,6 +4,7 @@ import android.content.Context
 import android.media.MediaPlayer
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
+import com.devstromo.advancedtictactoe.data.PlayerIconsGenerator.clearIcons
 import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.domain.Player
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -65,6 +66,7 @@ class GameViewModel : ViewModel() {
                 nextMoveToRemove = null
             )
         }
+        clearIcons()
     }
 
     fun canResetGame(): Boolean {
