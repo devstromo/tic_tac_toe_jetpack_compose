@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -62,13 +63,11 @@ fun PlayerMarker(
                 )
             }
     ) {
-        Image(
-            painter = drawable,
-            contentDescription = null,
-            contentScale = ContentScale.Fit,
+        Box(
             modifier = Modifier
                 .size(boxSize)
                 .clip(roundedShape)
+                .background(color = Color.LightGray) // Optional: for better visibility of the image
                 .modifyIf(state.isSelected) {
                     border(
                         width = 1.dp,
@@ -76,7 +75,17 @@ fun PlayerMarker(
                         roundedShape
                     )
                 }
-        )
+        ) {
+            Image(
+                painter = drawable,
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .width(boxSize * .8f)
+                    .height(boxSize * .8f)
+            )
+        }
         Text(
             modifier = Modifier
                 .padding(top = 55.dp)
