@@ -310,7 +310,7 @@ fun BoardKeyBox(
         modifier = Modifier
             .size(keySize)
             .background(
-                color = color.secondary.copy(alpha = alpha),
+                color = color.secondary,
                 shape = RoundedCornerShape(10.dp)
             )
             .clickable(
@@ -340,8 +340,8 @@ fun BoardKeyBox(
             },
             style = MaterialTheme.typography.displayMedium.copy(textAlign = TextAlign.Center),
             color = when (player) {
-                Player.PLAYER_1 -> kPlayerXMarkColor
-                Player.PLAYER_2 -> kPlayerOMarkColor
+                Player.PLAYER_1 -> kPlayerXMarkColor.copy(alpha = alpha)
+                Player.PLAYER_2 -> kPlayerOMarkColor.copy(alpha = alpha)
                 else -> Color.Transparent
             }
         )
