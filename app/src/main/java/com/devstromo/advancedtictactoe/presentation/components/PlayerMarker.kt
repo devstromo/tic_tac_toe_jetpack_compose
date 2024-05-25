@@ -67,7 +67,7 @@ fun PlayerMarker(
             modifier = Modifier
                 .size(boxSize)
                 .clip(roundedShape)
-                .background(color = Color.LightGray) // Optional: for better visibility of the image
+                .background(color = Color.White)
                 .modifyIf(state.isSelected) {
                     border(
                         width = 1.dp,
@@ -82,8 +82,8 @@ fun PlayerMarker(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .align(Alignment.Center)
-                    .width(boxSize * .8f)
-                    .height(boxSize * .8f)
+                    .width(boxSize * .75f)
+                    .height(boxSize * .75f)
             )
         }
         Text(
