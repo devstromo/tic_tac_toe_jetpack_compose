@@ -33,15 +33,7 @@ import com.devstromo.advancedtictactoe.ui.theme.kPlayerXMarkColor
 @Composable
 fun PlayerMarker(
     state: PlayerMakerState = PlayerMakerState(),
-    isBot: Boolean = false,
-    animalIcons: List<Int> = listOf(
-        R.drawable.ic_alpaca,
-        R.drawable.ic_bat,
-        R.drawable.ic_butterfly,
-        R.drawable.ic_crocodile,
-        R.drawable.ic_crow,
-        R.drawable.ic_deer,
-    )
+    playerIconId: Int = -1,
 ) {
     val typo = MaterialTheme.typography
     val shape = RoundedCornerShape(
@@ -53,12 +45,7 @@ fun PlayerMarker(
 
     val roundedShape = RoundedCornerShape(50.dp)
     val boxSize = 80.dp
-    val drawable = if (isBot) {
-        painterResource(id = R.drawable.ic_robot)
-    } else {
-        val randomIconId = animalIcons.random()
-        painterResource(id = randomIconId)
-    }
+    val drawable = painterResource(id = playerIconId)
     val isPlayerOne = PlayerMarkerType.X == state.playerMarketType
 
     Box(

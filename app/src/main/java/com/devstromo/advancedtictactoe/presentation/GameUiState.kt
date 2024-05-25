@@ -13,6 +13,4 @@ data class GameUiState(
     val player2MoveCount: Int = 0,
     val gameMode: GameMode = GameMode.CLASSIC,
     val nextMoveToRemove: Pair<Int, Int>? = null,
-    val player1IconId: Int = -1,
-    val player2IconId: Int = -1,
 )

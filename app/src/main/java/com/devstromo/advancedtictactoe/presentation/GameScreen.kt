@@ -165,7 +165,8 @@ fun GameScreen(
                     PlayerMarkerType.X,
                     isSelected = state.currentPlayer == Player.PLAYER_1,
                     itemsCount = state.player1MoveCount
-                )
+                ),
+                playerIconId = viewModel.getPlayer1Icon()
             )
             Spacer(modifier = Modifier.width(20.dp))
             PlayerMarker(
@@ -174,7 +175,7 @@ fun GameScreen(
                     isSelected = state.currentPlayer == Player.PLAYER_2,
                     itemsCount = state.player2MoveCount
                 ),
-                isBot = state.gameMode == GameMode.BOT
+                playerIconId = viewModel.getPlayer2Icon()
             )
         }
         Spacer(modifier = Modifier.weight(1f))
