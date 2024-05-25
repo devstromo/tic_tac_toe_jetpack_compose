@@ -14,10 +14,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.devstromo.advancedtictactoe.data.PlayerIconsGenerator
 import com.devstromo.advancedtictactoe.data.PlayerIconsGenerator.generatePlayer1Icon
 import com.devstromo.advancedtictactoe.data.PlayerIconsGenerator.generatePlayer2Icon
-
 import com.devstromo.advancedtictactoe.di.appModule
 import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.navigation.Screen
@@ -60,7 +58,10 @@ class MainActivity : ComponentActivity() {
                         startDestination = Screen.Initial.route
                     ) {
                         composable(route = Screen.Initial.route) {
-                            InitialScreen(navController = navController)
+                            InitialScreen(
+                                navController = navController,
+                                viewModel = viewModel,
+                            )
                         }
                         composable(
                             route = Screen.Game.route,

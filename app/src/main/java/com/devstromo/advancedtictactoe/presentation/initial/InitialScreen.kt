@@ -17,11 +17,13 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.navigation.Screen
+import com.devstromo.advancedtictactoe.presentation.GameViewModel
 import com.devstromo.advancedtictactoe.presentation.components.CustomButton
 
 @Composable
 fun InitialScreen(
     navController: NavController,
+    viewModel: GameViewModel,
     modifier: Modifier = Modifier
 ) {
     val typo = MaterialTheme.typography
@@ -46,6 +48,7 @@ fun InitialScreen(
         CustomButton(
             text = "Classic",
             onClick = {
+                viewModel.resetIcons()
                 navController.navigate(route = Screen.Game.createRoute(GameMode.CLASSIC))
             },
         )
@@ -53,6 +56,7 @@ fun InitialScreen(
         CustomButton(
             text = "1v1 Advance",
             onClick = {
+                viewModel.resetIcons()
                 navController.navigate(route = Screen.Game.createRoute(GameMode.ADVANCED))
             },
         )
@@ -60,6 +64,7 @@ fun InitialScreen(
         CustomButton(
             text = "Solo Play",
             onClick = {
+                viewModel.resetIcons()
                 navController.navigate(route = Screen.Game.createRoute(GameMode.BOT))
             },
         )

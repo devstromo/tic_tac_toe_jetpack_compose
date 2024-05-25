@@ -66,11 +66,9 @@ class GameViewModel : ViewModel() {
                 nextMoveToRemove = null
             )
         }
-        clearIcons()
     }
 
-    fun clearState() {
-        resetGame()
+    fun resetIcons() {
         clearIcons()
     }
 

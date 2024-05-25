@@ -148,7 +148,7 @@ fun GameScreen(
                             color = Color.Transparent,
                         ),
                     onClick = {
-                        viewModel.clearState()
+                        viewModel.resetGame()
                         navController.navigate(route = Screen.Initial.route)
                     },
                 ) {
