@@ -4,7 +4,10 @@ import android.content.Context
 import android.media.MediaPlayer
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
+import com.devstromo.advancedtictactoe.data.PlayerIconsGenerator
 import com.devstromo.advancedtictactoe.data.PlayerIconsGenerator.clearIcons
+import com.devstromo.advancedtictactoe.data.PlayerIconsGenerator.generatePlayer1Icon
+import com.devstromo.advancedtictactoe.data.PlayerIconsGenerator.generatePlayer2Icon
 import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.domain.Player
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -67,6 +70,9 @@ class GameViewModel : ViewModel() {
             )
         }
     }
+
+    fun player1Icon(): Int = generatePlayer1Icon()
+    fun player2Icon(): Int = generatePlayer2Icon(_state.value.gameMode)
 
     fun resetIcons() {
         clearIcons()

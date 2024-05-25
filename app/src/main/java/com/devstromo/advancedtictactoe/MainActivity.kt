@@ -73,15 +73,11 @@ class MainActivity : ComponentActivity() {
                                 GameMode.valueOf(it)
                             } ?: GameMode.CLASSIC
                             viewModel.updateGameMode(gameMode)
-                            val icon1 = generatePlayer1Icon()
-                            val icon2 = generatePlayer2Icon(gameMode)
                             GameScreen(
                                 navController = navController,
                                 viewModel = viewModel,
                                 state = state,
                                 onItemSelected = viewModel::onItemSelected,
-                                player1IconId = icon1,
-                                player2IconId = icon2
                             )
                         }
                         composable(route = Screen.Rules.route) {

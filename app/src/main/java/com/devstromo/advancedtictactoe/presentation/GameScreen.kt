@@ -65,8 +65,6 @@ fun GameScreen(
     viewModel: GameViewModel,
     state: GameUiState,
     onItemSelected: (Int, Int) -> Unit,
-    player1IconId: Int = -1,
-    player2IconId: Int = -1,
 ) {
     val typo = MaterialTheme.typography
     val context = LocalContext.current
@@ -171,7 +169,7 @@ fun GameScreen(
                     isSelected = state.currentPlayer == Player.PLAYER_1,
                     itemsCount = state.player1MoveCount
                 ),
-                playerIconId = player1IconId
+                playerIconId = viewModel.player1Icon()
             )
             Spacer(modifier = Modifier.width(20.dp))
             PlayerMarker(
@@ -180,7 +178,7 @@ fun GameScreen(
                     isSelected = state.currentPlayer == Player.PLAYER_2,
                     itemsCount = state.player2MoveCount
                 ),
-                playerIconId = player2IconId
+                playerIconId = viewModel.player2Icon()
             )
         }
         Spacer(modifier = Modifier.weight(1f))
