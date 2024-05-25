@@ -147,7 +147,10 @@ fun GameScreen(
                         .background(
                             color = Color.Transparent,
                         ),
-                    onClick = { navController.navigate(route = Screen.Initial.route) },
+                    onClick = {
+                        viewModel.clearState()
+                        navController.navigate(route = Screen.Initial.route)
+                    },
                 ) {
                     Icon(
                         Icons.Rounded.Home,

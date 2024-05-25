@@ -69,6 +69,11 @@ class GameViewModel : ViewModel() {
         clearIcons()
     }
 
+    fun clearState() {
+        resetGame()
+        clearIcons()
+    }
+
     fun canResetGame(): Boolean {
         return _state.value.board.any { row ->
             row.any { cell -> cell != Player.NONE }
