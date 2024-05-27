@@ -65,6 +65,8 @@ dependencies {
     implementation(libs.androidx.graphics.path.android)
     implementation(libs.androidx.graphics.shapes.android)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.rive.android)
+    implementation(libs.androidx.startup.runtime)
     testImplementation(libs.jupiter.junit5)
     testRuntimeOnly(libs.jupiter.engine.junit5)
     androidTestImplementation(libs.androidx.junit)
