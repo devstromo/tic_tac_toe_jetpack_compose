@@ -14,6 +14,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import app.rive.runtime.kotlin.core.Rive
 import com.devstromo.advancedtictactoe.di.appModule
 import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.navigation.Screen
@@ -33,12 +34,14 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Rive.init(this)
         startKoin {
             androidLogger()
             androidContext(this@MainActivity)
             modules(appModule)
         }
         setContent {
+
             AdvancedTicTacToeTheme(
                 darkTheme = true,
                 dynamicColor = false
