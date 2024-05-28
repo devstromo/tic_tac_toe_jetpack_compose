@@ -39,13 +39,7 @@ fun InitialScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            text = "Tic-Tac-Toe",
-            style = typo.titleLarge.copy(
-                fontWeight = FontWeight.Bold
-            ),
-            textAlign = TextAlign.Center,
-        )
+        Spacer(modifier = Modifier.weight(1f))
         RiveAnimation(
             resId = R.raw.tic_tac_toe_title,
             autoplay = true,
