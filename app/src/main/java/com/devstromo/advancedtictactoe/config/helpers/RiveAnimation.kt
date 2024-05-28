@@ -2,6 +2,7 @@ package com.devstromo.advancedtictactoe.config.helpers
 
 import androidx.annotation.RawRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Modifier
@@ -13,16 +14,22 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import app.rive.runtime.kotlin.RiveAnimationView
 import app.rive.runtime.kotlin.controllers.RiveFileController
 import app.rive.runtime.kotlin.core.Alignment
+import app.rive.runtime.kotlin.core.ExperimentalAssetLoader
 import app.rive.runtime.kotlin.core.Fit
 import app.rive.runtime.kotlin.core.Loop
 import app.rive.runtime.kotlin.core.PlayableInstance
 import com.devstromo.advancedtictactoe.R
 
+/**
+ * https://stackoverflow.com/a/78083060
+ */
+@OptIn(ExperimentalAssetLoader::class)
 @Suppress("LongMethod")
 @Composable
 fun RiveAnimation(
@@ -49,11 +56,11 @@ fun RiveAnimation(
     val lifecycleOwner = LocalLifecycleOwner.current
 
     if (LocalInspectionMode.current) { // For Developing only,
-//        Image(
-//            modifier = modifier.size(100.dp),
-//            painter = painterResource(id = R.drawable.), //any image
-//            contentDescription = contentDescription
-//        )
+        Image(
+            modifier = modifier.size(10.dp),
+            painter = painterResource(id = R.drawable.ic_app_title),
+            contentDescription = contentDescription
+        )
     } else {
         val semantics = if (contentDescription != null) {
             Modifier.semantics {
