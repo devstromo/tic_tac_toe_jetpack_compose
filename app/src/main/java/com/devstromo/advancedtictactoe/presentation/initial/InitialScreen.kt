@@ -15,6 +15,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.devstromo.advancedtictactoe.R
+import com.devstromo.advancedtictactoe.config.helpers.RiveAnimation
 import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.navigation.Screen
 import com.devstromo.advancedtictactoe.presentation.GameViewModel
@@ -43,6 +45,12 @@ fun InitialScreen(
                 fontWeight = FontWeight.Bold
             ),
             textAlign = TextAlign.Center,
+        )
+        RiveAnimation(
+            resId = R.raw.tic_tac_toe_title,
+            autoplay = true,
+            animationName = "Timeline 1",
+            contentDescription = "Some content Description"
         )
         Spacer(modifier = Modifier.weight(1f))
         CustomButton(
