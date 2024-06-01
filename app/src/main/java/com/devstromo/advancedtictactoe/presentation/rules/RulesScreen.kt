@@ -77,7 +77,7 @@ fun RulesScreen(
                 ),
         ) {
             Text(
-                text = "Game Rules",
+                text = stringResource(R.string.title_game_rules),
                 style = typos.titleLarge.copy(
                     fontWeight = FontWeight.Bold,
                 )

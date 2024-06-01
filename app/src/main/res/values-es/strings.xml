@@ -2,4 +2,5 @@
 <resources>
     <string name="header_win">Victoria</string>
     <string name="subtitle_win">Coloque tres de sus marcas en una fila horizontal, vertical o diagonal.</string>
+    <string name="title_game_rules">Reglas</string>
 </resources>
