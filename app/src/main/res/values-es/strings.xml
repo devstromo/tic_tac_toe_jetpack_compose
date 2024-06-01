@@ -3,4 +3,6 @@
     <string name="header_win">Victoria</string>
     <string name="subtitle_win">Coloque tres de sus marcas en una fila horizontal, vertical o diagonal.</string>
     <string name="title_game_rules">Reglas</string>
+    <string name="header_defeat">Derrota</string>
+    <string name="subtitle_defeat">Permita que el oponente coloque tres marcas en línea.</string>
 </resources>

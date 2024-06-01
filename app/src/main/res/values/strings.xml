@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">Advanced Tic Tac Toe</string>
+    <string name="app_name" translatable="false">Advanced Tic Tac Toe</string>
     <string name="header_win">Win</string>
     <string name="subtitle_win">Place three of your marks in a horizontal, vertical, or diagonal row.</string>
     <string name="title_game_rules">Game Rules</string>
+    <string name="header_defeat">Defeat</string>
+    <string name="subtitle_defeat">Allow the opponent to place three marks in a row.</string>
 </resources>

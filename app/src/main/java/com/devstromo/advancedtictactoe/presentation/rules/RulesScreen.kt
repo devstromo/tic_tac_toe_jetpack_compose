@@ -103,8 +103,8 @@ fun RulesScreen(
                     )
             )
             RuleInfo(
-                header = "Defeat",
-                subtitle = "Allow the opponent to place three marks in a row.",
+                header = stringResource(R.string.header_defeat),
+                subtitle = stringResource(R.string.subtitle_defeat),
                 iconId = R.drawable.ic_defeat
             )
             GradientDivider(
