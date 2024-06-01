@@ -5,4 +5,6 @@
     <string name="title_game_rules">Game Rules</string>
     <string name="header_defeat">Defeat</string>
     <string name="subtitle_defeat">Allow the opponent to place three marks in a row.</string>
+    <string name="header_draw">Draw</string>
+    <string name="subtitle_draw">All cells are filled without any player having three marks in a row.</string>
 </resources>

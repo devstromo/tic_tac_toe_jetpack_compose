@@ -5,4 +5,6 @@
     <string name="title_game_rules">Reglas</string>
     <string name="header_defeat">Derrota</string>
     <string name="subtitle_defeat">Permita que el oponente coloque tres marcas en línea.</string>
+    <string name="header_draw">Empate</string>
+    <string name="subtitle_draw">Todas las casillas se llenan sin que ningún jugador tenga tres marcas en línea.</string>
 </resources>

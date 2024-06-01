@@ -114,8 +114,8 @@ fun RulesScreen(
                     )
             )
             RuleInfo(
-                header = "Draw",
-                subtitle = "All cells are filled without any player having three marks in a row.",
+                header = stringResource(R.string.header_draw),
+                subtitle = stringResource(R.string.subtitle_draw),
                 iconId = R.drawable.ic_draw
             )
         }
