@@ -1,7 +1,6 @@
 package com.devstromo.advancedtictactoe.presentation
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -185,8 +184,10 @@ fun GameScreen(
             boardState = state.board,
             isGameOver = state.isGameOver,
             nextMoveToRemove = state.nextMoveToRemove,
-            viewModel = viewModel,
-            context = context
+            playSound = { soundId ->
+                viewModel.playSound(context, soundId)
+            },
+            onItemSelected = viewModel::onItemSelected
         )
         Spacer(modifier = Modifier.weight(1f))
         Column(
@@ -213,8 +214,8 @@ fun BoardContent(
     boardState: List<List<Player?>>,
     isGameOver: Boolean = false,
     nextMoveToRemove: Pair<Int, Int>? = null,
-    viewModel: GameViewModel,
-    context: Context
+    playSound: (Int) -> Unit,
+    onItemSelected: (Int, Int) -> Unit
 ) {
     BoxWithConstraints(
         modifier = Modifier.fillMaxWidth(),
@@ -236,15 +237,14 @@ fun BoardContent(
                 BoardRow(
                     onItemSelected = { selectedPair ->
                         Log.i("Board", "Pair $selectedPair")
-                        viewModel.onItemSelected(selectedPair.first, selectedPair.second)
+                        onItemSelected(selectedPair.first, selectedPair.second)
                     },
                     positions = positions,
                     rowState = boardState[row],
                     isGameOver = isGameOver,
                     nextMoveToRemove = nextMoveToRemove,
                     keySize = keySize,
-                    viewModel = viewModel,
-                    context = context
+                    playSound = playSound
                 )
             }
         }
@@ -259,8 +259,7 @@ fun BoardRow(
     isGameOver: Boolean,
     nextMoveToRemove: Pair<Int, Int>? = null,
     keySize: Dp,
-    viewModel: GameViewModel,
-    context: Context
+    playSound: (Int) -> Unit
 ) {
     val soundResources = listOf(
         R.raw.sound_1, R.raw.sound_2, R.raw.sound_3,
@@ -281,7 +280,7 @@ fun BoardRow(
                 isNextToRemove = nextMoveToRemove == pair,
                 keySize = keySize,
                 playSound = {
-                    viewModel.playSound(context, soundResources[index])
+                    playSound(soundResources[index])
                 }
             )
             if (index < positions.size - 1) {
