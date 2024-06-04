@@ -197,7 +197,7 @@ fun GameScreen(
                 .padding(horizontal = 45.dp)
         ) {
             CustomButton(
-                text = "Reset Game",
+                text = stringResource(R.string.reset_game),
                 onClick = viewModel::resetGame,
                 isEnable = viewModel.canResetGame()
             )
