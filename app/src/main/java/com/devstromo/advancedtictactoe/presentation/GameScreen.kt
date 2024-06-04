@@ -107,7 +107,7 @@ fun GameScreen(
                         modifier = Modifier
                             .align(Alignment.CenterVertically)
                             .padding(top = 10.dp),
-                        text = "Reset Game",
+                        text = stringResource(id = R.string.reset_game),
                         textAlign = TextAlign.Center,
                         style = typo.bodyLarge.copy(color = Color.White)
                     )
