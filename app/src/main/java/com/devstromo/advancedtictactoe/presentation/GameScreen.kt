@@ -282,10 +282,10 @@ fun BoardRow(
                 player = rowState[pair.second],
                 isClickable = !isGameOver,
                 isNextToRemove = nextMoveToRemove == pair,
-                soundResId = soundResources[index],
                 keySize = keySize,
-                viewModel = viewModel,
-                context = context
+                playSound = {
+                    viewModel.playSound(context, soundResources[index])
+                }
             )
             if (index < positions.size - 1) {
                 Spacer(modifier = Modifier.width(5.dp)) // Space between key boxes
@@ -300,10 +300,8 @@ fun BoardKeyBox(
     player: Player? = null,
     isClickable: Boolean = true,
     isNextToRemove: Boolean = false,
-    soundResId: Int,
     keySize: Dp,
-    viewModel: GameViewModel,
-    context: Context
+    playSound: () -> Unit,
 ) {
     val color = MaterialTheme.colorScheme
     val alpha = if (isNextToRemove) 0.5f else 1f
@@ -318,7 +316,7 @@ fun BoardKeyBox(
                 enabled = isClickable,
                 onClick = {
                     onItemSelected()
-                    viewModel.playSound(context, soundResId)
+                    playSound()
                 },
                 indication = rememberRipple(
                     bounded = true,
