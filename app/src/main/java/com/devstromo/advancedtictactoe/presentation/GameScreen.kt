@@ -81,7 +81,7 @@ fun GameScreen(
         AlertDialog(
             onDismissRequest = { showDialog.value = false },
             title = {
-                Text(text = "Game Over")
+                Text(text = stringResource(R.string.game_over))
             },
             text = {
                 Text(
