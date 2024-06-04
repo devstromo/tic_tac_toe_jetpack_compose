@@ -11,4 +11,5 @@
     <string name="game_over">Game Over</string>
     <string name="player_one_win">You win!</string>
     <string name="player_two_wins">Your opponent wins!</string>
+    <string name="draw_string">It\'s a draw!</string>
 </resources>

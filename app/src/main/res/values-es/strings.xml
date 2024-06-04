@@ -11,5 +11,5 @@
     <string name="game_over">Juego Finalizado</string>
     <string name="player_one_win">¡Ganaste!</string>
     <string name="player_two_wins">¡Tu oponente gana!</string>
-
+    <string name="draw_string">¡Empate!</string>
 </resources>

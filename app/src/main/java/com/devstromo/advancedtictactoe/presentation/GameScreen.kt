@@ -90,7 +90,7 @@ fun GameScreen(
                             stringResource(R.string.player_one_win)
                         } else stringResource(R.string.player_two_wins)
                     } else {
-                        "It's a draw!"
+                        stringResource(R.string.draw_string)
                     }
                 )
             },
