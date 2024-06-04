@@ -40,6 +40,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
@@ -202,7 +203,7 @@ fun GameScreen(
             )
             Spacer(modifier = Modifier.height(10.dp))
             CustomButton(
-                text = "Rules",
+                text = stringResource(id = R.string.title_game_rules),
                 onClick = { navController.navigate(Screen.Rules.route) },
             )
         }
