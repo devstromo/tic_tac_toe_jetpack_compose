@@ -46,7 +46,7 @@ fun InitialScreen(
         )
         Spacer(modifier = Modifier.weight(1f))
         CustomButton(
-            text = "Classic",
+            text = stringResource(R.string.mode_classic),
             onClick = {
                 viewModel.resetIcons()
                 navController.navigate(route = Screen.Game.createRoute(GameMode.CLASSIC))
