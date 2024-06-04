@@ -53,7 +53,7 @@ fun RulesScreen(
                     .height(45.dp)
                     .width(45.dp)
                     .background(
-                        color = color.primary,
+                        color = Color.Transparent,
                         shape = RoundedCornerShape(25)
                     ),
 
@@ -62,7 +62,7 @@ fun RulesScreen(
                 Icon(
                     Icons.Rounded.ArrowBack,
                     contentDescription = "Favorite",
-                    tint = color.secondary,
+                    tint = Color.White,
                     modifier = Modifier
                         .size(40.dp)
                 )
