@@ -9,4 +9,5 @@
     <string name="subtitle_draw">All cells are filled without any player having three marks in a row.</string>
     <string name="reset_game">Reset Game</string>
     <string name="game_over">Game Over</string>
+    <string name="player_one_win">You win!</string>
 </resources>

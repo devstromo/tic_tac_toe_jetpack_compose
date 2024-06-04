@@ -9,4 +9,5 @@
     <string name="subtitle_draw">Todas las casillas se llenan sin que ningún jugador tenga tres marcas en línea.</string>
     <string name="reset_game">Volver a jugar</string>
     <string name="game_over">Juego Finalizado</string>
+    <string name="player_one_win">Ganaste!</string>
 </resources>
