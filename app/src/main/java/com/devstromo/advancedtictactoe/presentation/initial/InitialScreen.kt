@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import app.rive.runtime.kotlin.core.ExperimentalAssetLoader
@@ -53,7 +54,7 @@ fun InitialScreen(
         )
         Spacer(modifier = Modifier.height(10.dp))
         CustomButton(
-            text = "1v1 Advance",
+            text = stringResource(R.string.game_mode_advance_title),
             onClick = {
                 viewModel.resetIcons()
                 navController.navigate(route = Screen.Game.createRoute(GameMode.ADVANCED))

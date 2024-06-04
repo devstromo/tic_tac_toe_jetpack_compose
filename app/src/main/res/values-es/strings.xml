@@ -12,4 +12,6 @@
     <string name="player_one_win">¡Ganaste!</string>
     <string name="player_two_wins">¡Tu oponente gana!</string>
     <string name="draw_string">¡Empate!</string>
+    <string name="game_mode_advance_title">1v1 Avanzado</string>
+
 </resources>
