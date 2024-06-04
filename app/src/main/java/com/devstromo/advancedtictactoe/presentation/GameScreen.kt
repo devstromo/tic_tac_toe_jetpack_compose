@@ -64,7 +64,6 @@ fun GameScreen(
     navController: NavController,
     viewModel: GameViewModel,
     state: GameUiState,
-    onItemSelected: (Int, Int) -> Unit,
 ) {
     val typo = MaterialTheme.typography
     val context = LocalContext.current
@@ -183,7 +182,7 @@ fun GameScreen(
         }
         Spacer(modifier = Modifier.weight(1f))
         BoardContent(
-            onItemSelected,
+            viewModel::onItemSelected,
             boardState = state.board,
             isGameOver = state.isGameOver,
             nextMoveToRemove = state.nextMoveToRemove,

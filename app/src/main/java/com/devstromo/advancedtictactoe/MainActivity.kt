@@ -78,7 +78,6 @@ class MainActivity : ComponentActivity() {
                                 navController = navController,
                                 viewModel = viewModel,
                                 state = state,
-                                onItemSelected = viewModel::onItemSelected,
                             )
                         }
                         composable(route = Screen.Rules.route) {
