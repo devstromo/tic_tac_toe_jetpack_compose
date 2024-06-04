@@ -182,7 +182,6 @@ fun GameScreen(
         }
         Spacer(modifier = Modifier.weight(1f))
         BoardContent(
-            viewModel::onItemSelected,
             boardState = state.board,
             isGameOver = state.isGameOver,
             nextMoveToRemove = state.nextMoveToRemove,
@@ -211,7 +210,6 @@ fun GameScreen(
 
 @Composable
 fun BoardContent(
-    onItemSelected: (Int, Int) -> Unit,
     boardState: List<List<Player?>>,
     isGameOver: Boolean = false,
     nextMoveToRemove: Pair<Int, Int>? = null,
@@ -238,7 +236,7 @@ fun BoardContent(
                 BoardRow(
                     onItemSelected = { selectedPair ->
                         Log.i("Board", "Pair $selectedPair")
-                        onItemSelected(selectedPair.first, selectedPair.second)
+                        viewModel.onItemSelected(selectedPair.first, selectedPair.second)
                     },
                     positions = positions,
                     rowState = boardState[row],
