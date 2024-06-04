@@ -4,17 +4,24 @@ import android.content.Context
 import android.media.MediaPlayer
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.devstromo.advancedtictactoe.data.PlayerIconsGenerator.clearIcons
 import com.devstromo.advancedtictactoe.data.PlayerIconsGenerator.generatePlayer1Icon
 import com.devstromo.advancedtictactoe.data.PlayerIconsGenerator.generatePlayer2Icon
 import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.domain.Player
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class GameViewModel : ViewModel() {
+class GameViewModel(
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
+) : ViewModel() {
     private val _state = MutableStateFlow(GameUiState())
     val uiState: StateFlow<GameUiState> = _state.asStateFlow()
     private var mediaPlayer: MediaPlayer? = null
@@ -47,8 +54,12 @@ class GameViewModel : ViewModel() {
             newState = applyAdvancedModeLogicIfNeeded(newState)
 
             if (shouldBotMove(newState)) {
-                val botMove = calculateBestMove(newState.board)
-                newState = makeMove(newState, botMove.first, botMove.second, Player.PLAYER_2)
+                viewModelScope.launch {
+                    val botMove = calculateBestMoveAsync(newState.board)
+                    newState = makeMove(newState, botMove.first, botMove.second, Player.PLAYER_2)
+                    _state.value = newState
+                }
+                return@update currentState
             }
 
             newState
@@ -190,6 +201,12 @@ class GameViewModel : ViewModel() {
             player2Moves = updatedPlayer2Moves,
             nextMoveToRemove = nextMoveToRemove,
         )
+    }
+
+    private suspend fun calculateBestMoveAsync(board: List<MutableList<Player>>): Pair<Int, Int> {
+        return withContext(dispatcher) {
+            calculateBestMove(board)
+        }
     }
 
     private fun calculateBestMove(board: List<MutableList<Player>>): Pair<Int, Int> {
