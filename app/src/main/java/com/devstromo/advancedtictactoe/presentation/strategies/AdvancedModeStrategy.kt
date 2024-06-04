@@ -13,7 +13,7 @@ class AdvancedModeStrategy : GameModeStrategy {
         dispatcher: CoroutineDispatcher,
         viewModel: GameViewModel
     ): GameUiState {
-        var newState = viewModel.makeMove(currentState, first, second, currentState.currentPlayer)
+        val newState = viewModel.makeMove(currentState, first, second, currentState.currentPlayer)
         return viewModel.applyAdvancedModeLogicIfNeeded(newState)
     }
 }
