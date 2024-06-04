@@ -88,7 +88,7 @@ fun GameScreen(
                     text = if (viewModel.checkForWinner(state.board)) {
                         if (state.currentPlayer == Player.PLAYER_1) {
                             stringResource(R.string.player_one_win)
-                        } else "Your opponent wins!"
+                        } else stringResource(R.string.player_two_wins)
                     } else {
                         "It's a draw!"
                     }
