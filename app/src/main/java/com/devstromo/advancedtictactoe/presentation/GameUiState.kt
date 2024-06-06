@@ -1,7 +1,9 @@
 package com.devstromo.advancedtictactoe.presentation
 
 import com.devstromo.advancedtictactoe.domain.GameMode
+import com.devstromo.advancedtictactoe.domain.GameModeStrategy
 import com.devstromo.advancedtictactoe.domain.Player
+import com.devstromo.advancedtictactoe.presentation.strategies.ClassicModeStrategy
 
 data class GameUiState(
     val board: List<MutableList<Player>> = List(3) { MutableList(3) { Player.NONE } },
@@ -13,4 +15,5 @@ data class GameUiState(
     val player2MoveCount: Int = 0,
     val gameMode: GameMode = GameMode.CLASSIC,
     val nextMoveToRemove: Pair<Int, Int>? = null,
+    val strategy: GameModeStrategy = ClassicModeStrategy()
 )

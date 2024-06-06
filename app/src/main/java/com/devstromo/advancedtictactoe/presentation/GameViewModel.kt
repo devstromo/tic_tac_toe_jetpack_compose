@@ -39,7 +39,13 @@ class GameViewModel(
 
     fun updateGameMode(newGameMode: GameMode) {
         _state.update { currentState ->
-            currentState.copy(gameMode = newGameMode)
+            currentState.copy(
+                gameMode = newGameMode, strategy = when (newGameMode) {
+                    GameMode.CLASSIC -> classicModeStrategy
+                    GameMode.ADVANCED -> advancedModeStrategy
+                    GameMode.BOT -> botModeStrategy
+                }
+            )
         }
     }
 
@@ -50,15 +56,14 @@ class GameViewModel(
         val cell = currentState.board[first][second]
         if (cell != Player.NONE) return
 
-        val strategy = when (currentState.gameMode) {
-            GameMode.CLASSIC -> classicModeStrategy
-            GameMode.ADVANCED -> advancedModeStrategy
-            GameMode.BOT -> botModeStrategy
-        }
-
         viewModelScope.launch {
-            val newState =
-                strategy.onItemSelected(first, second, currentState, dispatcher, this@GameViewModel)
+            val newState = currentState.strategy.onItemSelected(
+                first,
+                second,
+                currentState,
+                dispatcher,
+                this@GameViewModel
+            )
             _state.value = newState
         }
     }
