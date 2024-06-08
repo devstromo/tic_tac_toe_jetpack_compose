@@ -62,6 +62,14 @@ fun InitialScreen(
         )
         Spacer(modifier = Modifier.height(10.dp))
         CustomButton(
+            text = stringResource(R.string.game_mode_online_title),
+            onClick = {
+                viewModel.resetIcons()
+                navController.navigate(route = Screen.Bluetooth.route)
+            },
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        CustomButton(
             text = stringResource(R.string.mode_against_bot),
             onClick = {
                 viewModel.resetIcons()

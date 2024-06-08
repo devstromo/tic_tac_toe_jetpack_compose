@@ -13,6 +13,7 @@
     <string name="player_two_wins">¡Tu oponente gana!</string>
     <string name="draw_string">¡Empate!</string>
     <string name="game_mode_advance_title">1v1 Avanzado</string>
+    <string name="game_mode_online_title">1v1 Online</string>
     <string name="mode_against_bot">Duelo vs IA</string>
     <string name="mode_classic">Duelo 1v1</string>
     <string name="bluetooth_game_create_title">Crear partida</string>
