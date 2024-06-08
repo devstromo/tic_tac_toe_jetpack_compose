@@ -15,4 +15,6 @@
     <string name="game_mode_advance_title">1v1 Advance</string>
     <string name="mode_against_bot">AI Challenge</string>
     <string name="mode_classic">Classic</string>
+    <string name="bluetooth_game_create_title">Create Game</string>
+    <string name="bluetooth_game_join_title">Join Game</string>
 </resources>
