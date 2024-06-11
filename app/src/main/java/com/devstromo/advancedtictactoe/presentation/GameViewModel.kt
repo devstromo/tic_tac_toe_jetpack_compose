@@ -10,6 +10,8 @@ import com.devstromo.advancedtictactoe.data.PlayerIconsGenerator.generatePlayer1
 import com.devstromo.advancedtictactoe.data.PlayerIconsGenerator.generatePlayer2Icon
 import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.domain.Player
+import com.devstromo.advancedtictactoe.domain.online.bluetooth.BluetoothController
+import com.devstromo.advancedtictactoe.domain.online.bluetooth.ConnectionResult
 import com.devstromo.advancedtictactoe.presentation.strategies.AdvancedModeStrategy
 import com.devstromo.advancedtictactoe.presentation.strategies.BotModeStrategy
 import com.devstromo.advancedtictactoe.presentation.strategies.ClassicModeStrategy
@@ -22,16 +24,30 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class GameViewModel(
+    private val bluetoothController: BluetoothController,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
     private val _state = MutableStateFlow(GameUiState())
     val uiState: StateFlow<GameUiState> = _state.asStateFlow()
     private var mediaPlayer: MediaPlayer? = null
 
+    private val _isServerStarted = MutableStateFlow(false)
+    val isServerStarted: StateFlow<Boolean> = _isServerStarted.asStateFlow()
+
+    private val _isConnected = MutableStateFlow(false)
+    val isConnected: StateFlow<Boolean> = _isConnected.asStateFlow()
+
     private val classicModeStrategy = ClassicModeStrategy()
     private val advancedModeStrategy = AdvancedModeStrategy()
     private val botModeStrategy = BotModeStrategy()
 
+    init {
+        viewModelScope.launch {
+            bluetoothController.isConnected.collect {
+                _isConnected.value = it
+            }
+        }
+    }
     override fun onCleared() {
         super.onCleared()
         mediaPlayer?.release()
@@ -192,6 +208,26 @@ class GameViewModel(
             }
         }
         return bestMove
+    }
+
+    fun startBluetoothServer() {
+        viewModelScope.launch {
+            _isServerStarted.value = true
+            bluetoothController.startBluetoothServer().collect { result ->
+                when (result) {
+                    is ConnectionResult.ConnectionEstablished -> {
+                        _isConnected.value = true
+                    }
+                    is ConnectionResult.Error -> {
+                        _isServerStarted.value = false
+                        _isConnected.value = false
+                    }
+                    is ConnectionResult.TransferSucceeded -> {
+                        // Handle data transfer if needed
+                    }
+                }
+            }
+        }
     }
 
     private fun minimax(board: List<MutableList<Player>>, depth: Int, isMaximizing: Boolean): Int {
