@@ -8,5 +8,5 @@ import org.koin.dsl.module
 
 val appModule = module {
     single<BluetoothController> { AndroidBluetoothController(get()) }
-    viewModel { GameViewModel(get()) }
+    viewModel { GameViewModel(get(), get()) }
 }

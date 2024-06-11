@@ -52,6 +52,10 @@ class AndroidBluetoothController(
 
     private val _isConnected = MutableStateFlow(false)
 
+    private val _scannedDevices = MutableStateFlow<List<BluetoothDeviceDomain>>(emptyList())
+    private val _pairedDevices = MutableStateFlow<List<BluetoothDeviceDomain>>(emptyList())
+    private val _errors = MutableSharedFlow<String>()
+
     private val bluetoothStateReceiver = BluetoothStateReceiver { isConnected, bluetoothDevice ->
         if (bluetoothAdapter?.bondedDevices?.contains(bluetoothDevice) == true) {
             _isConnected.update { isConnected }
@@ -69,7 +73,7 @@ class AndroidBluetoothController(
             IntentFilter().apply {
                 addAction(BluetoothAdapter.ACTION_CONNECTION_STATE_CHANGED)
                 addAction(android.bluetooth.BluetoothDevice.ACTION_ACL_CONNECTED)
-                addAction(android.bluetooth.BluetoothDevice.ACTION_ACL_CONNECTED)
+                addAction(android.bluetooth.BluetoothDevice.ACTION_ACL_DISCONNECTED)
             }
         )
     }
@@ -77,15 +81,12 @@ class AndroidBluetoothController(
     override val isConnected: StateFlow<Boolean>
         get() = _isConnected.asStateFlow()
 
-    private val _scannedDevices = MutableStateFlow<List<BluetoothDeviceDomain>>(emptyList());
     override val scannedDevices: StateFlow<List<BluetoothDeviceDomain>>
         get() = _scannedDevices.asStateFlow()
 
-    private val _pairedDevices = MutableStateFlow<List<BluetoothDeviceDomain>>(emptyList());
     override val pairedDevices: StateFlow<List<BluetoothDeviceDomain>>
         get() = _pairedDevices.asStateFlow()
 
-    private val _errors = MutableSharedFlow<String>();
     override val errors: SharedFlow<String>
         get() = _errors.asSharedFlow()
 
@@ -137,7 +138,6 @@ class AndroidBluetoothController(
                             .map {
                                 ConnectionResult.TransferSucceeded(it)
                             }
-
                     )
                 }
             }
