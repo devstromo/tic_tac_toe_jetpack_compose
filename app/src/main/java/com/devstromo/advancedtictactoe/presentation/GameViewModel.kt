@@ -11,6 +11,7 @@ import com.devstromo.advancedtictactoe.data.PlayerIconsGenerator.generatePlayer2
 import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.domain.Player
 import com.devstromo.advancedtictactoe.domain.online.bluetooth.BluetoothController
+import com.devstromo.advancedtictactoe.domain.online.bluetooth.BluetoothDeviceDomain
 import com.devstromo.advancedtictactoe.domain.online.bluetooth.ConnectionResult
 import com.devstromo.advancedtictactoe.presentation.strategies.AdvancedModeStrategy
 import com.devstromo.advancedtictactoe.presentation.strategies.BotModeStrategy
@@ -48,6 +49,7 @@ class GameViewModel(
             }
         }
     }
+
     override fun onCleared() {
         super.onCleared()
         mediaPlayer?.release()
@@ -218,10 +220,40 @@ class GameViewModel(
                     is ConnectionResult.ConnectionEstablished -> {
                         _isConnected.value = true
                     }
+
                     is ConnectionResult.Error -> {
                         _isServerStarted.value = false
                         _isConnected.value = false
                     }
+
+                    is ConnectionResult.TransferSucceeded -> {
+                        // Handle data transfer if needed
+                    }
+                }
+            }
+        }
+    }
+
+    fun startDiscovery() {
+        bluetoothController.startDiscovery()
+    }
+
+    fun stopDiscovery() {
+        bluetoothController.stopDiscovery()
+    }
+
+    fun connectToDevice(device: BluetoothDeviceDomain) {
+        viewModelScope.launch {
+            bluetoothController.connectToDevice(device).collect { result ->
+                when (result) {
+                    is ConnectionResult.ConnectionEstablished -> {
+                        _isConnected.value = true
+                    }
+
+                    is ConnectionResult.Error -> {
+                        _isConnected.value = false
+                    }
+
                     is ConnectionResult.TransferSucceeded -> {
                         // Handle data transfer if needed
                     }
