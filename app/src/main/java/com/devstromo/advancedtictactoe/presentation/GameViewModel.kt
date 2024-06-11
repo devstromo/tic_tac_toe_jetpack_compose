@@ -53,6 +53,7 @@ class GameViewModel(
     override fun onCleared() {
         super.onCleared()
         mediaPlayer?.release()
+        bluetoothController.release()
     }
 
     fun updateGameMode(newGameMode: GameMode) {
