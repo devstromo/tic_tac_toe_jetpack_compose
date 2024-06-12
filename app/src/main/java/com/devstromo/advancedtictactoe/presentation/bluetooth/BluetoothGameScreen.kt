@@ -38,12 +38,6 @@ fun BluetoothGameScreen(
             // Handle permission denied case if needed
         }
     }
-//
-//    if (!permissionsGranted) {
-//        // Show some UI or message indicating permissions are needed
-//        Text("Bluetooth permissions are required to proceed.")
-//        return
-//    }
 
     val isServerStarted by viewModel.isServerStarted.collectAsState()
     val isConnected by viewModel.isConnected.collectAsState()
