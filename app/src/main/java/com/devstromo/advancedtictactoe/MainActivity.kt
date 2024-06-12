@@ -84,12 +84,12 @@ class MainActivity : ComponentActivity() {
                         composable(route = Screen.Rules.route) {
                             RulesScreen(navController = navController)
                         }
-//                        composable(route = Screen.Bluetooth.route) {
-//                            BluetoothGameScreen(
-//                                navController = navController,
-//                                viewModel = viewModel
-//                            )
-//                        }
+                        composable(route = Screen.Bluetooth.route) {
+                            BluetoothGameScreen(
+                                navController = navController,
+                                viewModel = viewModel
+                            )
+                        }
                     }
                 }
             }
