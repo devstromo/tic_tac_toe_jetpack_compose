@@ -38,12 +38,12 @@ fun BluetoothGameScreen(
             // Handle permission denied case if needed
         }
     }
-
-    if (!permissionsGranted) {
-        // Show some UI or message indicating permissions are needed
-        Text("Bluetooth permissions are required to proceed.")
-        return
-    }
+//
+//    if (!permissionsGranted) {
+//        // Show some UI or message indicating permissions are needed
+//        Text("Bluetooth permissions are required to proceed.")
+//        return
+//    }
 
     val isServerStarted by viewModel.isServerStarted.collectAsState()
     val isConnected by viewModel.isConnected.collectAsState()
@@ -67,6 +67,7 @@ fun BluetoothGameScreen(
             onClick = {
                 viewModel.startBluetoothServer()
             },
+            isEnable = permissionsGranted
         )
         Spacer(modifier = Modifier.height(10.dp))
         CustomButton(
@@ -74,38 +75,39 @@ fun BluetoothGameScreen(
             onClick = {
                 viewModel.startDiscovery()
             },
+            isEnable = permissionsGranted
         )
 
-        Spacer(modifier = Modifier.height(20.dp))
-
-        if (isServerStarted) {
-            Text("Server started, waiting for connection...")
-        } else {
-            Text("Nearby devices:")
-            scannedDevices.forEach { device ->
-                Text("Device: ${device.name ?: "Unknown"} (${device.address})")
-                CustomButton(
-                    text = "Connect",
-                    onClick = {
-                        viewModel.connectToDevice(device)
-                    }
-                )
-            }
-
-            Text("Paired devices:")
-            pairedDevices.forEach { device ->
-                Text("Device: ${device.name ?: "Unknown"} (${device.address})")
-                CustomButton(
-                    text = "Connect",
-                    onClick = {
-                        viewModel.connectToDevice(device)
-                    }
-                )
-            }
-        }
-
-        if (isConnected) {
-            Text("Connected to a device!")
-        }
+//        Spacer(modifier = Modifier.height(20.dp))
+//
+//        if (isServerStarted) {
+//            Text("Server started, waiting for connection...")
+//        } else {
+//            Text("Nearby devices:")
+//            scannedDevices.forEach { device ->
+//                Text("Device: ${device.name ?: "Unknown"} (${device.address})")
+//                CustomButton(
+//                    text = "Connect",
+//                    onClick = {
+//                        viewModel.connectToDevice(device)
+//                    }
+//                )
+//            }
+//
+//            Text("Paired devices:")
+//            pairedDevices.forEach { device ->
+//                Text("Device: ${device.name ?: "Unknown"} (${device.address})")
+//                CustomButton(
+//                    text = "Connect",
+//                    onClick = {
+//                        viewModel.connectToDevice(device)
+//                    }
+//                )
+//            }
+//        }
+//
+//        if (isConnected) {
+//            Text("Connected to a device!")
+//        }
     }
 }
