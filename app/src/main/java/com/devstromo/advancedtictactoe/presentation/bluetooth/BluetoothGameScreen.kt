@@ -62,6 +62,40 @@ fun BluetoothGameScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(modifier = Modifier.weight(1f))
+        if (!permissionsGranted) {
+            Text("Bluetooth permissions are required to proceed.")
+        } else {
+            if (isServerStarted) {
+                Text("Server started, waiting for connection...")
+            } else {
+                Text("Nearby devices:")
+                scannedDevices.forEach { device ->
+                    Text("Device: ${device.name ?: "Unknown"} (${device.address})")
+                    CustomButton(
+                        text = "Connect",
+                        onClick = {
+                            viewModel.connectToDevice(device)
+                        }
+                    )
+                }
+
+                Text("Paired devices:")
+                pairedDevices.forEach { device ->
+                    Text("Device: ${device.name ?: "Unknown"} (${device.address})")
+                    CustomButton(
+                        text = "Connect",
+                        onClick = {
+                            viewModel.connectToDevice(device)
+                        }
+                    )
+                }
+            }
+
+            if (isConnected) {
+                Text("Connected to a device!")
+            }
+        }
+        Spacer(modifier = Modifier.weight(1f))
         CustomButton(
             text = stringResource(R.string.bluetooth_game_create_title),
             onClick = {
@@ -78,36 +112,6 @@ fun BluetoothGameScreen(
             isEnable = permissionsGranted
         )
 
-//        Spacer(modifier = Modifier.height(20.dp))
-//
-//        if (isServerStarted) {
-//            Text("Server started, waiting for connection...")
-//        } else {
-//            Text("Nearby devices:")
-//            scannedDevices.forEach { device ->
-//                Text("Device: ${device.name ?: "Unknown"} (${device.address})")
-//                CustomButton(
-//                    text = "Connect",
-//                    onClick = {
-//                        viewModel.connectToDevice(device)
-//                    }
-//                )
-//            }
-//
-//            Text("Paired devices:")
-//            pairedDevices.forEach { device ->
-//                Text("Device: ${device.name ?: "Unknown"} (${device.address})")
-//                CustomButton(
-//                    text = "Connect",
-//                    onClick = {
-//                        viewModel.connectToDevice(device)
-//                    }
-//                )
-//            }
-//        }
-//
-//        if (isConnected) {
-//            Text("Connected to a device!")
-//        }
+
     }
 }
