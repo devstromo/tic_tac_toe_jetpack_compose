@@ -16,10 +16,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.devstromo.advancedtictactoe.R
+import com.devstromo.advancedtictactoe.config.helpers.hasPermissions
 import com.devstromo.advancedtictactoe.presentation.GameViewModel
 import com.devstromo.advancedtictactoe.presentation.components.CustomButton
 import com.devstromo.advancedtictactoe.presentation.permissions.RequestBluetoothPermissions
@@ -30,10 +32,13 @@ fun BluetoothGameScreen(
     modifier: Modifier = Modifier,
     viewModel: GameViewModel,
 ) {
-    var permissionsGranted by remember { mutableStateOf(false) }
+    val context = LocalContext.current
+    var permissionsGranted by remember { mutableStateOf(hasPermissions(context)) }
 
-    RequestBluetoothPermissions { granted ->
-        permissionsGranted = granted
+    if (!permissionsGranted) {
+        RequestBluetoothPermissions { granted ->
+            permissionsGranted = granted
+        }
     }
 
     if (permissionsGranted) {
