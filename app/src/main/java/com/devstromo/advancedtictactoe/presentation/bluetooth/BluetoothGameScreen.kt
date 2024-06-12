@@ -34,8 +34,11 @@ fun BluetoothGameScreen(
 
     RequestBluetoothPermissions { granted ->
         permissionsGranted = granted
-        if (!granted) {
-            // Handle permission denied case if needed
+    }
+
+    if (permissionsGranted) {
+        LaunchedEffect(Unit) {
+            viewModel.startDiscovery()
         }
     }
 
@@ -43,10 +46,6 @@ fun BluetoothGameScreen(
     val isConnected by viewModel.isConnected.collectAsState()
     val scannedDevices by viewModel.scannedDevices.collectAsState()
     val pairedDevices by viewModel.pairedDevices.collectAsState()
-
-    LaunchedEffect(Unit) {
-        viewModel.startDiscovery()
-    }
 
     Column(
         modifier = modifier
@@ -88,24 +87,23 @@ fun BluetoothGameScreen(
             if (isConnected) {
                 Text("Connected to a device!")
             }
+
+            Spacer(modifier = Modifier.weight(1f))
+            CustomButton(
+                text = stringResource(R.string.bluetooth_game_create_title),
+                onClick = {
+                    viewModel.startBluetoothServer()
+                },
+                isEnable = permissionsGranted
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            CustomButton(
+                text = stringResource(R.string.bluetooth_game_join_title),
+                onClick = {
+                    viewModel.startDiscovery()
+                },
+                isEnable = permissionsGranted
+            )
         }
-        Spacer(modifier = Modifier.weight(1f))
-        CustomButton(
-            text = stringResource(R.string.bluetooth_game_create_title),
-            onClick = {
-                viewModel.startBluetoothServer()
-            },
-            isEnable = permissionsGranted
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-        CustomButton(
-            text = stringResource(R.string.bluetooth_game_join_title),
-            onClick = {
-                viewModel.startDiscovery()
-            },
-            isEnable = permissionsGranted
-        )
-
-
     }
 }

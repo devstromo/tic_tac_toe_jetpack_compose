@@ -13,7 +13,7 @@ fun RequestBluetoothPermissions(
     val permissionLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->
-        val allGranted = permissions.entries.all { it.value }
+        val allGranted = permissions.values.all { it }
         onPermissionsResult(allGranted)
     }
 
