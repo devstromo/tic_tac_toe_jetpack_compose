@@ -1,11 +1,18 @@
 package com.devstromo.advancedtictactoe.presentation.bluetooth
 
+import android.bluetooth.BluetoothAdapter
+import android.content.Context
+import android.content.Intent
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -19,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.DialogProperties
 import androidx.navigation.NavController
 import com.devstromo.advancedtictactoe.R
 import com.devstromo.advancedtictactoe.config.helpers.hasPermissions
@@ -34,6 +42,14 @@ fun BluetoothGameScreen(
 ) {
     val context = LocalContext.current
     var permissionsGranted by remember { mutableStateOf(hasPermissions(context)) }
+    var isBluetoothEnabled by remember { mutableStateOf(isBluetoothEnabled()) }
+    var showEnableBluetoothDialog by remember { mutableStateOf(false) }
+
+    val enableBluetoothLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        isBluetoothEnabled = isBluetoothEnabled()
+    }
 
     if (!permissionsGranted) {
         RequestBluetoothPermissions { granted ->
@@ -41,16 +57,46 @@ fun BluetoothGameScreen(
         }
     }
 
-    if (permissionsGranted) {
-        LaunchedEffect(Unit) {
-            viewModel.startDiscovery()
-        }
+    if (permissionsGranted && !isBluetoothEnabled) {
+        showEnableBluetoothDialog = true
     }
+
+//    if (permissionsGranted && isBluetoothEnabled) {
+//        LaunchedEffect(Unit) {
+//            viewModel.startDiscovery()
+//        }
+//    }
 
     val isServerStarted by viewModel.isServerStarted.collectAsState()
     val isConnected by viewModel.isConnected.collectAsState()
     val scannedDevices by viewModel.scannedDevices.collectAsState()
     val pairedDevices by viewModel.pairedDevices.collectAsState()
+
+    if (showEnableBluetoothDialog) {
+        AlertDialog(
+            onDismissRequest = { showEnableBluetoothDialog = false },
+            title = { Text("Enable Bluetooth") },
+            text = { Text("Bluetooth is required to proceed. Please enable Bluetooth.") },
+            confirmButton = {
+                Button(
+                    onClick = {
+                        showEnableBluetoothDialog = false
+                        enableBluetoothLauncher.launch(Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE))
+                    }
+                ) {
+                    Text("Enable")
+                }
+            },
+            dismissButton = {
+                Button(
+                    onClick = { showEnableBluetoothDialog = false }
+                ) {
+                    Text("Cancel")
+                }
+            },
+            properties = DialogProperties(dismissOnClickOutside = false)
+        )
+    }
 
     Column(
         modifier = modifier
@@ -60,11 +106,11 @@ fun BluetoothGameScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(modifier = Modifier.weight(1f))
-        if (!permissionsGranted) {
-            Text("Bluetooth permissions are required to proceed.")
+        if (isServerStarted) {
+            Text("Server started, waiting for connection...")
         } else {
-            if (isServerStarted) {
-                Text("Server started, waiting for connection...")
+            if (!permissionsGranted  || !isBluetoothEnabled) {
+                Text("Bluetooth permissions are required to proceed.")
             } else {
                 Text("Nearby devices:")
                 scannedDevices.forEach { device ->
@@ -88,27 +134,32 @@ fun BluetoothGameScreen(
                     )
                 }
             }
-
-            if (isConnected) {
-                Text("Connected to a device!")
-            }
-
-            Spacer(modifier = Modifier.weight(1f))
-            CustomButton(
-                text = stringResource(R.string.bluetooth_game_create_title),
-                onClick = {
-                    viewModel.startBluetoothServer()
-                },
-                isEnable = permissionsGranted
-            )
-            Spacer(modifier = Modifier.height(10.dp))
-            CustomButton(
-                text = stringResource(R.string.bluetooth_game_join_title),
-                onClick = {
-                    viewModel.startDiscovery()
-                },
-                isEnable = permissionsGranted
-            )
         }
+
+        if (isConnected) {
+            Text("Connected to a device!")
+        }
+
+        Spacer(modifier = Modifier.weight(1f))
+        CustomButton(
+            text = stringResource(R.string.bluetooth_game_create_title),
+            onClick = {
+                viewModel.startBluetoothServer()
+            },
+            isEnable = permissionsGranted
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        CustomButton(
+            text = stringResource(R.string.bluetooth_game_join_title),
+            onClick = {
+                viewModel.startDiscovery()
+            },
+            isEnable = permissionsGranted
+        )
     }
+}
+
+fun isBluetoothEnabled(): Boolean {
+    val bluetoothAdapter  = BluetoothAdapter.getDefaultAdapter()
+    return bluetoothAdapter?.isEnabled == true
 }
