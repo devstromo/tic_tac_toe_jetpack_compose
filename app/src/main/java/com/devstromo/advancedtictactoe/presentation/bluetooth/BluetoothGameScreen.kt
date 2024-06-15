@@ -57,16 +57,6 @@ fun BluetoothGameScreen(
         }
     }
 
-    if (permissionsGranted && !isBluetoothEnabled) {
-        showEnableBluetoothDialog = true
-    }
-
-//    if (permissionsGranted && isBluetoothEnabled) {
-//        LaunchedEffect(Unit) {
-//            viewModel.startDiscovery()
-//        }
-//    }
-
     val isServerStarted by viewModel.isServerStarted.collectAsState()
     val isConnected by viewModel.isConnected.collectAsState()
     val scannedDevices by viewModel.scannedDevices.collectAsState()
@@ -144,7 +134,11 @@ fun BluetoothGameScreen(
         CustomButton(
             text = stringResource(R.string.bluetooth_game_create_title),
             onClick = {
-                viewModel.startBluetoothServer()
+                if (permissionsGranted && !isBluetoothEnabled) {
+                    showEnableBluetoothDialog = true
+                } else {
+                    viewModel.startBluetoothServer()
+                }
             },
             isEnable = permissionsGranted
         )
@@ -154,7 +148,7 @@ fun BluetoothGameScreen(
             onClick = {
                 viewModel.startDiscovery()
             },
-            isEnable = permissionsGranted
+            isEnable = permissionsGranted && isBluetoothEnabled
         )
     }
 }
