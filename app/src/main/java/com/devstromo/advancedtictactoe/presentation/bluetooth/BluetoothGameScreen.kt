@@ -86,7 +86,7 @@ fun BluetoothGameScreen(
                         modifier = Modifier
                             .align(Alignment.CenterVertically)
                             .padding(top = 10.dp),
-                        text = "Enable",
+                        text = stringResource(R.string.bluetooth_connection_enable_request),
                         textAlign = TextAlign.Center,
                         style = typo.bodyLarge.copy(color = Color.White)
                     )
@@ -104,7 +104,7 @@ fun BluetoothGameScreen(
                         modifier = Modifier
                             .align(Alignment.CenterVertically)
                             .padding(top = 10.dp),
-                        text = "Cancel",
+                        text = stringResource(R.string.bluetooth_connection_cancel_request),
                         textAlign = TextAlign.Center,
                         style = typo.bodyLarge.copy(color = Color.White)
                     )
