@@ -13,6 +13,8 @@
 .externalNativeBuild
 .cxx
 local.properties
+/.idea/codeStyles/*
+/.idea/sonarlint/*
 /.idea/codeStyles/codeStyleConfig.xml
 /.idea/codeStyles/Project.xml
 /.idea/sonarlint/issuestore/0/7/07a2efb644b116f881eedb31e148a3438e3b9791
@@ -101,3 +103,41 @@ local.properties
 /.idea/sonarlint/securityhotspotstore/index.pb
 /.idea/deploymentTargetSelector.xml
 /.idea/other.xml
+
+src/main/resources/plugins/*.jar
+out
+
+# ---- Sonar
+.sonar
+
+# ---- IntelliJ IDEA
+*.iws
+*.ipr
+.idea
+
+# ---- Eclipse
+.classpath
+.project
+.settings
+
+# ---- Maven
+target
+
+# ---- Mac OS X
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+
+# ---- Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Gradle
+classes
+build
+.scannerwork/
