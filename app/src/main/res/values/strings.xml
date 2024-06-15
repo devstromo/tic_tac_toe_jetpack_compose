@@ -18,4 +18,6 @@
     <string name="mode_classic">Classic</string>
     <string name="bluetooth_game_create_title">Create Game</string>
     <string name="bluetooth_game_join_title">Join Game</string>
+    <string name="bluetooth_connection_enable_request">Enable</string>
+    <string name="bluetooth_connection_cancel_request">Cancel</string>
 </resources>
