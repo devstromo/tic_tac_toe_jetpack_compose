@@ -130,7 +130,7 @@ fun BluetoothGameScreen(
             } else {
                 Text("Nearby devices:")
                 scannedDevices.forEach { device ->
-                    Text("Device: ${device.name ?: "Unknown"} (${device.address})")
+                    Text("Device: ${device.name ?: "Unknown"}")
                     CustomButton(
                         text = "Connect",
                         onClick = {
@@ -141,7 +141,7 @@ fun BluetoothGameScreen(
 
                 Text("Paired devices:")
                 pairedDevices.forEach { device ->
-                    Text("Device: ${device.name ?: "Unknown"} (${device.address})")
+                    Text("Device: ${device.name ?: "Unknown"}")
                     CustomButton(
                         text = "Connect",
                         onClick = {
