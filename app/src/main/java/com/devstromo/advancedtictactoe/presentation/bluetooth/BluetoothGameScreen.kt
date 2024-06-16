@@ -125,8 +125,10 @@ fun BluetoothGameScreen(
         if (isServerStarted) {
             Text("Server started, waiting for connection...")
         } else {
-            if (!permissionsGranted  || !isBluetoothEnabled) {
+            if (!permissionsGranted) {
                 Text("Bluetooth permissions are required to proceed.")
+            } else if (!isBluetoothEnabled) {
+                Text("Need to turn on your bluetooth connection.")
             } else {
                 Text("Nearby devices:")
                 scannedDevices.forEach { device ->
@@ -180,6 +182,6 @@ fun BluetoothGameScreen(
 }
 
 fun isBluetoothEnabled(): Boolean {
-    val bluetoothAdapter  = BluetoothAdapter.getDefaultAdapter()
+    val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
     return bluetoothAdapter?.isEnabled == true
 }
