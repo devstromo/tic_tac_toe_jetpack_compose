@@ -5,8 +5,10 @@ import android.content.Context
 import android.content.Intent
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -35,6 +37,7 @@ import androidx.compose.ui.window.DialogProperties
 import androidx.navigation.NavController
 import com.devstromo.advancedtictactoe.R
 import com.devstromo.advancedtictactoe.config.helpers.hasPermissions
+import com.devstromo.advancedtictactoe.domain.online.bluetooth.BluetoothDeviceDomain
 import com.devstromo.advancedtictactoe.presentation.GameViewModel
 import com.devstromo.advancedtictactoe.presentation.components.CustomButton
 import com.devstromo.advancedtictactoe.presentation.permissions.RequestBluetoothPermissions
@@ -132,23 +135,15 @@ fun BluetoothGameScreen(
             } else {
                 Text("Nearby devices:")
                 scannedDevices.forEach { device ->
-                    Text("Device: ${device.name ?: "Unknown"}")
-                    CustomButton(
-                        text = "Connect",
-                        onClick = {
-                            viewModel.connectToDevice(device)
-                        }
+                    DeviceInfo(
+                        deviceInfo = device
                     )
                 }
 
                 Text("Paired devices:")
                 pairedDevices.forEach { device ->
-                    Text("Device: ${device.name ?: "Unknown"}")
-                    CustomButton(
-                        text = "Connect",
-                        onClick = {
-                            viewModel.connectToDevice(device)
-                        }
+                    DeviceInfo(
+                        deviceInfo = device
                     )
                 }
             }
@@ -178,6 +173,27 @@ fun BluetoothGameScreen(
             },
             isEnable = permissionsGranted && isBluetoothEnabled
         )
+    }
+}
+
+@Composable
+fun DeviceInfo(
+    modifier: Modifier = Modifier,
+    deviceInfo: BluetoothDeviceDomain,
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(50.dp)
+            .padding(horizontal = 10.dp)
+            .background(
+                color = Color.Red,
+                shape = RoundedCornerShape(20.dp)
+            ),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(deviceInfo.name ?: "Unknown")
     }
 }
 
