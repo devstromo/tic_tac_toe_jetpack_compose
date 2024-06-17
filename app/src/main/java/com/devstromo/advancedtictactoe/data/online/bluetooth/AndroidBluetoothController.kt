@@ -3,16 +3,22 @@ package com.devstromo.advancedtictactoe.data.online.bluetooth
 import android.Manifest
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothManager
 import android.bluetooth.BluetoothServerSocket
 import android.bluetooth.BluetoothSocket
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Context.RECEIVER_EXPORTED
+import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
+import android.os.Build
 import com.devstromo.advancedtictactoe.domain.online.bluetooth.BluetoothController
-import com.devstromo.advancedtictactoe.domain.online.bluetooth.BluetoothDevice
 import com.devstromo.advancedtictactoe.domain.online.bluetooth.BluetoothDeviceDomain
 import com.devstromo.advancedtictactoe.domain.online.bluetooth.ConnectionResult
+import java.io.IOException
+import java.util.UUID
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -29,8 +35,6 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.io.IOException
-import java.util.UUID
 
 @SuppressLint("MissingPermission")
 class AndroidBluetoothController(
@@ -51,7 +55,6 @@ class AndroidBluetoothController(
     private var dataTransferService: BluetoothDataTransferService? = null
 
     private val _isConnected = MutableStateFlow(false)
-
     private val _scannedDevices = MutableStateFlow<List<BluetoothDeviceDomain>>(emptyList())
     private val _pairedDevices = MutableStateFlow<List<BluetoothDeviceDomain>>(emptyList())
     private val _errors = MutableSharedFlow<String>()
@@ -66,15 +69,64 @@ class AndroidBluetoothController(
         }
     }
 
+    private val foundDeviceReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            intent?.let { intent ->
+                when (intent.action) {
+                    BluetoothDevice.ACTION_FOUND -> {
+                        val device: BluetoothDevice? =
+                            intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
+
+                        val rssi: Int = intent.getShortExtra(
+                            BluetoothDevice.EXTRA_RSSI,
+                            Short.MIN_VALUE
+                        ).toInt()
+                        device?.let {
+                            val newDevice = it.toBluetoothDeviceDomain(rssi)
+                            _scannedDevices.update { devices ->
+                                if (newDevice in devices) devices else devices + newDevice
+                            }
+                        }
+                    }
+
+                    BluetoothDevice.ACTION_NAME_CHANGED -> {
+                    }
+
+                    BluetoothDevice.ACTION_UUID -> {
+                    }
+
+                    BluetoothDevice.ACTION_BOND_STATE_CHANGED -> {
+                    }
+
+                    else -> {}
+                }
+            }
+        }
+    }
+
     init {
         updatePairedDevices()
         context.registerReceiver(
             bluetoothStateReceiver,
             IntentFilter().apply {
                 addAction(BluetoothAdapter.ACTION_CONNECTION_STATE_CHANGED)
-                addAction(android.bluetooth.BluetoothDevice.ACTION_ACL_CONNECTED)
-                addAction(android.bluetooth.BluetoothDevice.ACTION_ACL_DISCONNECTED)
+                addAction(BluetoothDevice.ACTION_ACL_CONNECTED)
+                addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED)
             }
+        )
+
+        // Register for RSSI updates during discovery
+        context.registerReceiver(
+            foundDeviceReceiver,
+            IntentFilter().apply {
+                addAction(BluetoothDevice.ACTION_FOUND)
+                addAction(BluetoothDevice.ACTION_NAME_CHANGED)
+                addAction(BluetoothDevice.ACTION_UUID)
+                addAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    addAction(BluetoothDevice.EXTRA_RSSI)
+                }
+            }, RECEIVER_EXPORTED
         )
     }
 
@@ -94,11 +146,7 @@ class AndroidBluetoothController(
         if (!hasPermission(Manifest.permission.BLUETOOTH_SCAN)) {
             return
         }
-        context.registerReceiver(
-            foundDeviceReceiver,
-            IntentFilter(android.bluetooth.BluetoothDevice.ACTION_FOUND)
-        )
-        updatePairedDevices()
+
         bluetoothAdapter?.startDiscovery()
     }
 
@@ -197,12 +245,6 @@ class AndroidBluetoothController(
         closeConnection()
     }
 
-    private val foundDeviceReceiver = FoundDeviceReceiver { device ->
-        _scannedDevices.update { devices ->
-            val newDevice = device.toBluetoothDeviceDomain()
-            if (newDevice in devices) devices else devices + newDevice
-        }
-    }
 
     private fun updatePairedDevices() {
         if (!hasPermission(Manifest.permission.BLUETOOTH_CONNECT)) {

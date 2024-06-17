@@ -184,7 +184,7 @@ fun DeviceInfo(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .height(50.dp)
+            .height(75.dp)
             .padding(horizontal = 10.dp)
             .background(
                 color = Color.Red,
