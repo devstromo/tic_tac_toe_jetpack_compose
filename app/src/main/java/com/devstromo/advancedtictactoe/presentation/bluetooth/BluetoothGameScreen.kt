@@ -129,15 +129,9 @@ fun BluetoothGameScreen(
             } else if (!isBluetoothEnabled) {
                 Text("Need to turn on your bluetooth connection.")
             } else {
-                Text("Nearby devices:")
-                scannedDevices.forEach { device ->
-                    DeviceInfo(
-                        deviceInfo = device
-                    )
-                }
-
-                Text("Paired devices:")
-                pairedDevices.forEach { device ->
+                Text("Devices:")
+                val allDevices = (scannedDevices + pairedDevices)
+                allDevices.forEach { device ->
                     DeviceInfo(
                         deviceInfo = device
                     )
