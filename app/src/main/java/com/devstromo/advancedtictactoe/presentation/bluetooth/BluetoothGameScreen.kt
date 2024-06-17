@@ -77,14 +77,12 @@ fun BluetoothGameScreen(
             title = { Text("Enable Bluetooth") },
             text = { Text("Bluetooth is required to proceed. Please enable Bluetooth.") },
             confirmButton = {
-                Button(
-                    modifier = Modifier.fillMaxWidth(),
+                Button(modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(25),
                     onClick = {
                         showEnableBluetoothDialog = false
                         enableBluetoothLauncher.launch(Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE))
-                    }
-                ) {
+                    }) {
                     Text(
                         modifier = Modifier
                             .align(Alignment.CenterVertically)
@@ -96,13 +94,11 @@ fun BluetoothGameScreen(
                 }
             },
             dismissButton = {
-                Button(
-                    modifier = Modifier.fillMaxWidth(),
+                Button(modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(25),
                     onClick = {
                         showEnableBluetoothDialog = false
-                    }
-                ) {
+                    }) {
                     Text(
                         modifier = Modifier
                             .align(Alignment.CenterVertically)
@@ -155,23 +151,19 @@ fun BluetoothGameScreen(
 
         Spacer(modifier = Modifier.weight(1f))
         CustomButton(
-            text = stringResource(R.string.bluetooth_game_create_title),
-            onClick = {
+            text = stringResource(R.string.bluetooth_game_create_title), onClick = {
                 if (permissionsGranted && !isBluetoothEnabled) {
                     showEnableBluetoothDialog = true
                 } else {
                     viewModel.startBluetoothServer()
                 }
-            },
-            isEnable = permissionsGranted
+            }, isEnable = permissionsGranted
         )
         Spacer(modifier = Modifier.height(10.dp))
         CustomButton(
-            text = stringResource(R.string.bluetooth_game_join_title),
-            onClick = {
+            text = stringResource(R.string.bluetooth_game_join_title), onClick = {
                 viewModel.startDiscovery()
-            },
-            isEnable = permissionsGranted && isBluetoothEnabled
+            }, isEnable = permissionsGranted && isBluetoothEnabled
         )
     }
 }
@@ -181,19 +173,26 @@ fun DeviceInfo(
     modifier: Modifier = Modifier,
     deviceInfo: BluetoothDeviceDomain,
 ) {
+
     Row(
         modifier = modifier
             .fillMaxWidth()
             .height(75.dp)
-            .padding(horizontal = 10.dp)
+            .padding(horizontal = 10.dp, vertical = 5.dp)
             .background(
-                color = Color.Red,
+                color = MaterialTheme.colorScheme.primary,
                 shape = RoundedCornerShape(20.dp)
             ),
-        horizontalArrangement = Arrangement.Center,
+        horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(deviceInfo.name ?: "Unknown")
+        Text(
+            modifier = Modifier.padding(start = 10.dp),
+            text = deviceInfo.name ?: "Unknown",
+            style = MaterialTheme.typography.bodyLarge.copy(
+                color = Color.White
+            )
+        )
     }
 }
 
