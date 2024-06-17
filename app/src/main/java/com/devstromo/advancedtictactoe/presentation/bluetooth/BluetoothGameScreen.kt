@@ -6,6 +6,8 @@ import android.content.Intent
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -28,6 +30,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -167,7 +170,7 @@ fun DeviceInfo(
     modifier: Modifier = Modifier,
     deviceInfo: BluetoothDeviceDomain,
 ) {
-
+    val shape = RoundedCornerShape(20.dp)
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -175,15 +178,17 @@ fun DeviceInfo(
             .padding(horizontal = 10.dp, vertical = 5.dp)
             .background(
                 color = MaterialTheme.colorScheme.primary,
-                shape = RoundedCornerShape(20.dp)
-            ),
+                shape = shape
+            )
+            .clip(shape)
+            .clickable { print("Device clicked ${deviceInfo.name}") },
         horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            modifier = Modifier.padding(start = 10.dp),
+            modifier = Modifier.padding(start = 20.dp),
             text = deviceInfo.name ?: "Unknown",
-            style = MaterialTheme.typography.bodyLarge.copy(
+            style = MaterialTheme.typography.bodySmall.copy(
                 color = Color.White
             )
         )
