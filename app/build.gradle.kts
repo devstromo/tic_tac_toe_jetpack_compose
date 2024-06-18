@@ -67,6 +67,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.rive.android)
     implementation(libs.androidx.startup.runtime)
+    implementation(libs.google.zxing)
     testImplementation(libs.jupiter.junit5)
     testRuntimeOnly(libs.jupiter.engine.junit5)
     androidTestImplementation(libs.androidx.junit)
