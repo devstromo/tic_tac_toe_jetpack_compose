@@ -40,6 +40,7 @@ import com.devstromo.advancedtictactoe.config.helpers.hasPermissions
 import com.devstromo.advancedtictactoe.domain.online.bluetooth.BluetoothDeviceDomain
 import com.devstromo.advancedtictactoe.presentation.GameViewModel
 import com.devstromo.advancedtictactoe.presentation.components.CustomButton
+import com.devstromo.advancedtictactoe.presentation.components.QrCodeImage
 import com.devstromo.advancedtictactoe.presentation.permissions.RequestBluetoothPermissions
 
 @Composable
@@ -53,6 +54,9 @@ fun BluetoothGameScreen(
     var permissionsGranted by remember { mutableStateOf(hasPermissions(context)) }
     var isBluetoothEnabled by remember { mutableStateOf(isBluetoothEnabled()) }
     var showEnableBluetoothDialog by remember { mutableStateOf(false) }
+
+    var startServer by remember { mutableStateOf(false) }
+    var joinGameServer by remember { mutableStateOf(false) }
 
     val enableBluetoothLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -128,14 +132,15 @@ fun BluetoothGameScreen(
                 Text("Bluetooth permissions are required to proceed.")
             } else if (!isBluetoothEnabled) {
                 Text("Need to turn on your bluetooth connection.")
+            } else if (startServer) {
+                QrCodeImage(
+                    content = "Test Code",
+                    size = 200.dp
+                )
+            } else if (joinGameServer) {
+                Text("Join Game")
             } else {
-                Text("Devices:")
-                val allDevices = (scannedDevices + pairedDevices)
-                allDevices.forEach { device ->
-                    DeviceInfo(
-                        deviceInfo = device
-                    )
-                }
+                Text("Create or Join to a new Game")
             }
         }
 
@@ -145,19 +150,24 @@ fun BluetoothGameScreen(
 
         Spacer(modifier = Modifier.weight(1f))
         CustomButton(
-            text = stringResource(R.string.bluetooth_game_create_title), onClick = {
+            text = stringResource(R.string.bluetooth_game_create_title),
+            onClick = {
                 if (permissionsGranted && !isBluetoothEnabled) {
                     showEnableBluetoothDialog = true
                 } else {
-                    viewModel.startBluetoothServer()
+//                    viewModel.startBluetoothServer()
+                    startServer = true
                 }
-            }, isEnable = permissionsGranted
+            },
+            isEnable = permissionsGranted
         )
         Spacer(modifier = Modifier.height(10.dp))
         CustomButton(
-            text = stringResource(R.string.bluetooth_game_join_title), onClick = {
+            text = stringResource(R.string.bluetooth_game_join_title),
+            onClick = {
                 viewModel.startDiscovery()
-            }, isEnable = permissionsGranted && isBluetoothEnabled
+            },
+            isEnable = permissionsGranted && isBluetoothEnabled
         )
     }
 }
