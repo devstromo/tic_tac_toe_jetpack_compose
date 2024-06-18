@@ -13,9 +13,10 @@ koinVersion = "3.6.0-wasm-alpha2"
 graphicsShapesAndroid = "1.0.0-alpha05"
 graphicsPathAndroid = "1.0.0"
 graphicsCoreAndroid = "1.0.0-rc01"
-navigationCompose= "2.7.7"
+navigationCompose = "2.7.7"
 riveAndroidVersion = "8.7.0"
 startupRuntimeVersion = "1.1.1"
+zxingVersion = "3.5.3"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -41,7 +42,7 @@ androidx-graphics-core-android = { group = "androidx.graphics", name = "graphics
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 rive-android = { group = "app.rive", name = "rive-android", version.ref = "riveAndroidVersion" }
 androidx-startup-runtime = { group = "androidx.startup", name = "startup-runtime", version.ref = "startupRuntimeVersion" }
-
+google-zxing = { group = "com.google.zxing", name = "core", version.ref = "zxingVersion" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
