@@ -159,7 +159,7 @@ fun BluetoothGameScreen(
                     startServer = true
                 }
             },
-            isEnable = permissionsGranted
+            isEnable = permissionsGranted && isBluetoothEnabled
         )
         Spacer(modifier = Modifier.height(10.dp))
         CustomButton(
