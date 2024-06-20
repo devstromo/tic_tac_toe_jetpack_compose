@@ -17,6 +17,7 @@ navigationCompose = "2.7.7"
 riveAndroidVersion = "8.7.0"
 startupRuntimeVersion = "1.1.1"
 zxingVersion = "3.5.3"
+cameraxVerion = "1.4.0-beta02"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -43,6 +44,8 @@ androidx-navigation-compose = { group = "androidx.navigation", name = "navigatio
 rive-android = { group = "app.rive", name = "rive-android", version.ref = "riveAndroidVersion" }
 androidx-startup-runtime = { group = "androidx.startup", name = "startup-runtime", version.ref = "startupRuntimeVersion" }
 google-zxing = { group = "com.google.zxing", name = "core", version.ref = "zxingVersion" }
+camerax-core = { group = "androidx.camera", name = "camera-core", version.ref = "cameraxVerion" }
+camerax-camera2 = { group = "androidx.camera", name = "camera-camera2", version.ref = "cameraxVerion" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

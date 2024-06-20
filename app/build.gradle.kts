@@ -76,6 +76,11 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // Camera X
+    implementation(libs.camerax.core)
+    implementation(libs.camerax.camera2)
+
 }
 
 tasks.withType<Test> {
