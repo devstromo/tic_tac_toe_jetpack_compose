@@ -46,6 +46,7 @@ androidx-startup-runtime = { group = "androidx.startup", name = "startup-runtime
 google-zxing = { group = "com.google.zxing", name = "core", version.ref = "zxingVersion" }
 camerax-core = { group = "androidx.camera", name = "camera-core", version.ref = "cameraxVerion" }
 camerax-camera2 = { group = "androidx.camera", name = "camera-camera2", version.ref = "cameraxVerion" }
+camerax-lifecycle = { group = "androidx.camera", name = "camera-lifecycle", version.ref = "cameraxVerion" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
