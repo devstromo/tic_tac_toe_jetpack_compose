@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.LifecycleOwner
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import com.devstromo.advancedtictactoe.presentation.permissions.RequestCameraPermission
 
 @Composable
 fun QRCodeScanner(onQRCodeScanned: (String) -> Unit) {
@@ -114,17 +115,15 @@ private fun processImageProxy(
 fun QRCodeScreen() {
     var scannedCode by remember { mutableStateOf<String?>(null) }
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    var hasCameraPermission by remember { mutableStateOf(false) }
+
+    if (hasCameraPermission) {
         QRCodeScanner { scannedResult ->
             scannedCode = scannedResult
         }
-
-        scannedCode?.let {
-            Text(
-                text = "Scanned QR Code: $it",
-                modifier = Modifier.align(Alignment.Center),
-                color = Color.White
-            )
+    } else {
+        RequestCameraPermission { isGranted ->
+            hasCameraPermission = isGranted
         }
     }
 }
