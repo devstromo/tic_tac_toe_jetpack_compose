@@ -38,6 +38,7 @@ import androidx.navigation.NavController
 import com.devstromo.advancedtictactoe.R
 import com.devstromo.advancedtictactoe.config.helpers.hasPermissions
 import com.devstromo.advancedtictactoe.domain.online.bluetooth.BluetoothDeviceDomain
+import com.devstromo.advancedtictactoe.navigation.Screen
 import com.devstromo.advancedtictactoe.presentation.GameViewModel
 import com.devstromo.advancedtictactoe.presentation.components.CustomButton
 import com.devstromo.advancedtictactoe.presentation.components.QrCodeImage
@@ -48,6 +49,7 @@ fun BluetoothGameScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
     viewModel: GameViewModel,
+
 ) {
     val typo = MaterialTheme.typography
     val context = LocalContext.current
@@ -165,7 +167,8 @@ fun BluetoothGameScreen(
         CustomButton(
             text = stringResource(R.string.bluetooth_game_join_title),
             onClick = {
-                viewModel.startDiscovery()
+                navController.navigate(Screen.QRScanner.route)
+//                viewModel.startDiscovery()
             },
             isEnable = permissionsGranted && isBluetoothEnabled
         )

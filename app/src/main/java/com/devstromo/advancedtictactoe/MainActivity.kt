@@ -21,6 +21,7 @@ import com.devstromo.advancedtictactoe.navigation.Screen
 import com.devstromo.advancedtictactoe.presentation.GameScreen
 import com.devstromo.advancedtictactoe.presentation.GameViewModel
 import com.devstromo.advancedtictactoe.presentation.bluetooth.BluetoothGameScreen
+import com.devstromo.advancedtictactoe.presentation.components.QRCodeScreen
 import com.devstromo.advancedtictactoe.presentation.initial.InitialScreen
 import com.devstromo.advancedtictactoe.presentation.rules.RulesScreen
 import com.devstromo.advancedtictactoe.ui.theme.AdvancedTicTacToeTheme
@@ -89,6 +90,9 @@ class MainActivity : ComponentActivity() {
                                 navController = navController,
                                 viewModel = viewModel
                             )
+                        }
+                        composable(route = Screen.QRScanner.route) {
+                            QRCodeScreen()
                         }
                     }
                 }
