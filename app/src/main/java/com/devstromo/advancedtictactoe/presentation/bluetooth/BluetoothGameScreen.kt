@@ -7,6 +7,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -14,9 +15,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -49,7 +56,6 @@ fun BluetoothGameScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
     viewModel: GameViewModel,
-
 ) {
     val typo = MaterialTheme.typography
     val context = LocalContext.current
@@ -119,59 +125,90 @@ fun BluetoothGameScreen(
         )
     }
 
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(horizontal = 45.dp, vertical = 20.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+    Box(
+        modifier = Modifier.fillMaxSize()
     ) {
-        Spacer(modifier = Modifier.weight(1f))
-        if (isServerStarted) {
-            Text("Server started, waiting for connection...")
-        } else {
-            if (!permissionsGranted) {
-                Text("Bluetooth permissions are required to proceed.")
-            } else if (!isBluetoothEnabled) {
-                Text("Need to turn on your bluetooth connection.")
-            } else if (startServer) {
-                QrCodeImage(
-                    content = "Test Code",
-                    size = 200.dp
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(10.dp)
+                .align(Alignment.TopStart)
+        ) {
+            IconButton(
+                modifier = Modifier
+                    .height(45.dp)
+                    .width(45.dp)
+                    .background(
+                        color = Color.Transparent,
+                        shape = RoundedCornerShape(25)
+                    ),
+
+                onClick = { navController.popBackStack() },
+            ) {
+                Icon(
+                    Icons.Rounded.ArrowBack,
+                    contentDescription = "Favorite",
+                    tint = Color.White,
+                    modifier = Modifier
+                        .size(40.dp)
                 )
-            } else if (joinGameServer) {
-                Text("Join Game")
-            } else {
-                Text("Create or Join to a new Game")
             }
         }
+        Column(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(horizontal = 45.dp, vertical = 20.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
 
-        if (isConnected) {
-            Text("Connected to a device!")
-        }
-
-        Spacer(modifier = Modifier.weight(1f))
-        CustomButton(
-            text = stringResource(R.string.bluetooth_game_create_title),
-            onClick = {
-                if (permissionsGranted && !isBluetoothEnabled) {
-                    showEnableBluetoothDialog = true
+            Spacer(modifier = Modifier.weight(1f))
+            if (isServerStarted) {
+                Text("Server started, waiting for connection...")
+            } else {
+                if (!permissionsGranted) {
+                    Text("Bluetooth permissions are required to proceed.")
+                } else if (!isBluetoothEnabled) {
+                    Text("Need to turn on your bluetooth connection.")
+                } else if (startServer) {
+                    QrCodeImage(
+                        content = "Test Code",
+                        size = 200.dp
+                    )
+                } else if (joinGameServer) {
+                    Text("Join Game")
                 } else {
-//                    viewModel.startBluetoothServer()
-                    startServer = true
+                    Text("Create or Join to a new Game")
                 }
-            },
-            isEnable = permissionsGranted && isBluetoothEnabled
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-        CustomButton(
-            text = stringResource(R.string.bluetooth_game_join_title),
-            onClick = {
-                navController.navigate(Screen.QRScanner.route)
-//                viewModel.startDiscovery()
-            },
-            isEnable = permissionsGranted && isBluetoothEnabled
-        )
+            }
+
+            if (isConnected) {
+                Text("Connected to a device!")
+            }
+
+            Spacer(modifier = Modifier.weight(1f))
+            CustomButton(
+                text = stringResource(R.string.bluetooth_game_create_title),
+                onClick = {
+                    if (permissionsGranted && !isBluetoothEnabled) {
+                        showEnableBluetoothDialog = true
+                    } else {
+                        //                    viewModel.startBluetoothServer()
+                        startServer = true
+                    }
+                },
+                isEnable = permissionsGranted && isBluetoothEnabled
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            CustomButton(
+                text = stringResource(R.string.bluetooth_game_join_title),
+                onClick = {
+                    navController.navigate(Screen.QRScanner.route)
+                    //                viewModel.startDiscovery()
+                },
+                isEnable = permissionsGranted && isBluetoothEnabled
+            )
+        }
     }
 }
 
