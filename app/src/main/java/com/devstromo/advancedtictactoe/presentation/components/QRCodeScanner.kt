@@ -31,9 +31,22 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.geometry.center
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Outline
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.PathFillType
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
@@ -125,56 +138,63 @@ fun QRCodeScanner(onQRCodeScanned: (String) -> Unit) {
                 update = {}
             )
 
-            // Transparent overlay with a hole in the center for the QR scanner
+            // Overlay with a transparent square and corner markers
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Color(0x80000000)) // semi-transparent background
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size(200.dp)
-                        .align(Alignment.Center)
-                        .background(Color.Transparent)
-                )
-            }
-
-            // Additional rectangles to simulate a blur effect
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.SpaceBetween
-            ) {
-                Spacer(
-                    modifier = Modifier
-                        .height((LocalContext.current.resources.displayMetrics.heightPixels / 2 - 100).dp)
-                        .fillMaxWidth()
-                        .background(Color(0x80000000))
-                )
-                Spacer(
-                    modifier = Modifier
-                        .height((LocalContext.current.resources.displayMetrics.heightPixels / 2 - 100).dp)
-                        .fillMaxWidth()
-                        .background(Color(0x80000000))
-                )
-            }
-
-            Row(
-                modifier = Modifier.fillMaxSize(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Spacer(
-                    modifier = Modifier
-                        .width((LocalContext.current.resources.displayMetrics.widthPixels / 2 - 100).dp)
-                        .fillMaxHeight()
-                        .background(Color(0x80000000))
-                )
-                Spacer(
-                    modifier = Modifier
-                        .width((LocalContext.current.resources.displayMetrics.widthPixels / 2 - 100).dp)
-                        .fillMaxHeight()
-                        .background(Color(0x80000000))
-                )
-            }
+                    .background(Color(0x80000000))
+                    .drawWithContent {
+                        drawContent()
+                        val size = Size(200.dp.toPx(), 200.dp.toPx())
+                        val topLeft = Offset(
+                            (this.size.width - size.width) / 2,
+                            (this.size.height - size.height) / 2
+                        )
+                        val path = Path().apply {
+                            addRect(Rect(0f, 0f, this@drawWithContent.size.width, this@drawWithContent.size.height))
+                            addRect(Rect(topLeft.x, topLeft.y, topLeft.x + size.width, topLeft.y + size.height))
+                            fillType = PathFillType.EvenOdd
+                        }
+                        drawPath(path, Color(0x80000000))
+                        // Drawing corner markers
+                        drawRect(
+                            Color.Green, topLeft, Size(20.dp.toPx(), 4.dp.toPx())
+                        )
+                        drawRect(
+                            Color.Green, topLeft, Size(4.dp.toPx(), 20.dp.toPx())
+                        )
+                        drawRect(
+                            Color.Green,
+                            Offset(topLeft.x + size.width - 20.dp.toPx(), topLeft.y),
+                            Size(20.dp.toPx(), 4.dp.toPx())
+                        )
+                        drawRect(
+                            Color.Green,
+                            Offset(topLeft.x + size.width - 4.dp.toPx(), topLeft.y),
+                            Size(4.dp.toPx(), 20.dp.toPx())
+                        )
+                        drawRect(
+                            Color.Green,
+                            Offset(topLeft.x, topLeft.y + size.height - 4.dp.toPx()),
+                            Size(20.dp.toPx(), 4.dp.toPx())
+                        )
+                        drawRect(
+                            Color.Green,
+                            Offset(topLeft.x, topLeft.y + size.height - 20.dp.toPx()),
+                            Size(4.dp.toPx(), 20.dp.toPx())
+                        )
+                        drawRect(
+                            Color.Green,
+                            Offset(topLeft.x + size.width - 20.dp.toPx(), topLeft.y + size.height - 4.dp.toPx()),
+                            Size(20.dp.toPx(), 4.dp.toPx())
+                        )
+                        drawRect(
+                            Color.Green,
+                            Offset(topLeft.x + size.width - 4.dp.toPx(), topLeft.y + size.height - 20.dp.toPx()),
+                            Size(4.dp.toPx(), 20.dp.toPx())
+                        )
+                    }
+            )
         } else {
             RequestCameraPermission { granted ->
                 hasCameraPermission = granted
@@ -210,4 +230,3 @@ private fun processImageProxy(
         imageProxy.close()
     }
 }
-
