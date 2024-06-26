@@ -85,9 +85,9 @@ fun QRCodeScanner(onQRCodeScanned: (String) -> Unit) {
                     }
 
                     val imageAnalyzer = ImageAnalysis.Builder().build().also {
-                        it.setAnalyzer(ContextCompat.getMainExecutor(context), { imageProxy ->
+                        it.setAnalyzer(ContextCompat.getMainExecutor(context)) { imageProxy ->
                             processImageProxy(imageProxy, onQRCodeScanned)
-                        })
+                        }
                     }
 
                     val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
