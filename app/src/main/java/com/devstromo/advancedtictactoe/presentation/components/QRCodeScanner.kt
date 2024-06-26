@@ -128,7 +128,7 @@ fun QRCodeScanner(onQRCodeScanned: (String) -> Unit) {
                     .background(Color(0x20000000)) // full overlay
                     .drawWithContent {
                         drawContent()
-                        val size = Size(200.dp.toPx(), 200.dp.toPx())
+                        val size = Size(230.dp.toPx(), 230.dp.toPx())
                         val topLeft = Offset(
                             (this.size.width - size.width) / 2,
                             (this.size.height - size.height) / 2
