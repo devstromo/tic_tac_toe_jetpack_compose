@@ -125,7 +125,7 @@ fun QRCodeScanner(onQRCodeScanned: (String) -> Unit) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Color(0x80000000)) // full overlay
+                    .background(Color(0x20000000)) // full overlay
                     .drawWithContent {
                         drawContent()
                         val size = Size(200.dp.toPx(), 200.dp.toPx())
