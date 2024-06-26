@@ -61,6 +61,7 @@ fun QRCodeScreen() {
 fun QRCodeScanner(onQRCodeScanned: (String) -> Unit) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
+    val cornerColors = Color.White
     val cameraProviderFuture = remember { ProcessCameraProvider.getInstance(context) }
     var hasCameraPermission by remember {
         mutableStateOf(
@@ -124,7 +125,7 @@ fun QRCodeScanner(onQRCodeScanned: (String) -> Unit) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Color(0x80000000))
+                    .background(Color(0x80000000)) // full overlay
                     .drawWithContent {
                         drawContent()
                         val size = Size(200.dp.toPx(), 200.dp.toPx())
@@ -133,46 +134,66 @@ fun QRCodeScanner(onQRCodeScanned: (String) -> Unit) {
                             (this.size.height - size.height) / 2
                         )
                         val path = Path().apply {
-                            addRect(Rect(0f, 0f, this@drawWithContent.size.width, this@drawWithContent.size.height))
-                            addRect(Rect(topLeft.x, topLeft.y, topLeft.x + size.width, topLeft.y + size.height))
+                            addRect(
+                                Rect(
+                                    0f,
+                                    0f,
+                                    this@drawWithContent.size.width,
+                                    this@drawWithContent.size.height
+                                )
+                            )
+                            addRect(
+                                Rect(
+                                    topLeft.x,
+                                    topLeft.y,
+                                    topLeft.x + size.width,
+                                    topLeft.y + size.height
+                                )
+                            )
                             fillType = PathFillType.EvenOdd
                         }
-                        drawPath(path, Color(0x80000000))
+                        drawPath(path, Color(0x80000000)) // outer overlay to center square
                         // Drawing corner markers
                         drawRect(
-                            Color.Green, topLeft, Size(20.dp.toPx(), 4.dp.toPx())
+                            cornerColors, topLeft, Size(20.dp.toPx(), 4.dp.toPx())
                         )
                         drawRect(
-                            Color.Green, topLeft, Size(4.dp.toPx(), 20.dp.toPx())
+                            cornerColors, topLeft, Size(4.dp.toPx(), 20.dp.toPx())
                         )
                         drawRect(
-                            Color.Green,
+                            cornerColors,
                             Offset(topLeft.x + size.width - 20.dp.toPx(), topLeft.y),
                             Size(20.dp.toPx(), 4.dp.toPx())
                         )
                         drawRect(
-                            Color.Green,
+                            cornerColors,
                             Offset(topLeft.x + size.width - 4.dp.toPx(), topLeft.y),
                             Size(4.dp.toPx(), 20.dp.toPx())
                         )
                         drawRect(
-                            Color.Green,
+                            cornerColors,
                             Offset(topLeft.x, topLeft.y + size.height - 4.dp.toPx()),
                             Size(20.dp.toPx(), 4.dp.toPx())
                         )
                         drawRect(
-                            Color.Green,
+                            cornerColors,
                             Offset(topLeft.x, topLeft.y + size.height - 20.dp.toPx()),
                             Size(4.dp.toPx(), 20.dp.toPx())
                         )
                         drawRect(
-                            Color.Green,
-                            Offset(topLeft.x + size.width - 20.dp.toPx(), topLeft.y + size.height - 4.dp.toPx()),
+                            cornerColors,
+                            Offset(
+                                topLeft.x + size.width - 20.dp.toPx(),
+                                topLeft.y + size.height - 4.dp.toPx()
+                            ),
                             Size(20.dp.toPx(), 4.dp.toPx())
                         )
                         drawRect(
-                            Color.Green,
-                            Offset(topLeft.x + size.width - 4.dp.toPx(), topLeft.y + size.height - 20.dp.toPx()),
+                            cornerColors,
+                            Offset(
+                                topLeft.x + size.width - 4.dp.toPx(),
+                                topLeft.y + size.height - 20.dp.toPx()
+                            ),
                             Size(4.dp.toPx(), 20.dp.toPx())
                         )
                     }
