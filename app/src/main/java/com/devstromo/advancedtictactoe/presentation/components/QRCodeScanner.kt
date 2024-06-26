@@ -13,6 +13,9 @@ import androidx.camera.view.PreviewView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -28,6 +31,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.PathFillType
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -71,6 +75,8 @@ fun QRCodeScanner(onQRCodeScanned: (String) -> Unit) {
             ) == PackageManager.PERMISSION_GRANTED
         )
     }
+    var qrCodeContent by remember { mutableStateOf<String?>(null) }
+    val density = LocalDensity.current
 
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission(),
@@ -99,7 +105,13 @@ fun QRCodeScanner(onQRCodeScanned: (String) -> Unit) {
 
                     val imageAnalyzer = ImageAnalysis.Builder().build().also {
                         it.setAnalyzer(ContextCompat.getMainExecutor(context)) { imageProxy ->
-                            processImageProxy(imageProxy, onQRCodeScanned)
+                            with(density) {
+                                processImageProxy(
+                                    imageProxy = imageProxy,
+                                    sizePx = 230.dp.toPx(),
+                                    onQRCodeScanned = { qrCodeContent = it }
+                                )
+                            }
                         }
                     }
 
@@ -198,6 +210,20 @@ fun QRCodeScanner(onQRCodeScanned: (String) -> Unit) {
                         )
                     }
             )
+
+            // Show QR code content in a dialog
+            qrCodeContent?.let {
+                AlertDialog(
+                    onDismissRequest = { qrCodeContent = null },
+                    title = { Text("QR Code Scanned") },
+                    text = { Text(it) },
+                    confirmButton = {
+                        Button(onClick = { qrCodeContent = null }) {
+                            Text("OK")
+                        }
+                    }
+                )
+            }
         } else {
             RequestCameraPermission { granted ->
                 hasCameraPermission = granted
@@ -208,19 +234,28 @@ fun QRCodeScanner(onQRCodeScanned: (String) -> Unit) {
 
 private fun processImageProxy(
     imageProxy: ImageProxy,
+    sizePx: Float,
     onQRCodeScanned: (String) -> Unit
 ) {
     val buffer: ByteBuffer = imageProxy.planes[0].buffer
     val bytes = ByteArray(buffer.remaining())
     buffer.get(bytes)
+
+    // Ensure the size is within the bounds of the image
+    val width = imageProxy.width
+    val height = imageProxy.height
+    val cropSize = minOf(sizePx.toInt(), width, height)
+    val cropLeft = (width - cropSize) / 2
+    val cropTop = (height - cropSize) / 2
+
     val source = PlanarYUVLuminanceSource(
         bytes,
-        imageProxy.width,
-        imageProxy.height,
-        0,
-        0,
-        imageProxy.width,
-        imageProxy.height,
+        width,
+        height,
+        cropLeft,
+        cropTop,
+        cropSize,
+        cropSize,
         false
     )
     val binaryBitmap = BinaryBitmap(HybridBinarizer(source))
@@ -233,3 +268,4 @@ private fun processImageProxy(
         imageProxy.close()
     }
 }
+
