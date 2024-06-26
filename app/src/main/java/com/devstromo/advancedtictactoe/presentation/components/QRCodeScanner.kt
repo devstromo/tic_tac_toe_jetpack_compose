@@ -46,6 +46,23 @@ import com.google.zxing.common.HybridBinarizer
 import java.nio.ByteBuffer
 
 @Composable
+fun QRCodeScreen() {
+    var scannedCode by remember { mutableStateOf<String?>(null) }
+
+    var hasCameraPermission by remember { mutableStateOf(false) }
+
+    if (hasCameraPermission) {
+        QRCodeScanner { scannedResult ->
+            scannedCode = scannedResult
+        }
+    } else {
+        RequestCameraPermission { isGranted ->
+            hasCameraPermission = isGranted
+        }
+    }
+}
+
+@Composable
 fun QRCodeScanner(onQRCodeScanned: (String) -> Unit) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -194,19 +211,3 @@ private fun processImageProxy(
     }
 }
 
-@Composable
-fun QRCodeScreen() {
-    var scannedCode by remember { mutableStateOf<String?>(null) }
-
-    var hasCameraPermission by remember { mutableStateOf(false) }
-
-    if (hasCameraPermission) {
-        QRCodeScanner { scannedResult ->
-            scannedCode = scannedResult
-        }
-    } else {
-        RequestCameraPermission { isGranted ->
-            hasCameraPermission = isGranted
-        }
-    }
-}
