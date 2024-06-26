@@ -50,6 +50,7 @@ import com.devstromo.advancedtictactoe.presentation.GameViewModel
 import com.devstromo.advancedtictactoe.presentation.components.CustomButton
 import com.devstromo.advancedtictactoe.presentation.components.QrCodeImage
 import com.devstromo.advancedtictactoe.presentation.permissions.RequestBluetoothPermissions
+import com.devstromo.advancedtictactoe.presentation.permissions.hasBluetoothPermissions
 
 @Composable
 fun BluetoothGameScreen(
@@ -59,7 +60,7 @@ fun BluetoothGameScreen(
 ) {
     val typo = MaterialTheme.typography
     val context = LocalContext.current
-    var permissionsGranted by remember { mutableStateOf(hasPermissions(context)) }
+    var permissionsGranted by remember { mutableStateOf(hasBluetoothPermissions(context)) }
     var isBluetoothEnabled by remember { mutableStateOf(isBluetoothEnabled()) }
     var showEnableBluetoothDialog by remember { mutableStateOf(false) }
 
