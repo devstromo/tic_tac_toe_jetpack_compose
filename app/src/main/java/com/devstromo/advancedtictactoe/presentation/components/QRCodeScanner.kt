@@ -54,6 +54,18 @@ fun QRCodeScreen() {
         QRCodeScanner { scannedResult ->
             scannedCode = scannedResult
         }
+        scannedCode?.let {
+            AlertDialog(
+                onDismissRequest = { scannedCode = null },
+                title = { Text("QR Code Scanned") },
+                text = { Text(it) },
+                confirmButton = {
+                    Button(onClick = { scannedCode = null }) {
+                        Text("OK")
+                    }
+                }
+            )
+        }
     } else {
         RequestCameraPermission { isGranted ->
             hasCameraPermission = isGranted
@@ -62,7 +74,7 @@ fun QRCodeScreen() {
 }
 
 @Composable
-fun QRCodeScanner(onQRCodeScanned: (String) -> Unit) {
+fun QRCodeScanner(scannedResult: (String) -> Unit) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val cornerColors = Color.White
@@ -109,7 +121,7 @@ fun QRCodeScanner(onQRCodeScanned: (String) -> Unit) {
                                 processImageProxy(
                                     imageProxy = imageProxy,
                                     sizePx = 230.dp.toPx(),
-                                    onQRCodeScanned = { qrCodeContent = it }
+                                    onQRCodeScanned = scannedResult
                                 )
                             }
                         }
@@ -210,20 +222,6 @@ fun QRCodeScanner(onQRCodeScanned: (String) -> Unit) {
                         )
                     }
             )
-
-            // Show QR code content in a dialog
-            qrCodeContent?.let {
-                AlertDialog(
-                    onDismissRequest = { qrCodeContent = null },
-                    title = { Text("QR Code Scanned") },
-                    text = { Text(it) },
-                    confirmButton = {
-                        Button(onClick = { qrCodeContent = null }) {
-                            Text("OK")
-                        }
-                    }
-                )
-            }
         } else {
             RequestCameraPermission { granted ->
                 hasCameraPermission = granted
