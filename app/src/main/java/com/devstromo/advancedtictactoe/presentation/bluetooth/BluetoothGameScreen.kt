@@ -1,6 +1,9 @@
 package com.devstromo.advancedtictactoe.presentation.bluetooth
 
+import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothManager
+import android.content.Context
 import android.content.Intent
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -48,6 +51,7 @@ import com.devstromo.advancedtictactoe.presentation.components.QrCodeImage
 import com.devstromo.advancedtictactoe.presentation.permissions.RequestBluetoothPermissions
 import com.devstromo.advancedtictactoe.presentation.permissions.hasBluetoothPermissions
 
+@SuppressLint("MissingPermission", "HardwareIds")
 @Composable
 fun BluetoothGameScreen(
     navController: NavController,
@@ -61,7 +65,8 @@ fun BluetoothGameScreen(
     var showEnableBluetoothDialog by remember { mutableStateOf(false) }
 
     var startServer by remember { mutableStateOf(false) }
-    var joinGameServer by remember { mutableStateOf(false) }
+    val joinGameServer by remember { mutableStateOf(false) }
+    val bluetoothManager = context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
 
     val enableBluetoothLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -166,8 +171,11 @@ fun BluetoothGameScreen(
                 } else if (!isBluetoothEnabled) {
                     Text("Need to turn on your bluetooth connection.")
                 } else if (startServer) {
+                    val deviceName = bluetoothManager.adapter?.name ?: "Unknown"
+                    val deviceAddress = bluetoothManager.adapter?.address ?: "00:00:00:00:00:00"
+                    val qrCodeContent = "DeviceName:$deviceName;DeviceAddress:$deviceAddress"
                     QrCodeImage(
-                        content = "Test Code",
+                        content = qrCodeContent,
                         size = 200.dp
                     )
                 } else if (joinGameServer) {
