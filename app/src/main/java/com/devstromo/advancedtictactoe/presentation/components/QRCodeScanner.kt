@@ -51,9 +51,11 @@ fun QRCodeScreen() {
     var hasCameraPermission by remember { mutableStateOf(false) }
 
     if (hasCameraPermission) {
-        QRCodeScanner { scannedResult ->
-            scannedCode = scannedResult
-        }
+        QRCodeScanner(
+            scannedResult = {
+                scannedCode = it
+            }
+        )
         scannedCode?.let {
             AlertDialog(
                 onDismissRequest = { scannedCode = null },
@@ -74,7 +76,9 @@ fun QRCodeScreen() {
 }
 
 @Composable
-fun QRCodeScanner(scannedResult: (String) -> Unit) {
+fun QRCodeScanner(
+    scannedResult: (String) -> Unit
+) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val cornerColors = Color.White
