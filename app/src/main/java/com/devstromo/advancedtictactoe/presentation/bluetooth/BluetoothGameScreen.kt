@@ -213,36 +213,6 @@ fun BluetoothGameScreen(
     }
 }
 
-@Composable
-fun DeviceInfo(
-    modifier: Modifier = Modifier,
-    deviceInfo: BluetoothDeviceDomain,
-) {
-    val shape = RoundedCornerShape(20.dp)
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(75.dp)
-            .padding(horizontal = 10.dp, vertical = 5.dp)
-            .background(
-                color = MaterialTheme.colorScheme.primary,
-                shape = shape
-            )
-            .clip(shape)
-            .clickable { print("Device clicked ${deviceInfo.name}") },
-        horizontalArrangement = Arrangement.Start,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(
-            modifier = Modifier.padding(start = 20.dp),
-            text = deviceInfo.name ?: "Unknown",
-            style = MaterialTheme.typography.bodySmall.copy(
-                color = Color.White
-            )
-        )
-    }
-}
-
 fun isBluetoothEnabled(): Boolean {
     val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
     return bluetoothAdapter?.isEnabled == true
