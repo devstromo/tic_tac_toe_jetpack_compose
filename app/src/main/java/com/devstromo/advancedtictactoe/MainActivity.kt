@@ -92,7 +92,9 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable(route = Screen.QRScanner.route) {
-                            QRCodeScreen()
+                            QRCodeScreen(
+                                viewModel = viewModel
+                            )
                         }
                     }
                 }

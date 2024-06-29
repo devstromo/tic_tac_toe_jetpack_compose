@@ -36,6 +36,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import com.devstromo.advancedtictactoe.domain.online.bluetooth.BluetoothDeviceDomain
+import com.devstromo.advancedtictactoe.presentation.GameViewModel
 import com.devstromo.advancedtictactoe.presentation.permissions.RequestCameraPermission
 import com.google.zxing.BinaryBitmap
 import com.google.zxing.MultiFormatReader
@@ -45,7 +47,9 @@ import com.google.zxing.common.HybridBinarizer
 import java.nio.ByteBuffer
 
 @Composable
-fun QRCodeScreen() {
+fun QRCodeScreen(
+    viewModel: GameViewModel
+) {
     var scannedCode by remember { mutableStateOf<String?>(null) }
 
     var hasCameraPermission by remember { mutableStateOf(false) }
@@ -54,6 +58,15 @@ fun QRCodeScreen() {
         QRCodeScanner(
             scannedResult = {
                 scannedCode = it
+                val parts = it.split(";")
+                val deviceName = parts[0].split(":")[1]
+                val deviceAddress = parts[1].split(":")[1]
+                viewModel.connectToDevice(
+                    BluetoothDeviceDomain(
+                        name = deviceName,
+                        address = deviceAddress,
+                    )
+                )
             }
         )
         scannedCode?.let {
