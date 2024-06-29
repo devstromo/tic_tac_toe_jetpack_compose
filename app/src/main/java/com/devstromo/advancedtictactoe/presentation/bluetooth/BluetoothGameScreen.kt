@@ -60,18 +60,18 @@ fun BluetoothGameScreen(
 ) {
     val typo = MaterialTheme.typography
     val context = LocalContext.current
+    val bluetoothManager = context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
     var permissionsGranted by remember { mutableStateOf(hasBluetoothPermissions(context)) }
-    var isBluetoothEnabled by remember { mutableStateOf(isBluetoothEnabled()) }
+    var isBluetoothEnabled by remember { mutableStateOf(isBluetoothEnabled(bluetoothManager)) }
     var showEnableBluetoothDialog by remember { mutableStateOf(false) }
 
     var startServer by remember { mutableStateOf(false) }
     val joinGameServer by remember { mutableStateOf(false) }
-    val bluetoothManager = context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
 
     val enableBluetoothLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
-        isBluetoothEnabled = isBluetoothEnabled()
+        isBluetoothEnabled = isBluetoothEnabled(bluetoothManager)
     }
 
     if (!permissionsGranted) {
@@ -196,7 +196,6 @@ fun BluetoothGameScreen(
                     if (permissionsGranted && !isBluetoothEnabled) {
                         showEnableBluetoothDialog = true
                     } else {
-                        //                    viewModel.startBluetoothServer()
                         startServer = true
                     }
                 },
@@ -207,7 +206,6 @@ fun BluetoothGameScreen(
                 text = stringResource(R.string.bluetooth_game_join_title),
                 onClick = {
                     navController.navigate(Screen.QRScanner.route)
-                    //                viewModel.startDiscovery()
                 },
                 isEnable = permissionsGranted && isBluetoothEnabled
             )
@@ -215,7 +213,6 @@ fun BluetoothGameScreen(
     }
 }
 
-fun isBluetoothEnabled(): Boolean {
-    val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
-    return bluetoothAdapter?.isEnabled == true
+fun isBluetoothEnabled(bluetoothManager: BluetoothManager): Boolean {
+    return bluetoothManager.adapter?.isEnabled == true
 }
