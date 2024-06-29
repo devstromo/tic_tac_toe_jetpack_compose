@@ -5,7 +5,6 @@ import android.content.Intent
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -34,7 +33,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -43,8 +41,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import androidx.navigation.NavController
 import com.devstromo.advancedtictactoe.R
-import com.devstromo.advancedtictactoe.config.helpers.hasPermissions
-import com.devstromo.advancedtictactoe.domain.online.bluetooth.BluetoothDeviceDomain
 import com.devstromo.advancedtictactoe.navigation.Screen
 import com.devstromo.advancedtictactoe.presentation.GameViewModel
 import com.devstromo.advancedtictactoe.presentation.components.CustomButton
@@ -81,8 +77,6 @@ fun BluetoothGameScreen(
 
     val isServerStarted by viewModel.isServerStarted.collectAsState()
     val isConnected by viewModel.isConnected.collectAsState()
-    val scannedDevices by viewModel.scannedDevices.collectAsState()
-    val pairedDevices by viewModel.pairedDevices.collectAsState()
 
     if (showEnableBluetoothDialog) {
         AlertDialog(
