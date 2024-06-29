@@ -87,7 +87,6 @@ fun QRCodeScanner(scannedResult: (String) -> Unit) {
             ) == PackageManager.PERMISSION_GRANTED
         )
     }
-    var qrCodeContent by remember { mutableStateOf<String?>(null) }
     val density = LocalDensity.current
 
     val launcher = rememberLauncherForActivityResult(
