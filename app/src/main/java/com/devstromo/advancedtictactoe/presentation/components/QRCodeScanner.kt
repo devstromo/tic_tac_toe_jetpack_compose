@@ -2,6 +2,7 @@ package com.devstromo.advancedtictactoe.presentation.components
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
@@ -61,6 +62,7 @@ fun QRCodeScreen(
                 val parts = it.split(";")
                 val deviceName = parts[0].split(":")[1]
                 val deviceAddress = parts[1].split(":")[1]
+                Log.i("QRCodeScreen", "QRCodeScreen: parts: ${parts[0]} and ${parts[1]} device name: $deviceName device address: $deviceAddress ")
 //                viewModel.connectToDevice(
 //                    BluetoothDeviceDomain(
 //                        name = deviceName,
