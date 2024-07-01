@@ -14,6 +14,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Build
+import android.util.Log
 import com.devstromo.advancedtictactoe.domain.online.bluetooth.BluetoothController
 import com.devstromo.advancedtictactoe.domain.online.bluetooth.BluetoothDeviceDomain
 import com.devstromo.advancedtictactoe.domain.online.bluetooth.ConnectionResult
@@ -199,7 +200,7 @@ class AndroidBluetoothController(
             if (!hasPermission(Manifest.permission.BLUETOOTH_CONNECT)) {
                 throw SecurityException("No BLUETOOTH_CONNECT permission")
             }
-
+            Log.i("Connect to device", "connectToDevice: $device", )
             val bluetoothDevice = bluetoothAdapter?.getRemoteDevice(device.address)
 
             currentClientSocket = bluetoothDevice

@@ -61,12 +61,12 @@ fun QRCodeScreen(
                 val parts = it.split(";")
                 val deviceName = parts[0].split(":")[1]
                 val deviceAddress = parts[1].split(":")[1]
-                viewModel.connectToDevice(
-                    BluetoothDeviceDomain(
-                        name = deviceName,
-                        address = deviceAddress,
-                    )
-                )
+//                viewModel.connectToDevice(
+//                    BluetoothDeviceDomain(
+//                        name = deviceName,
+//                        address = deviceAddress,
+//                    )
+//                )
             }
         )
         scannedCode?.let {
