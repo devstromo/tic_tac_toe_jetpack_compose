@@ -61,7 +61,7 @@ fun QRCodeScreen(
                 scannedCode = it
                 val parts = it.split(";")
                 val deviceName = parts[0].split(":")[1]
-                val deviceAddress = parts[1].split(":")[1]
+                val deviceAddress = parts[1].split(":".toRegex(), limit = 2)
                 Log.i("QRCodeScreen", "QRCodeScreen: parts: ${parts[0]} and ${parts[1]} device name: $deviceName device address: $deviceAddress ")
 //                viewModel.connectToDevice(
 //                    BluetoothDeviceDomain(
