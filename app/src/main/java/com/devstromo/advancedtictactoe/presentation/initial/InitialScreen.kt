@@ -53,7 +53,7 @@ fun InitialScreen(
                 viewModel.resetIcons()
                 navController.navigate(route = Screen.Bluetooth.route)
             },
-            isActive = true
+            isActive = false
         ),
         MenuItem(
             title = currentContext.getString(R.string.mode_against_bot),
