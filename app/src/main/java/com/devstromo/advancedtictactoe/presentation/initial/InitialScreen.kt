@@ -60,7 +60,7 @@ fun InitialScreen(
         MainScreenMenu(
             menuItems = menuItems
         )
-//        Spacer(modifier = Modifier.weight(1f))
+        Spacer(modifier = Modifier.weight(1f))
 //        CustomButton(
 //            text = stringResource(R.string.mode_classic),
 //            onClick = {
