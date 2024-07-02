@@ -46,7 +46,15 @@ fun InitialScreen(
                 navController.navigate(route = Screen.Game.createRoute(GameMode.ADVANCED))
             },
             isActive = true
-        )
+        ),
+        MenuItem(
+            title = currentContext.getString(R.string.game_mode_online_title),
+            onClick = {
+                viewModel.resetIcons()
+                navController.navigate(route = Screen.Bluetooth.route)
+            },
+            isActive = true
+        ),
     )
 
 
@@ -71,21 +79,6 @@ fun InitialScreen(
             menuItems = menuItems
         )
         Spacer(modifier = Modifier.weight(1f))
-//        CustomButton(
-//            text = stringResource(R.string.mode_classic),
-//            onClick = {
-//                viewModel.resetIcons()
-//                navController.navigate(route = Screen.Game.createRoute(GameMode.CLASSIC))
-//            },
-//        )
-//        Spacer(modifier = Modifier.height(10.dp))
-//        CustomButton(
-//            text = stringResource(R.string.game_mode_advance_title),
-//            onClick = {
-//                viewModel.resetIcons()
-//                navController.navigate(route = Screen.Game.createRoute(GameMode.ADVANCED))
-//            },
-//        )
 //        Spacer(modifier = Modifier.height(10.dp))
 //        CustomButton(
 //            text = stringResource(R.string.game_mode_online_title),
