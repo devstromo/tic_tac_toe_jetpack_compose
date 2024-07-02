@@ -58,8 +58,6 @@ fun InitialScreen(
             contentDescription = "Some content Description"
         )
         MainScreenMenu(
-            navController = navController,
-            viewModel = viewModel,
             menuItems = menuItems
         )
 //        Spacer(modifier = Modifier.weight(1f))
