@@ -63,6 +63,14 @@ fun InitialScreen(
             },
             isActive = true
         ),
+        MenuItem(
+            title = "Rules",
+            onClick = {
+                viewModel.resetIcons()
+                navController.navigate(route = Screen.Rules.route)
+            },
+            isActive = true
+        ),
     )
 
 
@@ -87,21 +95,6 @@ fun InitialScreen(
         MainScreenMenu(
             menuItems = menuItems
         )
-//        Spacer(modifier = Modifier.height(10.dp))
-//        CustomButton(
-//            text = stringResource(R.string.mode_against_bot),
-//            onClick = {
-//                viewModel.resetIcons()
-//                navController.navigate(route = Screen.Game.createRoute(GameMode.BOT))
-//            },
-//        )
-//        Spacer(modifier = Modifier.height(10.dp))
-//        CustomButton(
-//            text = "Rules",
-//            onClick = {
-//                navController.navigate(route = Screen.Rules.route)
-//            },
-//        )
     }
 }
 
