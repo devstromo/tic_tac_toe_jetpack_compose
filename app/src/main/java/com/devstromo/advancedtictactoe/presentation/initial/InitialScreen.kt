@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -19,6 +20,7 @@ import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.navigation.Screen
 import com.devstromo.advancedtictactoe.presentation.GameViewModel
 import com.devstromo.advancedtictactoe.presentation.components.CustomButton
+import com.devstromo.advancedtictactoe.presentation.components.MainScreenMenu
 
 @OptIn(ExperimentalAssetLoader::class)
 @Composable
@@ -27,6 +29,17 @@ fun InitialScreen(
     viewModel: GameViewModel,
     modifier: Modifier = Modifier
 ) {
+    val currentContext = LocalContext.current
+    val menuItems = listOf(
+        MenuItem(
+            title = currentContext.getString(R.string.mode_classic),
+            onClick = {
+                viewModel.resetIcons()
+                navController.navigate(route = Screen.Game.createRoute(GameMode.CLASSIC))
+            },
+            isActive = true
+        )
+    )
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -44,44 +57,55 @@ fun InitialScreen(
             animationName = "Timeline 1",
             contentDescription = "Some content Description"
         )
-        Spacer(modifier = Modifier.weight(1f))
-        CustomButton(
-            text = stringResource(R.string.mode_classic),
-            onClick = {
-                viewModel.resetIcons()
-                navController.navigate(route = Screen.Game.createRoute(GameMode.CLASSIC))
-            },
+        MainScreenMenu(
+            navController = navController,
+            viewModel = viewModel,
+            menuItems = menuItems
         )
-        Spacer(modifier = Modifier.height(10.dp))
-        CustomButton(
-            text = stringResource(R.string.game_mode_advance_title),
-            onClick = {
-                viewModel.resetIcons()
-                navController.navigate(route = Screen.Game.createRoute(GameMode.ADVANCED))
-            },
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-        CustomButton(
-            text = stringResource(R.string.game_mode_online_title),
-            onClick = {
-                viewModel.resetIcons()
-                navController.navigate(route = Screen.Bluetooth.route)
-            },
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-        CustomButton(
-            text = stringResource(R.string.mode_against_bot),
-            onClick = {
-                viewModel.resetIcons()
-                navController.navigate(route = Screen.Game.createRoute(GameMode.BOT))
-            },
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-        CustomButton(
-            text = "Rules",
-            onClick = {
-                navController.navigate(route = Screen.Rules.route)
-            },
-        )
+//        Spacer(modifier = Modifier.weight(1f))
+//        CustomButton(
+//            text = stringResource(R.string.mode_classic),
+//            onClick = {
+//                viewModel.resetIcons()
+//                navController.navigate(route = Screen.Game.createRoute(GameMode.CLASSIC))
+//            },
+//        )
+//        Spacer(modifier = Modifier.height(10.dp))
+//        CustomButton(
+//            text = stringResource(R.string.game_mode_advance_title),
+//            onClick = {
+//                viewModel.resetIcons()
+//                navController.navigate(route = Screen.Game.createRoute(GameMode.ADVANCED))
+//            },
+//        )
+//        Spacer(modifier = Modifier.height(10.dp))
+//        CustomButton(
+//            text = stringResource(R.string.game_mode_online_title),
+//            onClick = {
+//                viewModel.resetIcons()
+//                navController.navigate(route = Screen.Bluetooth.route)
+//            },
+//        )
+//        Spacer(modifier = Modifier.height(10.dp))
+//        CustomButton(
+//            text = stringResource(R.string.mode_against_bot),
+//            onClick = {
+//                viewModel.resetIcons()
+//                navController.navigate(route = Screen.Game.createRoute(GameMode.BOT))
+//            },
+//        )
+//        Spacer(modifier = Modifier.height(10.dp))
+//        CustomButton(
+//            text = "Rules",
+//            onClick = {
+//                navController.navigate(route = Screen.Rules.route)
+//            },
+//        )
     }
 }
+
+data class MenuItem(
+    val title: String,
+    val onClick: () -> Unit,
+    val isActive: Boolean = false,
+)

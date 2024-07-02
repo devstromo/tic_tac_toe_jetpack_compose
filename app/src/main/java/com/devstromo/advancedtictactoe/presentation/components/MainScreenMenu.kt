@@ -7,31 +7,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
-import androidx.navigation.NavController
-import com.devstromo.advancedtictactoe.R
-import com.devstromo.advancedtictactoe.domain.GameMode
-import com.devstromo.advancedtictactoe.navigation.Screen
-import com.devstromo.advancedtictactoe.presentation.GameViewModel
+import com.devstromo.advancedtictactoe.presentation.initial.MenuItem
 
 @Composable
 fun MainScreenMenu(
     modifier: Modifier = Modifier,
-    navController: NavController,
-    viewModel: GameViewModel,
+    menuItems: List<MenuItem>
 ) {
-    val currentContext = LocalContext.current
-    val menuItems = arrayOf(
-        MenuItem(
-            title = currentContext.getString(R.string.mode_classic),
-            onClick = {
-                viewModel.resetIcons()
-                navController.navigate(route = Screen.Game.createRoute(GameMode.CLASSIC))
-            },
-            isActive = true
-        )
-    )
     Column(
         modifier = modifier
             .fillMaxSize(),
@@ -57,8 +39,3 @@ internal fun MenuItemView(
     )
 }
 
-internal data class MenuItem(
-    val title: String,
-    val onClick: () -> Unit,
-    val isActive: Boolean = false,
-)
