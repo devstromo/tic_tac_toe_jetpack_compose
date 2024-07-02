@@ -38,8 +38,18 @@ fun InitialScreen(
                 navController.navigate(route = Screen.Game.createRoute(GameMode.CLASSIC))
             },
             isActive = true
+        ),
+        MenuItem(
+            title = currentContext.getString(R.string.game_mode_advance_title),
+            onClick = {
+                viewModel.resetIcons()
+                navController.navigate(route = Screen.Game.createRoute(GameMode.ADVANCED))
+            },
+            isActive = true
         )
     )
+
+
     Column(
         modifier = modifier
             .fillMaxSize()
