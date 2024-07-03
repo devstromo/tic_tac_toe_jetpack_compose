@@ -14,8 +14,8 @@ jobs:
       - name: set up JDK
         uses: actions/setup-java@v4
         with:
-          distribution: 'zulu'
-          java-version: 11
+          distribution: 'adopt'
+          java-version: '17'
       - name: Grant execute permissions for gradlew
         run: chmod +x ./gradlew
       - name: Unit tests
@@ -27,8 +27,8 @@ jobs:
       - name: set up JDK
         uses: actions/setup-java@v4
         with:
-          distribution: 'zulu'
-          java-version: 11
+          distribution: 'adopt'
+          java-version: '17'
       - name: Grant execute permissions for gradlew
         run: chmod +x ./gradlew
       - name: Instrumented Tests
