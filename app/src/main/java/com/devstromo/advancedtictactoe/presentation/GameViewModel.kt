@@ -38,9 +38,6 @@ class GameViewModel(
     private val _isConnected = MutableStateFlow(false)
     val isConnected: StateFlow<Boolean> = _isConnected.asStateFlow()
 
-    val scannedDevices: StateFlow<List<BluetoothDeviceDomain>> = bluetoothController.scannedDevices
-    val pairedDevices: StateFlow<List<BluetoothDeviceDomain>> = bluetoothController.pairedDevices
-
     private val classicModeStrategy = ClassicModeStrategy()
     private val advancedModeStrategy = AdvancedModeStrategy()
     private val botModeStrategy = BotModeStrategy()
