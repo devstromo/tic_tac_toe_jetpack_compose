@@ -4,6 +4,7 @@ import com.devstromo.advancedtictactoe.domain.Player
 import com.devstromo.advancedtictactoe.domain.online.bluetooth.BluetoothController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.TestScope
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.mock
+import org.mockito.kotlin.whenever
 
 @ExperimentalCoroutinesApi
 class GameViewModelTest {
@@ -23,16 +25,14 @@ class GameViewModelTest {
     private val testDispatcher = StandardTestDispatcher()
     private lateinit var testScope: TestScope
 
+    private val isConnectedState = MutableStateFlow(false)
+
     @BeforeEach
     fun setUp() {
         Dispatchers.setMain(testDispatcher)
         bluetoothController = mock(BluetoothController::class.java)
+        whenever(bluetoothController.isConnected).thenReturn(isConnectedState)
         testScope = TestScope(testDispatcher)
-    }
-
-    @AfterEach
-    fun tearDown() {
-        Dispatchers.resetMain()
     }
 
     @Test
