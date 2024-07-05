@@ -73,6 +73,8 @@ dependencies {
     implementation(libs.androidx.startup.runtime)
     implementation(libs.google.zxing)
     testImplementation(libs.jupiter.junit5)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.kotlin.core)
     testRuntimeOnly(libs.jupiter.engine.junit5)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
