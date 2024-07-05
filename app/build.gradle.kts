@@ -72,6 +72,7 @@ dependencies {
     implementation(libs.rive.android)
     implementation(libs.androidx.startup.runtime)
     implementation(libs.google.zxing)
+    implementation(libs.jetbrain.kotlinx.coroutines.test)
     testImplementation(libs.jupiter.junit5)
     testImplementation(libs.mockito.core)
     testImplementation(libs.mockito.kotlin.core)
