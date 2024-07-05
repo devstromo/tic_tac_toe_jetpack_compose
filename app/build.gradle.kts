@@ -72,6 +72,13 @@ dependencies {
     implementation(libs.rive.android)
     implementation(libs.androidx.startup.runtime)
     implementation(libs.google.zxing)
+
+    // Camera X
+    implementation(libs.camerax.core)
+    implementation(libs.camerax.camera2)
+    implementation(libs.camerax.lifecycle)
+    implementation(libs.camerax.view)
+
     implementation(libs.jetbrain.kotlinx.coroutines.test)
     testImplementation(libs.jupiter.junit5)
     testImplementation(libs.mockito.core)
@@ -84,11 +91,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    // Camera X
-    implementation(libs.camerax.core)
-    implementation(libs.camerax.camera2)
-    implementation(libs.camerax.lifecycle)
-    implementation(libs.camerax.view)
+
 }
 
 tasks.withType<Test> {
