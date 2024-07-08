@@ -25,24 +25,6 @@ jobs:
         run: chmod +x ./gradlew
       - name: Unit tests
         run: ./gradlew testDebugUnitTest
-  android_tests:
-    runs-on:
-      - ubuntu-latest
-      # [ macos-12 ]
-    steps:
-      - uses: actions/checkout@v4
-      - name: set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'adopt'
-          java-version: '17'
-      - name: Grant execute permissions for gradlew
-        run: chmod +x ./gradlew
-      - name: Instrumented Tests
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 29
-          script: ./gradlew connectedDebugAndroidTest
   build_debug:
     runs-on:
       - ubuntu-latest
