@@ -244,7 +244,9 @@ fun BoardContent(
                     isGameOver = isGameOver,
                     nextMoveToRemove = nextMoveToRemove,
                     keySize = keySize,
-                    playSound = playSound
+                    playSound = playSound,
+                    topMargin = if (row == 0) 10.dp else 2.dp,
+                    bottomMargin = if (row == 2) 10.dp else 2.dp
                 )
             }
         }
@@ -259,7 +261,9 @@ fun BoardRow(
     isGameOver: Boolean,
     nextMoveToRemove: Pair<Int, Int>? = null,
     keySize: Dp,
-    playSound: (Int) -> Unit
+    playSound: (Int) -> Unit,
+    topMargin: Dp,
+    bottomMargin: Dp,
 ) {
     val soundResources = listOf(
         R.raw.sound_1, R.raw.sound_2, R.raw.sound_3,
@@ -269,7 +273,12 @@ fun BoardRow(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 5.dp, horizontal = 10.dp),
+            .padding(
+                top = topMargin,
+                bottom = bottomMargin,
+                start = 10.dp,
+                end = 10.dp
+            ),
         horizontalArrangement = Arrangement.SpaceAround
     ) {
         positions.forEachIndexed { index, pair ->
