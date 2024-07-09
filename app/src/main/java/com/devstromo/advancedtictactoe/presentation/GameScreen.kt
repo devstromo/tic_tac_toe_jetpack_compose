@@ -245,8 +245,8 @@ fun BoardContent(
                     nextMoveToRemove = nextMoveToRemove,
                     keySize = keySize,
                     playSound = playSound,
-                    topMargin = if (row == 0) 10.dp else 2.dp,
-                    bottomMargin = if (row == 2) 10.dp else 2.dp
+                    topMargin = if (row == 0) 10.dp else 3.dp,
+                    bottomMargin = if (row == 2) 10.dp else 3.dp
                 )
             }
         }
