@@ -217,6 +217,11 @@ fun BoardContent(
     playSound: (Int) -> Unit,
     onItemSelected: (Int, Int) -> Unit
 ) {
+    val soundResources = listOf(
+        R.raw.sound_1, R.raw.sound_2, R.raw.sound_3,
+        R.raw.sound_4, R.raw.sound_5, R.raw.sound_6,
+        R.raw.sound_7, R.raw.sound_8, R.raw.sound_9
+    )
     BoxWithConstraints(
         modifier = Modifier.fillMaxWidth(),
         contentAlignment = Alignment.Center
@@ -244,7 +249,7 @@ fun BoardContent(
                     isGameOver = isGameOver,
                     nextMoveToRemove = nextMoveToRemove,
                     keySize = keySize,
-                    playSound = playSound,
+                    soundIndex = { index -> playSound(soundResources[index]) },
                     topMargin = if (row == 0) 10.dp else 3.dp,
                     bottomMargin = if (row == 2) 10.dp else 3.dp
                 )
@@ -261,15 +266,11 @@ fun BoardRow(
     isGameOver: Boolean,
     nextMoveToRemove: Pair<Int, Int>? = null,
     keySize: Dp,
-    playSound: (Int) -> Unit,
+    soundIndex: (Int) -> Unit,
     topMargin: Dp,
     bottomMargin: Dp,
 ) {
-    val soundResources = listOf(
-        R.raw.sound_1, R.raw.sound_2, R.raw.sound_3,
-        R.raw.sound_4, R.raw.sound_5, R.raw.sound_6,
-        R.raw.sound_7, R.raw.sound_8, R.raw.sound_9
-    )
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -289,7 +290,7 @@ fun BoardRow(
                 isNextToRemove = nextMoveToRemove == pair,
                 keySize = keySize,
                 playSound = {
-                    playSound(soundResources[index])
+                    soundIndex(index)
                 }
             )
             if (index < positions.size - 1) {
