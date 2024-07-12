@@ -37,7 +37,6 @@ fun RulesScreen(
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
-    val color = MaterialTheme.colorScheme
     val typos = MaterialTheme.typography
     Box(
         modifier = modifier.fillMaxSize()
