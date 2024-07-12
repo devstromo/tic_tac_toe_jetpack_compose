@@ -46,6 +46,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.devstromo.advancedtictactoe.R
+import com.devstromo.advancedtictactoe.data.game.BoardRowConfigSize
 import com.devstromo.advancedtictactoe.domain.Player
 import com.devstromo.advancedtictactoe.navigation.Screen
 import com.devstromo.advancedtictactoe.presentation.components.CustomButton
@@ -248,10 +249,12 @@ fun BoardContent(
                     rowState = boardState[row],
                     isGameOver = isGameOver,
                     nextMoveToRemove = nextMoveToRemove,
-                    keySize = keySize,
                     soundIndex = { index -> playSound(soundResources[index]) },
-                    topMargin = if (row == 0) 10.dp else 3.dp,
-                    bottomMargin = if (row == 2) 10.dp else 3.dp
+                    boardRowConfigSize = BoardRowConfigSize(
+                        keySize = keySize,
+                        topMargin = if (row == 0) 10.dp else 3.dp,
+                        bottomMargin = if (row == 2) 10.dp else 3.dp
+                    )
                 )
             }
         }
@@ -265,18 +268,16 @@ fun BoardRow(
     rowState: List<Player?>,
     isGameOver: Boolean,
     nextMoveToRemove: Pair<Int, Int>? = null,
-    keySize: Dp,
     soundIndex: (Int) -> Unit,
-    topMargin: Dp,
-    bottomMargin: Dp,
+    boardRowConfigSize: BoardRowConfigSize
 ) {
 
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(
-                top = topMargin,
-                bottom = bottomMargin,
+                top = boardRowConfigSize.topMargin,
+                bottom = boardRowConfigSize.bottomMargin,
                 start = 10.dp,
                 end = 10.dp
             ),
@@ -288,7 +289,7 @@ fun BoardRow(
                 player = rowState[pair.second],
                 isClickable = !isGameOver,
                 isNextToRemove = nextMoveToRemove == pair,
-                keySize = keySize,
+                keySize = boardRowConfigSize.keySize,
                 playSound = {
                     soundIndex(index)
                 }
