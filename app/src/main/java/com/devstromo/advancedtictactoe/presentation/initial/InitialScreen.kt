@@ -73,7 +73,6 @@ fun InitialScreen(
         ),
     )
 
-
     Column(
         modifier = modifier
             .fillMaxSize()
