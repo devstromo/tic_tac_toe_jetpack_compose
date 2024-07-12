@@ -271,7 +271,6 @@ fun BoardRow(
     soundIndex: (Int) -> Unit,
     boardRowConfigSize: BoardRowConfigSize
 ) {
-
     Row(
         modifier = Modifier
             .fillMaxWidth()
