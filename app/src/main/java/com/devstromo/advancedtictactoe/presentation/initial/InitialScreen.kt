@@ -64,7 +64,7 @@ fun InitialScreen(
             isActive = true
         ),
         MenuItem(
-            title = "Rules",
+            title = currentContext.getString(R.string.title_rules),
             onClick = {
                 viewModel.resetIcons()
                 navController.navigate(route = Screen.Rules.route)

@@ -16,6 +16,7 @@
     <string name="game_mode_online_title">1v1 Online</string>
     <string name="mode_against_bot">Duelo vs IA</string>
     <string name="mode_classic">Duelo 1v1</string>
+    <string name="title_rules">Reglas</string>
     <string name="bluetooth_game_create_title">Crear partida</string>
     <string name="bluetooth_game_join_title">Unir a partida</string>
     <string name="bluetooth_connection_enable_request">Habilitar</string>
