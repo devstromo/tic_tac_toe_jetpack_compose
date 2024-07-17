@@ -9,6 +9,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -100,7 +104,10 @@ fun InitialScreen(
                 border = BorderStroke(2.dp, Color.White)
 
             ) {
-                Text(text = "!")
+                Icon(
+                    imageVector = Icons.Default.Info,
+                    contentDescription = ""
+                )
             }
             OutlinedButton(
                 modifier = Modifier
@@ -109,7 +116,10 @@ fun InitialScreen(
                 border = BorderStroke(2.dp, Color.White)
 
             ) {
-                Text(text = "Lang")
+                Icon(
+                    imageVector = Icons.Default.LocationOn,
+                    contentDescription = ""
+                )
             }
         }
         Spacer(modifier = Modifier.weight(1f))
