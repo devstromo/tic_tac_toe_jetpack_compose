@@ -90,7 +90,7 @@ fun InitialScreen(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             ConfigButton(
-                text = "!",
+                text = "¡",
                 onClick = { /*TODO*/ }
             )
             ConfigButton(
