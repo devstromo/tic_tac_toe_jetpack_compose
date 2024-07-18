@@ -28,6 +28,7 @@ import com.devstromo.advancedtictactoe.config.helpers.RiveAnimation
 import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.navigation.Screen
 import com.devstromo.advancedtictactoe.presentation.GameViewModel
+import com.devstromo.advancedtictactoe.presentation.components.ConfigButton
 import com.devstromo.advancedtictactoe.presentation.components.MainScreenMenu
 
 @OptIn(ExperimentalAssetLoader::class)
@@ -97,22 +98,14 @@ fun InitialScreen(
                 .padding(top = 10.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            OutlinedButton(
-                modifier = Modifier
-                    .size(70.dp),
-                onClick = { /*TODO*/ },
-                border = BorderStroke(2.dp, Color.White)
-            ) {
-                Text("!")
-            }
-            OutlinedButton(
-                modifier = Modifier
-                    .size(70.dp),
-                onClick = { /*TODO*/ },
-                border = BorderStroke(2.dp, Color.White)
-            ) {
-              Text("EN")
-            }
+            ConfigButton(
+                text = "!",
+                onClick = { /*TODO*/ }
+            )
+            ConfigButton(
+                text = "EN",
+                onClick = { /*TODO*/ }
+            )
         }
         Spacer(modifier = Modifier.weight(1f))
         RiveAnimation(
