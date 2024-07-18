@@ -16,9 +16,12 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun AnimatedDialog(
     buttonAction: () -> Unit,
-    onDismissRequest: () -> Unit
+    onDismissRequest: () -> Unit,
+    content: @Composable () -> Unit,
 ) {
-    AnimatedTransitionDialog(onDismissRequest = onDismissRequest) { dialogHelper ->
+    AnimatedTransitionDialog(
+        onDismissRequest = onDismissRequest
+    ) { dialogHelper ->
         Surface(
             shape = RoundedCornerShape(10.dp),
             color = MaterialTheme.colorScheme.surface,
@@ -29,7 +32,7 @@ fun AnimatedDialog(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.padding(16.dp)
             ) {
-                Text("This is an animated dialog")
+                content()
                 Button(onClick = {
                     buttonAction.invoke()
                     dialogHelper::triggerAnimatedDismiss.invoke()
