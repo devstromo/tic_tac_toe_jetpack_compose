@@ -14,6 +14,7 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -94,7 +95,7 @@ fun InitialScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 10.dp),
-            horizontalArrangement = Arrangement.SpaceAround
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
             OutlinedButton(
                 modifier = Modifier
@@ -102,11 +103,7 @@ fun InitialScreen(
                 onClick = { /*TODO*/ },
                 border = BorderStroke(2.dp, Color.White)
             ) {
-                Icon(
-                    imageVector = Icons.Default.Info,
-                    contentDescription = "",
-                    tint = Color.White
-                )
+                Text("!")
             }
             OutlinedButton(
                 modifier = Modifier
@@ -114,11 +111,7 @@ fun InitialScreen(
                 onClick = { /*TODO*/ },
                 border = BorderStroke(2.dp, Color.White)
             ) {
-                Icon(
-                    imageVector = Icons.Default.LocationOn,
-                    contentDescription = "",
-                    tint = Color.White
-                )
+              Text("EN")
             }
         }
         Spacer(modifier = Modifier.weight(1f))
