@@ -29,12 +29,10 @@ fun ConfigButton(
     Box(
         modifier = modifier
             .size(70.dp)
-            .border(
-                width = 2.dp,
+             .background(
                 color = Color.White,
                 shape = RoundedCornerShape(25)
             )
-            .background(Color.Transparent)
             .clickable(
                 onClick = onClick
             ),
