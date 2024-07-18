@@ -107,7 +107,7 @@ fun InitialScreen(
             )
             ConfigButton(
                 text = "EN",
-                onClick = { /*TODO*/ }
+                onClick = { showDialog.value = true }
             )
         }
         Spacer(modifier = Modifier.weight(1f))
