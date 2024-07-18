@@ -19,7 +19,7 @@ fun ConfigButton(
     val typo = MaterialTheme.typography
     Button(
         modifier = modifier,
-        shape = RoundedCornerShape(5),
+        shape = RoundedCornerShape(15),
         border = BorderStroke(2.dp, Color.White),
         onClick = onClick,
     ) {
