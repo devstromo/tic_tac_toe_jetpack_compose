@@ -23,6 +23,7 @@ import com.devstromo.advancedtictactoe.navigation.Screen
 import com.devstromo.advancedtictactoe.presentation.GameViewModel
 import com.devstromo.advancedtictactoe.presentation.components.ConfigButton
 import com.devstromo.advancedtictactoe.presentation.components.MainScreenMenu
+import com.devstromo.advancedtictactoe.presentation.components.dialog.AnimatedDialog
 
 @OptIn(ExperimentalAssetLoader::class)
 @Composable
@@ -78,7 +79,11 @@ fun InitialScreen(
     val showDialog = remember { mutableStateOf(false) }
 
     if (showDialog.value) {
-
+        AnimatedDialog(
+            buttonAction = {
+            },
+            onDismissRequest = { showDialog.value = false }
+        )
     }
     Column(
         modifier = modifier
