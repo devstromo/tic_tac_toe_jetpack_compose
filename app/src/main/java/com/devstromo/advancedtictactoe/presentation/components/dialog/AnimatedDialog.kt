@@ -1,7 +1,10 @@
 package com.devstromo.advancedtictactoe.presentation.components.dialog
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -37,7 +40,13 @@ fun AnimatedDialog(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.padding(16.dp)
             ) {
-                DraggableToggleSwitch(state = toggleState)
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(80.dp)
+                ) {
+                    DraggableToggleSwitch(state = toggleState)
+                }
                 Button(onClick = {
                     buttonAction.invoke()
                     dialogHelper::triggerAnimatedDismiss.invoke()
