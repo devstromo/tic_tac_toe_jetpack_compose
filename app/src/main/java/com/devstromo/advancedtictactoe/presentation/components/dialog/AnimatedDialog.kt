@@ -3,6 +3,7 @@ package com.devstromo.advancedtictactoe.presentation.components.dialog
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -16,6 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.devstromo.advancedtictactoe.presentation.components.DraggableToggleSwitch
 
@@ -23,9 +25,9 @@ import com.devstromo.advancedtictactoe.presentation.components.DraggableToggleSw
 fun AnimatedDialog(
     buttonAction: () -> Unit,
     onDismissRequest: () -> Unit,
-    content: @Composable () -> Unit,
 ) {
     val toggleState = remember { mutableStateOf(false) }
+    val typo = MaterialTheme.typography
 
     AnimatedTransitionDialog(
         onDismissRequest = onDismissRequest
@@ -47,12 +49,35 @@ fun AnimatedDialog(
                 ) {
                     DraggableToggleSwitch(state = toggleState)
                 }
-                Button(onClick = {
-                    buttonAction.invoke()
-                    dialogHelper::triggerAnimatedDismiss.invoke()
-                }) {
-                    Text("Close Button")
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Button(onClick = {
+                        buttonAction.invoke()
+                        dialogHelper::triggerAnimatedDismiss.invoke()
+                    }) {
+                        Text(
+                            text = "Cancel",
+                            style = typo.bodySmall.copy(
+                                color = Color.White
+                            )
+                        )
+                    }
+                    Button(onClick = {
+                        buttonAction.invoke()
+                        dialogHelper::triggerAnimatedDismiss.invoke()
+                    }) {
+                        Text(
+                            text = "Accept",
+                            style = typo.bodySmall.copy(
+                                color = Color.White
+                            )
+                        )
+                    }
                 }
+
             }
         }
     }

@@ -85,11 +85,7 @@ fun InitialScreen(
             buttonAction = {
             },
             onDismissRequest = { showDialog.value = false }
-        ) {
-            Text(
-                text = "Language info"
-            )
-        }
+        )
     }
     Column(
         modifier = modifier
