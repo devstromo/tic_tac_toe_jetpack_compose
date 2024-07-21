@@ -24,4 +24,6 @@
     <string name="title_accept">Accept</string>
     <string name="title_cancel">Cancel</string>
     <string name="select_language_title">Select Language</string>
+    <string name="language_EN" translatable="false">EN</string>
+    <string name="language_ES" translatable="false">ES</string>
 </resources>
