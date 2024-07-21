@@ -26,7 +26,6 @@ fun DraggableToggleSwitch(
     modifier: Modifier = Modifier
 ) {
     val width = 100.dp
-    val toggleWidth = 50.dp
 
     Box(
         modifier = modifier
