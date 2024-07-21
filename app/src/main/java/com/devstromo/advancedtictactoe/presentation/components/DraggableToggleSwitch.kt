@@ -21,6 +21,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -55,13 +56,16 @@ fun DraggableToggleSwitch(
                         color = if (!state.value) MaterialTheme.colorScheme.primary else Color.Transparent,
                         shape = RoundedCornerShape(20.dp)
                     )
+                    .clip(RoundedCornerShape(20.dp))
                     .clickable(
                         onClick = { state.value = false },
                         interactionSource = remember { MutableInteractionSource() },
                         indication = rememberRipple(
-                            color = Color.White
+                            bounded = true,
+                            color = Color.White,
+                            radius = 40.dp
                         )
-                    ) ,
+                    ),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
@@ -77,11 +81,14 @@ fun DraggableToggleSwitch(
                         color = if (state.value) MaterialTheme.colorScheme.primary else Color.Transparent,
                         shape = RoundedCornerShape(20.dp)
                     )
+                    .clip(RoundedCornerShape(20.dp))
                     .clickable(
                         onClick = { state.value = true },
                         interactionSource = remember { MutableInteractionSource() },
                         indication = rememberRipple(
-                            color = Color.White
+                            bounded = true,
+                            color = Color.White,
+                            radius = 40.dp
                         )
                     ),
                 contentAlignment = Alignment.Center
