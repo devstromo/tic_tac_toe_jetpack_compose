@@ -55,7 +55,13 @@ fun DraggableToggleSwitch(
                         color = if (!state.value) MaterialTheme.colorScheme.primary else Color.Transparent,
                         shape = RoundedCornerShape(20.dp)
                     )
-                    .clickable { state.value = false },
+                    .clickable(
+                        onClick = { state.value = false },
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = rememberRipple(
+                            color = Color.White
+                        )
+                    ) ,
                 contentAlignment = Alignment.Center
             ) {
                 Text(
@@ -73,6 +79,10 @@ fun DraggableToggleSwitch(
                     )
                     .clickable(
                         onClick = { state.value = true },
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = rememberRipple(
+                            color = Color.White
+                        )
                     ),
                 contentAlignment = Alignment.Center
             ) {
