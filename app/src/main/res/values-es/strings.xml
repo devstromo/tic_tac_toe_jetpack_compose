@@ -21,4 +21,6 @@
     <string name="bluetooth_game_join_title">Unir a partida</string>
     <string name="bluetooth_connection_enable_request">Habilitar</string>
     <string name="bluetooth_connection_cancel_request">Cancelar</string>
+    <string name="title_accept">Aceptar</string>
+    <string name="title_cancel">Cancelar</string>
 </resources>

@@ -18,7 +18,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.devstromo.advancedtictactoe.R
 import com.devstromo.advancedtictactoe.presentation.components.DraggableToggleSwitch
 
 @Composable
@@ -28,6 +30,7 @@ fun AnimatedDialog(
 ) {
     val toggleState = remember { mutableStateOf(false) }
     val typo = MaterialTheme.typography
+    val context = LocalContext.current
 
     AnimatedTransitionDialog(
         onDismissRequest = onDismissRequest
@@ -59,7 +62,9 @@ fun AnimatedDialog(
                         dialogHelper::triggerAnimatedDismiss.invoke()
                     }) {
                         Text(
-                            text = "Cancel",
+                            modifier = Modifier
+                                .padding(top = 10.dp),
+                            text = context.getString(R.string.title_accept),
                             style = typo.bodySmall.copy(
                                 color = Color.White
                             )
@@ -70,14 +75,13 @@ fun AnimatedDialog(
                         dialogHelper::triggerAnimatedDismiss.invoke()
                     }) {
                         Text(
-                            text = "Accept",
+                            text = context.getString(R.string.title_cancel),
                             style = typo.bodySmall.copy(
                                 color = Color.White
                             )
                         )
                     }
                 }
-
             }
         }
     }

@@ -21,4 +21,6 @@
     <string name="bluetooth_game_join_title">Join Game</string>
     <string name="bluetooth_connection_enable_request">Enable</string>
     <string name="bluetooth_connection_cancel_request">Cancel</string>
+    <string name="title_accept">Accept</string>
+    <string name="title_cancel">Cancel</string>
 </resources>
