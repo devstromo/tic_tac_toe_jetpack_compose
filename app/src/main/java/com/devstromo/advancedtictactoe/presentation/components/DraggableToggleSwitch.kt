@@ -36,8 +36,7 @@ fun DraggableToggleSwitch(
 
     Box(
         modifier = modifier
-            .width(width)
-            .height(40.dp)
+            .fillMaxSize()
             .padding(4.dp)
     ) {
         Row(
@@ -107,8 +106,17 @@ fun DraggableToggleSwitchPreview() {
         darkTheme = true,
         dynamicColor = false
     ) {
+
         val toggleState = remember { mutableStateOf(false) }
-        DraggableToggleSwitch(state = toggleState)
+        Box(
+            modifier = Modifier
+                .width(100.dp)
+                .height(70.dp)
+        ) {
+            DraggableToggleSwitch(state = toggleState)
+
+        }
+
     }
 
 }
