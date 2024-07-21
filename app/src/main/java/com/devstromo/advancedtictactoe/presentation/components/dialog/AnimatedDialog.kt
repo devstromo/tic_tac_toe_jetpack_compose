@@ -45,6 +45,12 @@ fun AnimatedDialog(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.padding(16.dp)
             ) {
+                Text(
+                    text = context.getString(R.string.select_language_title),
+                    style = typo.bodyMedium.copy(
+                        color = Color.White
+                    )
+                )
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
