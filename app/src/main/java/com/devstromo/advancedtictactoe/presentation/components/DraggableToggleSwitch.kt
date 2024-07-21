@@ -38,13 +38,11 @@ fun DraggableToggleSwitch(
         modifier = modifier
             .width(width)
             .height(40.dp)
-            .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(20.dp))
             .padding(4.dp)
     ) {
         Row(
             modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(20.dp)),
+                .fillMaxSize(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
