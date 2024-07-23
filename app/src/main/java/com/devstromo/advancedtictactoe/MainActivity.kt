@@ -55,7 +55,6 @@ class MainActivity : ComponentActivity() {
         currentLanguage.value = language ?: "en"
 
         setContent {
-
             AdvancedTicTacToeTheme(
                 darkTheme = true,
                 dynamicColor = false
@@ -63,12 +62,11 @@ class MainActivity : ComponentActivity() {
                 val state by viewModel.uiState.collectAsState()
                 val navController = rememberNavController()
 
-                CompositionLocalProvider(LocalAppLanguage provides currentLanguage.value) {
+                CompositionLocalProvider(LocalAppLanguage provides currentLanguage) {
                     Surface(
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colorScheme.background
                     ) {
-
                         NavHost(
                             navController = navController,
                             startDestination = Screen.Initial.route
@@ -85,10 +83,9 @@ class MainActivity : ComponentActivity() {
                                     type = NavType.StringType
                                 })
                             ) { backStackEntry ->
-                                val gameMode =
-                                    backStackEntry.arguments?.getString("gameMode")?.let {
-                                        GameMode.valueOf(it)
-                                    } ?: GameMode.CLASSIC
+                                val gameMode = backStackEntry.arguments?.getString("gameMode")?.let {
+                                    GameMode.valueOf(it)
+                                } ?: GameMode.CLASSIC
                                 viewModel.updateGameMode(gameMode)
                                 GameScreen(
                                     navController = navController,

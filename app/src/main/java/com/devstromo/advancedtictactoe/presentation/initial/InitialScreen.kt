@@ -21,6 +21,7 @@ import app.rive.runtime.kotlin.core.ExperimentalAssetLoader
 import com.devstromo.advancedtictactoe.R
 import com.devstromo.advancedtictactoe.config.LocalAppLanguage
 import com.devstromo.advancedtictactoe.config.helpers.RiveAnimation
+import com.devstromo.advancedtictactoe.config.helpers.setLocale
 import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.navigation.Screen
 import com.devstromo.advancedtictactoe.presentation.GameViewModel
@@ -84,7 +85,13 @@ fun InitialScreen(
 
     if (showDialog.value) {
         AnimatedDialog(
-            buttonAction = {
+            buttonAction = { newLanguage ->
+                if (newLanguage.isNotEmpty()) {
+                    // Change app language
+                    setLocale(currentContext, newLanguage)
+                    // Update the CompositionLocal value
+                    currentLanguage.value = newLanguage
+                }
             },
             onDismissRequest = { showDialog.value = false }
         )
@@ -110,7 +117,7 @@ fun InitialScreen(
                 onClick = { /*TODO*/ }
             )
             ConfigButton(
-                text = if (currentLanguage == "en") "EN" else "ES",
+                text = if (currentLanguage.value == "en") "EN" else "ES",
                 onClick = { showDialog.value = true }
             )
         }
@@ -128,8 +135,7 @@ fun InitialScreen(
     }
 }
 
-
-internal data class MenuItem(
+data class MenuItem(
     val title: String,
     val onClick: () -> Unit,
     val isActive: Boolean = false,
