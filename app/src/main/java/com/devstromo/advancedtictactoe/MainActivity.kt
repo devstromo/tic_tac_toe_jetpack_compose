@@ -1,5 +1,7 @@
 package com.devstromo.advancedtictactoe
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -15,6 +17,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import app.rive.runtime.kotlin.core.Rive
+import com.devstromo.advancedtictactoe.config.helpers.setLocale
 import com.devstromo.advancedtictactoe.di.appModule
 import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.navigation.Screen
@@ -42,6 +45,10 @@ class MainActivity : ComponentActivity() {
             androidContext(this@MainActivity)
             modules(appModule)
         }
+        val prefs: SharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        val language = prefs.getString("app_language", "en")
+        setLocale(this, language ?: "en")
+
         setContent {
 
             AdvancedTicTacToeTheme(
