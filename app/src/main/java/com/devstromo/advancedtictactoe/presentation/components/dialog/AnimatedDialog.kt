@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.devstromo.advancedtictactoe.R
+import com.devstromo.advancedtictactoe.config.helpers.setLocale
 import com.devstromo.advancedtictactoe.presentation.components.DraggableToggleSwitch
 
 @Composable
@@ -64,6 +65,7 @@ fun AnimatedDialog(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Button(onClick = {
+                        setLocale(context, if (toggleState.value) "es" else "en")
                         buttonAction.invoke()
                         dialogHelper::triggerAnimatedDismiss.invoke()
                     }) {
