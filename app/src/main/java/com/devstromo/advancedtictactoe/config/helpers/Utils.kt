@@ -34,6 +34,7 @@ internal fun radialToCartesian(
 internal fun directionVectorPointF(angleRadians: Float) =
     PointF(cos(angleRadians), sin(angleRadians))
 
+@Suppress("DEPRECATION")
 fun setLocale(context: Context, languageCode: String) {
     val locale = Locale(languageCode)
     Locale.setDefault(locale)
@@ -42,7 +43,6 @@ fun setLocale(context: Context, languageCode: String) {
     config.setLocale(locale)
     resources.updateConfiguration(config, resources.displayMetrics)
 
-    // Save the selected language to SharedPreferences
     val prefs: SharedPreferences = context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
     prefs.edit().putString("app_language", languageCode).apply()
 }
