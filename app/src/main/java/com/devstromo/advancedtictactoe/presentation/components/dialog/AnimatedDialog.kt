@@ -13,6 +13,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -21,6 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.devstromo.advancedtictactoe.R
+import com.devstromo.advancedtictactoe.config.LocalAppLanguage
 import com.devstromo.advancedtictactoe.presentation.components.DraggableToggleSwitch
 
 @Composable
@@ -28,9 +30,14 @@ fun AnimatedDialog(
     buttonAction: (String) -> Unit,
     onDismissRequest: () -> Unit,
 ) {
-    val toggleState = remember { mutableStateOf(false) }
-    val typo = MaterialTheme.typography
     val context = LocalContext.current
+    val currentLanguage = LocalAppLanguage.current.value
+    val toggleState = remember { mutableStateOf(currentLanguage == "es") }
+    val typo = MaterialTheme.typography
+
+    LaunchedEffect(currentLanguage) {
+        toggleState.value = (currentLanguage == "es")
+    }
 
     AnimatedTransitionDialog(
         onDismissRequest = onDismissRequest
