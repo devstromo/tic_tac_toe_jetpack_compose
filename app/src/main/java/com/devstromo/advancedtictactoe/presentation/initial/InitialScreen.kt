@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import app.rive.runtime.kotlin.core.ExperimentalAssetLoader
 import com.devstromo.advancedtictactoe.R
+import com.devstromo.advancedtictactoe.config.LocalAppLanguage
 import com.devstromo.advancedtictactoe.config.helpers.RiveAnimation
 import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.navigation.Screen
@@ -35,6 +36,7 @@ fun InitialScreen(
     modifier: Modifier = Modifier
 ) {
     val currentContext = LocalContext.current
+    val currentLanguage = LocalAppLanguage.current
     val menuItems = listOf(
         MenuItem(
             title = currentContext.getString(R.string.mode_classic),
@@ -108,7 +110,7 @@ fun InitialScreen(
                 onClick = { /*TODO*/ }
             )
             ConfigButton(
-                text = "EN",
+                text = if (currentLanguage == "en") "EN" else "ES",
                 onClick = { showDialog.value = true }
             )
         }
@@ -126,7 +128,8 @@ fun InitialScreen(
     }
 }
 
-data class MenuItem(
+
+internal data class MenuItem(
     val title: String,
     val onClick: () -> Unit,
     val isActive: Boolean = false,
