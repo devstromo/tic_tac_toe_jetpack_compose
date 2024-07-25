@@ -34,6 +34,8 @@ fun DraggableToggleSwitch(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
+
+    val textModifier = Modifier.padding(top = 10.dp)
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -62,6 +64,7 @@ fun DraggableToggleSwitch(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
+                    modifier = textModifier,
                     text = context.getString(R.string.language_EN),
                     color = if (!state.value) Color.White else Color.White.copy(alpha = 0.1f)
                 )
@@ -83,6 +86,7 @@ fun DraggableToggleSwitch(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
+                    modifier = textModifier,
                     text = context.getString(R.string.language_ES),
                     color = if (state.value) Color.White else Color.White.copy(alpha = 0.1f)
                 )
