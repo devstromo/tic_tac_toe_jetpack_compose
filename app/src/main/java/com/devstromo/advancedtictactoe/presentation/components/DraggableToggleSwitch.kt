@@ -63,7 +63,7 @@ fun DraggableToggleSwitch(
             ) {
                 Text(
                     text = context.getString(R.string.language_EN),
-                    color = if (!state.value) Color.White else Color.Black
+                    color = if (!state.value) Color.White else Color.White.copy(alpha = 0.1f)
                 )
             }
             Box(
@@ -84,7 +84,7 @@ fun DraggableToggleSwitch(
             ) {
                 Text(
                     text = context.getString(R.string.language_ES),
-                    color = if (state.value) Color.White else Color.Black
+                    color = if (state.value) Color.White else Color.White.copy(alpha = 0.1f)
                 )
             }
         }
