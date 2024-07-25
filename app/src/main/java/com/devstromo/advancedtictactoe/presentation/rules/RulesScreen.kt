@@ -1,5 +1,11 @@
 package com.devstromo.advancedtictactoe.presentation.rules
 
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -20,6 +26,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -38,6 +45,22 @@ fun RulesScreen(
     modifier: Modifier = Modifier
 ) {
     val typos = MaterialTheme.typography
+    val infiniteTransition = rememberInfiniteTransition(
+        label = "divider_animation_transition"
+    )
+
+    val animatedWidth by infiniteTransition.animateFloat(
+        initialValue = 50f,
+        targetValue = 100f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(
+                durationMillis = 2000,
+                easing = LinearEasing
+            ),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "divider_animation"
+    )
     Box(
         modifier = modifier.fillMaxSize()
     ) {
@@ -83,7 +106,7 @@ fun RulesScreen(
             )
             Divider(
                 modifier = Modifier
-                    .width(50.dp)
+                    .width(animatedWidth.dp)
                     .padding(
                         top = 10.dp,
                         bottom = 20.dp
