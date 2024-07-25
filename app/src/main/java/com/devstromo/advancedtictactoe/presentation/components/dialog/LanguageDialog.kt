@@ -26,7 +26,7 @@ import com.devstromo.advancedtictactoe.config.LocalAppLanguage
 import com.devstromo.advancedtictactoe.presentation.components.DraggableToggleSwitch
 
 @Composable
-fun AnimatedDialog(
+fun LanguageDialog(
     buttonAction: (String) -> Unit,
     onDismissRequest: () -> Unit,
 ) {

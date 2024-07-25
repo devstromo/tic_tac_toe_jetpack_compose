@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -27,7 +25,7 @@ import com.devstromo.advancedtictactoe.navigation.Screen
 import com.devstromo.advancedtictactoe.presentation.GameViewModel
 import com.devstromo.advancedtictactoe.presentation.components.ConfigButton
 import com.devstromo.advancedtictactoe.presentation.components.MainScreenMenu
-import com.devstromo.advancedtictactoe.presentation.components.dialog.AnimatedDialog
+import com.devstromo.advancedtictactoe.presentation.components.dialog.LanguageDialog
 
 @OptIn(ExperimentalAssetLoader::class)
 @Composable
@@ -84,7 +82,7 @@ fun InitialScreen(
     val showDialog = remember { mutableStateOf(false) }
 
     if (showDialog.value) {
-        AnimatedDialog(
+        LanguageDialog(
             buttonAction = { newLanguage ->
                 if (newLanguage.isNotEmpty()) {
                     // Change app language
