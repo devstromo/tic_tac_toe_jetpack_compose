@@ -23,6 +23,6 @@ suspend fun startDismissWithExitAnimation(
     onDismissRequest: () -> Unit
 ) {
     animateTrigger.value = false
-    delay(1000L)
+    delay(250L)
     onDismissRequest()
 }
