@@ -111,8 +111,8 @@ fun InitialScreen(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             ConfigButton(
-                text = "¡",
-                onClick = { /*TODO*/ }
+                text = "?",
+                onClick = { /*TODO add game mode description */ }
             )
             ConfigButton(
                 text = if (currentLanguage.value == "en") "EN" else "ES",
