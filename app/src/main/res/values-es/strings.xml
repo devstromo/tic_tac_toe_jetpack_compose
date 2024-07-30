@@ -24,4 +24,5 @@
     <string name="title_accept">Aceptar</string>
     <string name="title_cancel">Cancelar</string>
     <string name="select_language_title">Seleccionar idioma</string>
+    <string name="game_modes_title">Modos de Juego</string>
 </resources>
