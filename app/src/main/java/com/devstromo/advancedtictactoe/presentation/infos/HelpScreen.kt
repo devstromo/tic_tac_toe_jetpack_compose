@@ -41,7 +41,7 @@ fun HelpScreen(
     val menuItems = listOf(
         MenuItem(
             title = currentContext.getString(R.string.game_modes_title),
-            onClick = { },
+            onClick = { navController.navigate(route = Screen.GameModesInfo.route) },
             isActive = true
         ),
         MenuItem(
@@ -67,7 +67,9 @@ fun HelpScreen(
             ),
             title = {
                 Text(
-                    currentContext.getString(R.string.help_title),
+                    modifier = Modifier
+                        .padding(top = 10.dp),
+                    text = currentContext.getString(R.string.help_title),
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
