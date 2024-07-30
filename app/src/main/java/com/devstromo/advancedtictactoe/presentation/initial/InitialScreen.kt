@@ -20,6 +20,7 @@ import com.devstromo.advancedtictactoe.R
 import com.devstromo.advancedtictactoe.config.LocalAppLanguage
 import com.devstromo.advancedtictactoe.config.helpers.RiveAnimation
 import com.devstromo.advancedtictactoe.config.helpers.setLocale
+import com.devstromo.advancedtictactoe.data.item.MenuItem
 import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.navigation.Screen
 import com.devstromo.advancedtictactoe.presentation.GameViewModel
@@ -130,9 +131,3 @@ fun InitialScreen(
         )
     }
 }
-
-data class MenuItem(
-    val title: String,
-    val onClick: () -> Unit,
-    val isActive: Boolean = false,
-)
