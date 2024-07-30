@@ -70,14 +70,6 @@ fun InitialScreen(
             },
             isActive = true
         ),
-        MenuItem(
-            title = currentContext.getString(R.string.title_rules),
-            onClick = {
-                viewModel.resetIcons()
-                navController.navigate(route = Screen.Rules.route)
-            },
-            isActive = true
-        ),
     )
 
     val showDialog = remember { mutableStateOf(false) }
