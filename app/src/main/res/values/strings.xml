@@ -27,4 +27,5 @@
     <string name="language_EN" translatable="false">EN</string>
     <string name="language_ES" translatable="false">ES</string>
     <string name="game_modes_title">Game Modes</string>
+    <string name="help_title">Help Info</string>
 </resources>
