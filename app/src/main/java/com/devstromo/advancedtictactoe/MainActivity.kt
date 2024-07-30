@@ -28,9 +28,9 @@ import com.devstromo.advancedtictactoe.presentation.GameScreen
 import com.devstromo.advancedtictactoe.presentation.GameViewModel
 import com.devstromo.advancedtictactoe.presentation.bluetooth.BluetoothGameScreen
 import com.devstromo.advancedtictactoe.presentation.components.QRCodeScreen
-import com.devstromo.advancedtictactoe.presentation.help.HelpScreen
+import com.devstromo.advancedtictactoe.presentation.infos.HelpScreen
 import com.devstromo.advancedtictactoe.presentation.initial.InitialScreen
-import com.devstromo.advancedtictactoe.presentation.rules.RulesScreen
+import com.devstromo.advancedtictactoe.presentation.infos.RulesScreen
 import com.devstromo.advancedtictactoe.ui.theme.AdvancedTicTacToeTheme
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger

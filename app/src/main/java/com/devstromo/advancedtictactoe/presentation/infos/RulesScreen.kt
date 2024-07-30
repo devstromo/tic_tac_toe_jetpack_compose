@@ -1,4 +1,4 @@
-package com.devstromo.advancedtictactoe.presentation.rules
+package com.devstromo.advancedtictactoe.presentation.infos
 
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
