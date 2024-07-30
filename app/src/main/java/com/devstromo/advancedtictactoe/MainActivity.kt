@@ -28,6 +28,7 @@ import com.devstromo.advancedtictactoe.presentation.GameScreen
 import com.devstromo.advancedtictactoe.presentation.GameViewModel
 import com.devstromo.advancedtictactoe.presentation.bluetooth.BluetoothGameScreen
 import com.devstromo.advancedtictactoe.presentation.components.QRCodeScreen
+import com.devstromo.advancedtictactoe.presentation.help.HelpScreen
 import com.devstromo.advancedtictactoe.presentation.initial.InitialScreen
 import com.devstromo.advancedtictactoe.presentation.rules.RulesScreen
 import com.devstromo.advancedtictactoe.ui.theme.AdvancedTicTacToeTheme
@@ -83,9 +84,10 @@ class MainActivity : ComponentActivity() {
                                     type = NavType.StringType
                                 })
                             ) { backStackEntry ->
-                                val gameMode = backStackEntry.arguments?.getString("gameMode")?.let {
-                                    GameMode.valueOf(it)
-                                } ?: GameMode.CLASSIC
+                                val gameMode =
+                                    backStackEntry.arguments?.getString("gameMode")?.let {
+                                        GameMode.valueOf(it)
+                                    } ?: GameMode.CLASSIC
                                 viewModel.updateGameMode(gameMode)
                                 GameScreen(
                                     navController = navController,
@@ -105,6 +107,11 @@ class MainActivity : ComponentActivity() {
                             composable(route = Screen.QRScanner.route) {
                                 QRCodeScreen(
                                     viewModel = viewModel
+                                )
+                            }
+                            composable(route = Screen.Help.route) {
+                                HelpScreen(
+                                    navController = navController
                                 )
                             }
                         }

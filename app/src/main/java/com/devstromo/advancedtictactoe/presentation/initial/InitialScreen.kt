@@ -111,7 +111,7 @@ fun InitialScreen(
         ) {
             ConfigButton(
                 text = "?",
-                onClick = { /*TODO add game mode description */ }
+                onClick = { navController.navigate(route = Screen.Help.route) }
             )
             ConfigButton(
                 text = if (currentLanguage.value == "en") "EN" else "ES",

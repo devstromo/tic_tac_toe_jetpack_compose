@@ -14,4 +14,6 @@ sealed class Screen(val route: String) {
     data object Bluetooth: Screen("bluetooth_screen")
 
     data object QRScanner: Screen("qr_code_scanner_screen")
+
+    data object Help: Screen("help_screen")
 }

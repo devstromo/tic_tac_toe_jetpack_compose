@@ -10,13 +10,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.devstromo.advancedtictactoe.R
 import com.devstromo.advancedtictactoe.data.item.MenuItem
 import com.devstromo.advancedtictactoe.presentation.components.MenuItemView
 
 @Composable
 fun HelpScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController: NavController,
 ) {
     val currentContext = LocalContext.current
     val menuItems = listOf(
