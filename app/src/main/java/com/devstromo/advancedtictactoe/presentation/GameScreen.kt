@@ -118,7 +118,11 @@ fun GameScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(bottom = 30.dp),
+            .padding(
+                start = 20.dp,
+                end = 20.dp,
+                bottom = 30.dp
+            ),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         CenterAlignedTopAppBar(
@@ -138,7 +142,6 @@ fun GameScreen(
             navigationIcon = {
                 IconButton(
                     modifier = Modifier
-                        .padding(start = 20.dp)
                         .height(45.dp)
                         .width(45.dp)
                         .background(
@@ -194,7 +197,7 @@ fun GameScreen(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 45.dp)
+                .padding(horizontal = 25.dp)
         ) {
             CustomButton(
                 text = stringResource(R.string.reset_game),
