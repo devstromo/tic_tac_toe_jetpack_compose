@@ -53,7 +53,11 @@ fun GameModesInfoScreen(
             ),
             title = {
                 Text(
-                    currentContext.getString(R.string.help_title),
+                    modifier = Modifier
+                        .padding(
+                            top = 10.dp
+                        ),
+                    text = currentContext.getString(R.string.game_modes_title),
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
