@@ -48,7 +48,7 @@ fun HelpScreen(
         ),
         MenuItem(
             title = currentContext.getString(R.string.title_rules),
-            onClick = { },
+            onClick = { navController.navigate(route = Screen.Rules.route) },
             isActive = true
         ),
     )
