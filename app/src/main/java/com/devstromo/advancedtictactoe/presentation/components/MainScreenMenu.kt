@@ -30,14 +30,3 @@ fun MainScreenMenu(
             }
     }
 }
-
-@Composable
-internal fun MenuItemView(
-    menuItem: MenuItem,
-) {
-    CustomButton(
-        text = menuItem.title,
-        onClick = menuItem.onClick,
-    )
-}
-
