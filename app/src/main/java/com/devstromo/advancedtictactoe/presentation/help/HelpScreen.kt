@@ -75,7 +75,6 @@ fun HelpScreen(
             navigationIcon = {
                 IconButton(
                     modifier = Modifier
-                        .padding(start = 20.dp)
                         .height(45.dp)
                         .width(45.dp)
                         .background(
