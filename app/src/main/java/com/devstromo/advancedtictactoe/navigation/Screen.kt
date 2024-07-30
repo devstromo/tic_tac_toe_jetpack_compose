@@ -16,4 +16,6 @@ sealed class Screen(val route: String) {
     data object QRScanner: Screen("qr_code_scanner_screen")
 
     data object Help: Screen("help_screen")
+
+    data object GameModesInfo: Screen("game_modes_info_screen")
 }

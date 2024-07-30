@@ -28,6 +28,7 @@ import com.devstromo.advancedtictactoe.presentation.GameScreen
 import com.devstromo.advancedtictactoe.presentation.GameViewModel
 import com.devstromo.advancedtictactoe.presentation.bluetooth.BluetoothGameScreen
 import com.devstromo.advancedtictactoe.presentation.components.QRCodeScreen
+import com.devstromo.advancedtictactoe.presentation.infos.GameModesInfoScreen
 import com.devstromo.advancedtictactoe.presentation.infos.HelpScreen
 import com.devstromo.advancedtictactoe.presentation.initial.InitialScreen
 import com.devstromo.advancedtictactoe.presentation.infos.RulesScreen
@@ -111,6 +112,11 @@ class MainActivity : ComponentActivity() {
                             }
                             composable(route = Screen.Help.route) {
                                 HelpScreen(
+                                    navController = navController
+                                )
+                            }
+                            composable(route = Screen.GameModesInfo.route) {
+                                GameModesInfoScreen(
                                     navController = navController
                                 )
                             }
