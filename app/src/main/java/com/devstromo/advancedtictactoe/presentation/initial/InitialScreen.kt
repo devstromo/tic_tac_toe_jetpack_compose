@@ -85,9 +85,7 @@ fun InitialScreen(
         LanguageDialog(
             buttonAction = { newLanguage ->
                 if (newLanguage.isNotEmpty()) {
-                    // Change app language
                     setLocale(currentContext, newLanguage)
-                    // Update the CompositionLocal value
                     currentLanguage.value = newLanguage
                 }
             },
