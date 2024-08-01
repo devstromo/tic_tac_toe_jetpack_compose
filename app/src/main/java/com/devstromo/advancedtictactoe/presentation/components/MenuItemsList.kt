@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import com.devstromo.advancedtictactoe.data.item.MenuItem
 
 @Composable
-fun MainScreenMenu(
+fun MenuItemsList(
     modifier: Modifier = Modifier,
     menuItems: List<MenuItem>
 ) {

@@ -25,7 +25,7 @@ import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.navigation.Screen
 import com.devstromo.advancedtictactoe.presentation.GameViewModel
 import com.devstromo.advancedtictactoe.presentation.components.ConfigButton
-import com.devstromo.advancedtictactoe.presentation.components.MainScreenMenu
+import com.devstromo.advancedtictactoe.presentation.components.MenuItemsList
 import com.devstromo.advancedtictactoe.presentation.components.dialog.LanguageDialog
 
 @OptIn(ExperimentalAssetLoader::class)
@@ -118,7 +118,7 @@ fun InitialScreen(
             contentDescription = "Some content Description"
         )
         Spacer(modifier = Modifier.weight(1f))
-        MainScreenMenu(
+        MenuItemsList(
             menuItems = menuItems
         )
     }

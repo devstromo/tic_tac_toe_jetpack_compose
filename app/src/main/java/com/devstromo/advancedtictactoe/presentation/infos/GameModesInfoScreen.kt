@@ -28,7 +28,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.devstromo.advancedtictactoe.R
+import com.devstromo.advancedtictactoe.data.item.MenuItem
 import com.devstromo.advancedtictactoe.navigation.Screen
+import com.devstromo.advancedtictactoe.presentation.components.MenuItemsList
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -39,6 +41,27 @@ fun GameModesInfoScreen(
     val currentContext = LocalContext.current
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     val typo = MaterialTheme.typography
+
+    val menuItems = listOf(
+        MenuItem(
+            title = currentContext.getString(R.string.mode_classic),
+            onClick = {
+            },
+            isActive = true
+        ),
+        MenuItem(
+            title = currentContext.getString(R.string.game_mode_advance_title),
+            onClick = {
+            },
+            isActive = true
+        ),
+        MenuItem(
+            title = currentContext.getString(R.string.mode_against_bot),
+            onClick = {
+            },
+            isActive = true
+        ),
+    )
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -88,6 +111,9 @@ fun GameModesInfoScreen(
             scrollBehavior = scrollBehavior,
         )
         Spacer(modifier = Modifier.weight(1F))
-
+        MenuItemsList(
+            menuItems = menuItems
+        )
+        Spacer(modifier = Modifier.weight(1f))
     }
 }
