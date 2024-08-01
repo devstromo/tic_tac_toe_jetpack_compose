@@ -15,6 +15,7 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
@@ -37,6 +38,7 @@ fun GameModesInfoScreen(
 ) {
     val currentContext = LocalContext.current
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+    val typo = MaterialTheme.typography
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -59,7 +61,8 @@ fun GameModesInfoScreen(
                         ),
                     text = currentContext.getString(R.string.game_modes_title),
                     maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
+                    style = typo.bodyMedium
                 )
             },
             navigationIcon = {
