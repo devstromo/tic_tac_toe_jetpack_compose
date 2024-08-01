@@ -23,18 +23,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.devstromo.advancedtictactoe.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GameModeInfoScreen(
     modifier: Modifier = Modifier,
     navController: NavController,
-    title: String,
-    body: String
+    titleId: Int?,
+    bodyId: Int?
 ) {
+    val currentContext = LocalContext.current
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     val typo = MaterialTheme.typography
     Column(
@@ -57,7 +60,12 @@ fun GameModeInfoScreen(
                         .padding(
                             top = 10.dp
                         ),
-                    text = title,
+                    text = if (titleId != null)
+                        currentContext.getString(titleId)
+                    else
+                        currentContext.getString(
+                            R.string.title_rules
+                        ),
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     style = typo.bodyLarge
@@ -77,7 +85,7 @@ fun GameModeInfoScreen(
                 ) {
                     Icon(
                         Icons.Rounded.ArrowBack,
-                        contentDescription = "Home",
+                        contentDescription = "back-screen",
                         tint = Color.White,
                         modifier = Modifier.size(40.dp)
                     )
@@ -86,7 +94,14 @@ fun GameModeInfoScreen(
             scrollBehavior = scrollBehavior,
         )
         Spacer(modifier = Modifier.weight(1F))
-        Text(text = body)
+        Text(
+            text = if (bodyId != null)
+                currentContext.getString(bodyId)
+            else
+                currentContext.getString(
+                    R.string.title_rules
+                )
+        )
         Spacer(modifier = Modifier.weight(1f))
     }
 

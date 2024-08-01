@@ -121,11 +121,23 @@ class MainActivity : ComponentActivity() {
                                     navController = navController
                                 )
                             }
-                            composable(route = Screen.GameModeInfo.route) {
+                            composable(
+                                route = Screen.GameModeInfo.route,
+                                arguments = listOf(
+                                    navArgument("titleId") {
+                                        type = NavType.IntType
+                                    },
+                                    navArgument("textId") {
+                                        type = NavType.IntType
+                                    },
+                                )
+                            ) { backStackEntry ->
+                                val titleId: Int? = backStackEntry.arguments?.getInt("titleId")
+                                val textId: Int? = backStackEntry.arguments?.getInt("textId")
                                 GameModeInfoScreen(
                                     navController = navController,
-                                    title = "",
-                                    body = "",
+                                    titleId = titleId,
+                                    bodyId = textId,
                                 )
                             }
                         }
