@@ -19,5 +19,5 @@ sealed class Screen(val route: String) {
 
     data object GameModesInfo: Screen("game_modes_info_screen")
 
-    data object GameModeInfo: Screen("game_mode_info_screen")
+    data object GameModeInfo: Screen("game_mode_info_screen/{titleId}/{bodyId}")
 }

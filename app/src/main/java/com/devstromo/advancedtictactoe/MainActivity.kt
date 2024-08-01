@@ -127,17 +127,17 @@ class MainActivity : ComponentActivity() {
                                     navArgument("titleId") {
                                         type = NavType.IntType
                                     },
-                                    navArgument("textId") {
+                                    navArgument("bodyId") {
                                         type = NavType.IntType
                                     },
                                 )
                             ) { backStackEntry ->
                                 val titleId: Int? = backStackEntry.arguments?.getInt("titleId")
-                                val textId: Int? = backStackEntry.arguments?.getInt("textId")
+                                val bodyId: Int? = backStackEntry.arguments?.getInt("bodyId")
                                 GameModeInfoScreen(
                                     navController = navController,
                                     titleId = titleId,
-                                    bodyId = textId,
+                                    bodyId = bodyId,
                                 )
                             }
                         }
