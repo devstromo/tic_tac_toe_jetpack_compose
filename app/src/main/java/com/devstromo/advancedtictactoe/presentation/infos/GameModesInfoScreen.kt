@@ -62,7 +62,7 @@ fun GameModesInfoScreen(
                     text = currentContext.getString(R.string.game_modes_title),
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    style = typo.bodyMedium
+                    style = typo.bodyLarge
                 )
             },
             navigationIcon = {
