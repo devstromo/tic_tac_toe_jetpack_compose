@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.devstromo.advancedtictactoe.R
 import com.devstromo.advancedtictactoe.presentation.components.GradientDivider
+import com.devstromo.advancedtictactoe.presentation.components.RuleInfo
 
 @Composable
 fun RulesScreen(
@@ -140,54 +141,6 @@ fun RulesScreen(
                 subtitle = stringResource(R.string.subtitle_draw),
                 iconId = R.drawable.ic_draw
             )
-        }
-    }
-}
-
-@Composable
-fun RuleInfo(
-    modifier: Modifier = Modifier,
-    header: String,
-    subtitle: String,
-    iconId: Int = R.drawable.ic_defeat,
-    iconSize: Dp = 28.dp
-) {
-    val typos = MaterialTheme.typography
-    Row(
-        modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Start
-    ) {
-        Icon(
-            modifier = Modifier
-                .size(iconSize)
-                .padding(end = 10.dp)
-                .weight(1f),
-            painter = painterResource(
-                id = iconId
-            ),
-            contentDescription = "",
-            tint = Color.Unspecified
-        )
-        Column(
-            modifier = Modifier.weight(3.5f)
-        ) {
-            Text(
-                text = header,
-                style = typos.titleMedium.copy(
-                    fontWeight = FontWeight.Bold,
-                )
-            )
-            Text(
-                text = subtitle,
-                style = typos.labelSmall
-            )
-        }
-        Box(
-            modifier = Modifier
-                .weight(1.5f)
-                .background(color = Color.Red)
-        ) {
-
         }
     }
 }
