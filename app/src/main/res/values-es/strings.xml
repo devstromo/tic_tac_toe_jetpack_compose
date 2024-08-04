@@ -27,4 +27,5 @@
     <string name="game_modes_title">Modos de Juego</string>
     <string name="help_title">Info Útil</string>
     <string name="mode_classic_details">Duelo 1v1 detalles</string>
+    <string name="game_mode_advance_details">1v1 Advance detalles</string>
 </resources>

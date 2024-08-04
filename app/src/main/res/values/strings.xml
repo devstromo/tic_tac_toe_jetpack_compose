@@ -29,4 +29,5 @@
     <string name="game_modes_title">Game Modes</string>
     <string name="help_title">Help Info</string>
     <string name="mode_classic_details">Mode Classic details</string>
+    <string name="game_mode_advance_details">1v1 Advance details</string>
 </resources>
