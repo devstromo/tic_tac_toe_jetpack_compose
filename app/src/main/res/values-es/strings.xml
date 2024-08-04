@@ -28,4 +28,5 @@
     <string name="help_title">Info Útil</string>
     <string name="mode_classic_details">Duelo 1v1 detalles</string>
     <string name="game_mode_advance_details">1v1 Advance detalles</string>
+    <string name="mode_against_bot_details">Duelo vs IA details</string>
 </resources>

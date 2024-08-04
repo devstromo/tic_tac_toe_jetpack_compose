@@ -70,6 +70,12 @@ fun GameModesInfoScreen(
         MenuItem(
             title = currentContext.getString(R.string.mode_against_bot),
             onClick = {
+                navController.navigate(
+                    route = Screen.GameModeInfo.createRoute(
+                        R.string.mode_against_bot,
+                        R.string.mode_against_bot_details
+                    )
+                )
             },
             isActive = true
         ),
