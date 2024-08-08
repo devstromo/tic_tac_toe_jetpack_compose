@@ -27,4 +27,6 @@ sealed class Screen(val route: String) {
     }
 
     data object GameModeInfoClassical : Screen("game_modes_info_classical_screen")
+
+    data object GameModeInfoAdvance : Screen("game_modes_info_advance_screen")
 }
