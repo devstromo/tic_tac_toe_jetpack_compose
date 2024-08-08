@@ -25,4 +25,6 @@ sealed class Screen(val route: String) {
             return "game_mode_info_screen/${titleId}/${bodyId}"
         }
     }
+
+    data object GameModeInfoClassical : Screen("game_modes_info_classical_screen")
 }
