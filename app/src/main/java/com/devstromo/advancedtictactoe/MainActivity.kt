@@ -33,6 +33,7 @@ import com.devstromo.advancedtictactoe.presentation.infos.GameModesInfoScreen
 import com.devstromo.advancedtictactoe.presentation.infos.HelpScreen
 import com.devstromo.advancedtictactoe.presentation.initial.InitialScreen
 import com.devstromo.advancedtictactoe.presentation.infos.RulesScreen
+import com.devstromo.advancedtictactoe.presentation.infos.rules.AIChallengeModeInfoScreen
 import com.devstromo.advancedtictactoe.presentation.infos.rules.AdvanceModeInfoScreen
 import com.devstromo.advancedtictactoe.presentation.infos.rules.ClassicModeInfoScreen
 import com.devstromo.advancedtictactoe.ui.theme.AdvancedTicTacToeTheme
@@ -152,6 +153,14 @@ class MainActivity : ComponentActivity() {
                             }
                             composable(route = Screen.GameModeInfoAdvance.route) {
                                 AdvanceModeInfoScreen(
+                                    popBackStack = {
+                                        navController.popBackStack()
+                                    }
+                                )
+                            }
+
+                            composable(route = Screen.GameModeInfoAIChallenge.route) {
+                                AIChallengeModeInfoScreen(
                                     popBackStack = {
                                         navController.popBackStack()
                                     }
