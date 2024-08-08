@@ -47,10 +47,7 @@ fun GameModesInfoScreen(
             title = currentContext.getString(R.string.mode_classic),
             onClick = {
                 navController.navigate(
-                    route = Screen.GameModeInfo.createRoute(
-                        R.string.mode_classic,
-                        R.string.mode_classic_details
-                    )
+                    route = Screen.GameModeInfoClassical.route
                 )
             },
             isActive = true
