@@ -33,6 +33,7 @@ import com.devstromo.advancedtictactoe.presentation.infos.GameModesInfoScreen
 import com.devstromo.advancedtictactoe.presentation.infos.HelpScreen
 import com.devstromo.advancedtictactoe.presentation.initial.InitialScreen
 import com.devstromo.advancedtictactoe.presentation.infos.RulesScreen
+import com.devstromo.advancedtictactoe.presentation.infos.rules.ClassicModeInfoScreen
 import com.devstromo.advancedtictactoe.ui.theme.AdvancedTicTacToeTheme
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -138,6 +139,14 @@ class MainActivity : ComponentActivity() {
                                     navController = navController,
                                     titleId = titleId,
                                     bodyId = bodyId,
+                                )
+                            }
+
+                            composable(route = Screen.GameModeInfoClassical.route) {
+                                ClassicModeInfoScreen(
+                                    popBackStack = {
+                                        navController.popBackStack()
+                                    }
                                 )
                             }
                         }
