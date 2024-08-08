@@ -97,7 +97,7 @@ fun AdvanceModeInfoScreen(
                 ),
         ) {
             Text(
-                text = stringResource(R.string.title_game_rules),
+                text = stringResource(R.string.game_mode_advance_title),
                 style = typos.titleLarge.copy(
                     fontWeight = FontWeight.Bold,
                 )

@@ -56,10 +56,7 @@ fun GameModesInfoScreen(
             title = currentContext.getString(R.string.game_mode_advance_title),
             onClick = {
                 navController.navigate(
-                    route = Screen.GameModeInfo.createRoute(
-                        R.string.game_mode_advance_title,
-                        R.string.game_mode_advance_details
-                    )
+                    route = Screen.GameModeInfoAdvance.route
                 )
             },
             isActive = true
