@@ -15,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import app.rive.runtime.kotlin.core.ExperimentalAssetLoader
 import com.devstromo.advancedtictactoe.R
 import com.devstromo.advancedtictactoe.config.LocalAppLanguage
 import com.devstromo.advancedtictactoe.config.helpers.RiveAnimation
@@ -28,7 +27,6 @@ import com.devstromo.advancedtictactoe.presentation.components.ConfigButton
 import com.devstromo.advancedtictactoe.presentation.components.MenuItemsList
 import com.devstromo.advancedtictactoe.presentation.components.dialog.LanguageDialog
 
-@OptIn(ExperimentalAssetLoader::class)
 @Composable
 fun InitialScreen(
     navController: NavController,

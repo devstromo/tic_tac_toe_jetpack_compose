@@ -20,7 +20,6 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import app.rive.runtime.kotlin.RiveAnimationView
 import app.rive.runtime.kotlin.controllers.RiveFileController
 import app.rive.runtime.kotlin.core.Alignment
-import app.rive.runtime.kotlin.core.ExperimentalAssetLoader
 import app.rive.runtime.kotlin.core.Fit
 import app.rive.runtime.kotlin.core.Loop
 import app.rive.runtime.kotlin.core.PlayableInstance
@@ -29,7 +28,6 @@ import com.devstromo.advancedtictactoe.R
 /**
  * https://stackoverflow.com/a/78083060
  */
-@OptIn(ExperimentalAssetLoader::class)
 @Suppress("LongMethod")
 @Composable
 fun RiveAnimation(
