@@ -1,12 +1,15 @@
 package com.devstromo.advancedtictactoe.presentation.initial
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -109,12 +112,24 @@ fun InitialScreen(
             )
         }
         Spacer(modifier = Modifier.weight(1f))
-        RiveAnimation(
-            resId = R.raw.tic_tac_toe_title,
-            autoplay = true,
-            animationName = "Timeline 1",
-            contentDescription = "Some content Description"
-        )
+        BoxWithConstraints(
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            val boardSize = maxHeight * 0.5f
+            Box(
+                modifier = Modifier
+                    .size(boardSize)
+            ) {
+                RiveAnimation(
+                    resId = R.raw.tic_tac_toe_title,
+                    autoplay = true,
+                    animationName = "Timeline 1",
+                    contentDescription = "Some content Description"
+                )
+            }
+
+        }
         Spacer(modifier = Modifier.weight(1f))
         MenuItemsList(
             menuItems = menuItems
