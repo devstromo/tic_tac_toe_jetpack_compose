@@ -230,7 +230,7 @@ fun BoardContent(
         modifier = Modifier.fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
-        val boardSize = maxWidth * 0.8f
+        val boardSize = maxHeight * 0.7f
         val keySize = (boardSize - 30.dp) / 3
 
         Column(
