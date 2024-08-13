@@ -114,7 +114,8 @@ fun InitialScreen(
         Spacer(modifier = Modifier.weight(1f))
         BoxWithConstraints(
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxWidth(),
+            contentAlignment = Alignment.Center
         ) {
             val boardSize = maxHeight * 0.5f
             Box(
