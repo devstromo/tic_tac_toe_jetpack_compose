@@ -51,7 +51,9 @@ fun ConfigButton(
     ) {
         Text(
             modifier = Modifier
-                .padding(top = 10.dp),
+                .padding(
+                    top = 5.dp
+                ),
             text = text,
             style = typo.titleMedium.copy(
                 color = color.secondary
