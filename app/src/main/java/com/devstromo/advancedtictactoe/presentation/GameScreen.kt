@@ -197,7 +197,11 @@ fun GameScreen(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 25.dp)
+                .padding(
+                    top = 10.dp,
+                    start = 25.dp,
+                    end = 25.dp
+                )
         ) {
             CustomButton(
                 text = stringResource(R.string.reset_game),
