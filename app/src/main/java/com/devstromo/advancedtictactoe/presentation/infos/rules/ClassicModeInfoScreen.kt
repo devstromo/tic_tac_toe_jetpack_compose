@@ -39,7 +39,7 @@ import com.devstromo.advancedtictactoe.presentation.components.RuleInfo
 @Composable
 fun ClassicModeInfoScreen(
     modifier: Modifier = Modifier,
-    popBackStack: ()-> Unit
+    popBackStack: () -> Unit
 ) {
     val typos = MaterialTheme.typography
     val infiniteTransition = rememberInfiniteTransition(
@@ -109,6 +109,12 @@ fun ClassicModeInfoScreen(
                         bottom = 20.dp
                     )
                     .height(2.dp)
+            )
+            Text(
+                modifier = Modifier
+                    .padding(bottom = 25.dp),
+                text = stringResource(id = R.string.description_classic),
+                style = typos.labelSmall
             )
             RuleInfo(
                 header = stringResource(R.string.header_win),
