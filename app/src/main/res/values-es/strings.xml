@@ -7,6 +7,7 @@
     <string name="subtitle_defeat">Permita que el oponente coloque tres marcas en línea.</string>
     <string name="header_draw">Empate</string>
     <string name="subtitle_draw">Todas las casillas se llenan sin que ningún jugador tenga tres marcas en línea.</string>
+    <string name="subtitle_draw_1v1_advance">En este modo de juego no hay empate entre los jugadores</string>
     <string name="reset_game">Volver a jugar</string>
     <string name="game_over">Juego Finalizado</string>
     <string name="player_one_win">¡Ganaste!</string>

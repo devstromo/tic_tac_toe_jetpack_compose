@@ -135,7 +135,7 @@ fun AdvanceModeInfoScreen(
             )
             RuleInfo(
                 header = stringResource(R.string.header_draw),
-                subtitle = stringResource(R.string.subtitle_draw),
+                subtitle = stringResource(R.string.subtitle_draw_1v1_advance),
                 iconId = R.drawable.ic_draw
             )
         }
