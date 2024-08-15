@@ -9,6 +9,7 @@
     <string name="subtitle_draw">All cells are filled without any player having three marks in a row.</string>
     <string name="subtitle_draw_1v1_advance">In this advanced mode, draws are not possible.</string>
     <string name="description_classic">The classic battle of Xs and Os: where strategy meets simplicity, and friendships are tested!</string>
+    <string name="description_vs_ai">Think you can outsmart the AI? Prepare for a showdown of wits and algorithms!</string>
     <string name="reset_game">Reset Game</string>
     <string name="game_over">Game Over</string>
     <string name="player_one_win">You win!</string>

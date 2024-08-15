@@ -110,6 +110,12 @@ fun AIChallengeModeInfoScreen(
                     )
                     .height(2.dp)
             )
+            Text(
+                modifier = Modifier
+                    .padding(bottom = 25.dp),
+                text = stringResource(id = R.string.description_vs_ai),
+                style = typos.labelSmall
+            )
             RuleInfo(
                 header = stringResource(R.string.header_win),
                 subtitle = stringResource(R.string.subtitle_win),
