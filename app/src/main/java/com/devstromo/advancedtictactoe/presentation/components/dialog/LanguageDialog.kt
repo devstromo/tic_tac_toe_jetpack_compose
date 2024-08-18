@@ -76,8 +76,7 @@ fun LanguageDialog(
                         dialogHelper::triggerAnimatedDismiss.invoke()
                     }) {
                         Text(
-                            modifier = Modifier
-                                .padding(top = 10.dp),
+                            modifier = Modifier,
                             text = context.getString(R.string.title_accept),
                             style = typo.bodySmall.copy(
                                 color = Color.White
