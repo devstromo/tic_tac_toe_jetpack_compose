@@ -33,7 +33,6 @@ import com.devstromo.advancedtictactoe.presentation.infos.GameModeInfoScreen
 import com.devstromo.advancedtictactoe.presentation.infos.GameModesInfoScreen
 import com.devstromo.advancedtictactoe.presentation.infos.HelpScreen
 import com.devstromo.advancedtictactoe.presentation.initial.InitialScreen
-import com.devstromo.advancedtictactoe.presentation.infos.RulesScreen
 import com.devstromo.advancedtictactoe.presentation.infos.rules.AIChallengeModeInfoScreen
 import com.devstromo.advancedtictactoe.presentation.infos.rules.AdvanceModeInfoScreen
 import com.devstromo.advancedtictactoe.presentation.infos.rules.ClassicModeInfoScreen
@@ -101,9 +100,6 @@ class MainActivity : ComponentActivity() {
                                     state = state,
                                     ruleRoute = createRuleRoute(gameMode)
                                 )
-                            }
-                            composable(route = Screen.Rules.route) {
-                                RulesScreen(navController = navController)
                             }
                             composable(route = Screen.Bluetooth.route) {
                                 BluetoothGameScreen(
