@@ -10,6 +10,7 @@
     <string name="subtitle_draw_1v1_advance">En este modo de juego no hay empate entre los jugadores</string>
     <string name="description_classic">El clásico duelo de Xs y Os: donde la estrategia se encuentra con la simplicidad, ¡y las amistades se ponen a prueba!</string>
     <string name="description_vs_ai">¿Crees que puedes vencer a la IA? ¡Prepárate para un duelo de ingenio y algoritmos!</string>
+    <string name="description_1v1_advance">En esta variante del clásico Tic Tac Toe, no hay empates: o ganas o pierdes. Si después de 3 movimientos no hay ganador, el primer movimiento de cada jugador se elimina, luego el segundo, y así sucesivamente hasta que alguien gane.</string>
     <string name="reset_game">Volver a jugar</string>
     <string name="game_over">Juego Finalizado</string>
     <string name="player_one_win">¡Ganaste!</string>

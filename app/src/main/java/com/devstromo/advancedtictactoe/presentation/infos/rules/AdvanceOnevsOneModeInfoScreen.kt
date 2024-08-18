@@ -39,7 +39,7 @@ import com.devstromo.advancedtictactoe.presentation.components.RuleInfo
 @Composable
 fun AdvanceModeInfoScreen(
     modifier: Modifier = Modifier,
-    popBackStack: ()-> Unit
+    popBackStack: () -> Unit
 ) {
 
     val typos = MaterialTheme.typography
@@ -110,6 +110,12 @@ fun AdvanceModeInfoScreen(
                         bottom = 20.dp
                     )
                     .height(2.dp)
+            )
+            Text(
+                modifier = Modifier
+                    .padding(bottom = 25.dp),
+                text = stringResource(id = R.string.description_1v1_advance),
+                style = typos.labelSmall
             )
             RuleInfo(
                 header = stringResource(R.string.header_win),
