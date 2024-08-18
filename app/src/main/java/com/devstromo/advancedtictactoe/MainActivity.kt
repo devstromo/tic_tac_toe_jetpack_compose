@@ -24,6 +24,7 @@ import com.devstromo.advancedtictactoe.config.helpers.setLocale
 import com.devstromo.advancedtictactoe.di.appModule
 import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.navigation.Screen
+import com.devstromo.advancedtictactoe.navigation.createRuleRoute
 import com.devstromo.advancedtictactoe.presentation.GameScreen
 import com.devstromo.advancedtictactoe.presentation.GameViewModel
 import com.devstromo.advancedtictactoe.presentation.bluetooth.BluetoothGameScreen
@@ -98,6 +99,7 @@ class MainActivity : ComponentActivity() {
                                     navController = navController,
                                     viewModel = viewModel,
                                     state = state,
+                                    ruleRoute = createRuleRoute(gameMode)
                                 )
                             }
                             composable(route = Screen.Rules.route) {

@@ -32,3 +32,11 @@ sealed class Screen(val route: String) {
 
     data object GameModeInfoAIChallenge : Screen("game_modes_info_ai_challenge_screen")
 }
+
+fun createRuleRoute(gameMode: GameMode): String {
+    return when (gameMode) {
+        GameMode.CLASSIC -> Screen.GameModeInfoClassical.route
+        GameMode.ADVANCED -> Screen.GameModeInfoAdvance.route
+        GameMode.BOT -> Screen.GameModeInfoAIChallenge.route
+    }
+}

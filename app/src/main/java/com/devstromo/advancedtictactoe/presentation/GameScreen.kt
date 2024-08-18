@@ -64,6 +64,7 @@ fun GameScreen(
     navController: NavController,
     viewModel: GameViewModel,
     state: GameUiState,
+    ruleRoute: String,
 ) {
     val typo = MaterialTheme.typography
     val context = LocalContext.current
@@ -211,7 +212,7 @@ fun GameScreen(
             Spacer(modifier = Modifier.height(10.dp))
             CustomButton(
                 text = stringResource(id = R.string.title_game_rules),
-                onClick = { navController.navigate(Screen.Rules.route) },
+                onClick = { navController.navigate(ruleRoute) },
             )
         }
     }
