@@ -79,7 +79,7 @@ fun GameScreen(
 
     if (showDialog.value) {
         AlertDialog(
-            onDismissRequest = { showDialog.value = false },
+            onDismissRequest = { },
             title = {
                 Text(text = stringResource(R.string.game_over))
             },
