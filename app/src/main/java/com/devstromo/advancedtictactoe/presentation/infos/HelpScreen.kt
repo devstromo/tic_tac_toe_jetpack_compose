@@ -40,13 +40,8 @@ fun HelpScreen(
     val currentContext = LocalContext.current
     val menuItems = listOf(
         MenuItem(
-            title = currentContext.getString(R.string.game_modes_title),
+            title = currentContext.getString(R.string.game_modes_info_title),
             onClick = { navController.navigate(route = Screen.GameModesInfo.route) },
-            isActive = true
-        ),
-        MenuItem(
-            title = currentContext.getString(R.string.title_rules),
-            onClick = { navController.navigate(route = Screen.Rules.route) },
             isActive = true
         ),
     )
