@@ -32,7 +32,7 @@ fun CustomButton(
             Text(
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
-                    .padding(top = 10.dp),
+                    .padding(vertical = 5.dp),
                 text = text,
                 textAlign = TextAlign.Center,
                 style = typo.bodyLarge.copy(
