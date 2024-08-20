@@ -56,14 +56,6 @@ fun InitialScreen(
             isActive = true
         ),
         MenuItem(
-            title = currentContext.getString(R.string.game_mode_online_title),
-            onClick = {
-                viewModel.resetIcons()
-                navController.navigate(route = Screen.Bluetooth.route)
-            },
-            isActive = false
-        ),
-        MenuItem(
             title = currentContext.getString(R.string.mode_against_bot),
             onClick = {
                 viewModel.resetIcons()
