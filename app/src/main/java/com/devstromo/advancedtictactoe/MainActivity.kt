@@ -101,12 +101,6 @@ class MainActivity : ComponentActivity() {
                                     ruleRoute = createRuleRoute(gameMode)
                                 )
                             }
-                            composable(route = Screen.Bluetooth.route) {
-                                BluetoothGameScreen(
-                                    navController = navController,
-                                    viewModel = viewModel
-                                )
-                            }
                             composable(route = Screen.QRScanner.route) {
                                 QRCodeScreen(
                                     viewModel = viewModel
