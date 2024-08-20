@@ -27,7 +27,6 @@ import com.devstromo.advancedtictactoe.navigation.Screen
 import com.devstromo.advancedtictactoe.navigation.createRuleRoute
 import com.devstromo.advancedtictactoe.presentation.GameScreen
 import com.devstromo.advancedtictactoe.presentation.GameViewModel
-import com.devstromo.advancedtictactoe.presentation.bluetooth.BluetoothGameScreen
 import com.devstromo.advancedtictactoe.presentation.components.QRCodeScreen
 import com.devstromo.advancedtictactoe.presentation.infos.GameModeInfoScreen
 import com.devstromo.advancedtictactoe.presentation.infos.GameModesInfoScreen
