@@ -4,7 +4,7 @@ import com.devstromo.advancedtictactoe.presentation.GameUiState
 import com.devstromo.advancedtictactoe.presentation.GameViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 
-interface GameModeStrategy {
+fun interface GameModeStrategy {
     suspend fun onItemSelected(
         first: Int,
         second: Int,
