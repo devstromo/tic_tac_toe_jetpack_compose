@@ -28,10 +28,6 @@ class GameViewModel(
     val uiState: StateFlow<GameUiState> = _state.asStateFlow()
     private var mediaPlayer: MediaPlayer? = null
 
-    private val _isServerStarted = MutableStateFlow(false)
-
-    private val _isConnected = MutableStateFlow(false)
-
     private val classicModeStrategy = ClassicModeStrategy()
     private val advancedModeStrategy = AdvancedModeStrategy()
     private val botModeStrategy = BotModeStrategy()
