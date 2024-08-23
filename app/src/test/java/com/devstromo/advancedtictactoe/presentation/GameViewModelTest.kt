@@ -1,7 +1,6 @@
 package com.devstromo.advancedtictactoe.presentation
 
 import com.devstromo.advancedtictactoe.domain.Player
-import com.devstromo.advancedtictactoe.domain.online.bluetooth.BluetoothController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
