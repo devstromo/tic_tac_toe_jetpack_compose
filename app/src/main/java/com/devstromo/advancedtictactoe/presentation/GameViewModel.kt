@@ -10,8 +10,6 @@ import com.devstromo.advancedtictactoe.data.PlayerIconsGenerator.generatePlayer1
 import com.devstromo.advancedtictactoe.data.PlayerIconsGenerator.generatePlayer2Icon
 import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.domain.Player
-import com.devstromo.advancedtictactoe.domain.online.bluetooth.BluetoothDeviceDomain
-import com.devstromo.advancedtictactoe.domain.online.bluetooth.ConnectionResult
 import com.devstromo.advancedtictactoe.presentation.strategies.AdvancedModeStrategy
 import com.devstromo.advancedtictactoe.presentation.strategies.BotModeStrategy
 import com.devstromo.advancedtictactoe.presentation.strategies.ClassicModeStrategy
