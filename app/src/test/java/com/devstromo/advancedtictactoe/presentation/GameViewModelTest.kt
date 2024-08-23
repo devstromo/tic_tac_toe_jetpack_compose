@@ -19,23 +19,18 @@ import org.mockito.kotlin.whenever
 @ExperimentalCoroutinesApi
 class GameViewModelTest {
 
-    private lateinit var bluetoothController: BluetoothController
     private val testDispatcher = StandardTestDispatcher()
     private lateinit var testScope: TestScope
-
-    private val isConnectedState = MutableStateFlow(false)
 
     @BeforeEach
     fun setUp() {
         Dispatchers.setMain(testDispatcher)
-        bluetoothController = mock(BluetoothController::class.java)
-        whenever(bluetoothController.isConnected).thenReturn(isConnectedState)
         testScope = TestScope(testDispatcher)
     }
 
     @Test
     fun testCheckForWinnerShouldWinWithNoWin() = runTest {
-        val viewModel = GameViewModel(bluetoothController, testDispatcher)
+        val viewModel = GameViewModel(testDispatcher)
         val board = List(3) { MutableList(3) { Player.NONE } }
         viewModel.updateStateForTesting(board)
         assertFalse(viewModel.checkForWinner(board))
@@ -43,7 +38,7 @@ class GameViewModelTest {
 
     @Test
     fun testCheckForWinnerShouldWinWithRowWin() = runTest {
-        val viewModel = GameViewModel(bluetoothController, testDispatcher)
+        val viewModel = GameViewModel(testDispatcher)
         val board = listOf(
             mutableListOf(Player.PLAYER_1, Player.PLAYER_1, Player.PLAYER_1),
             mutableListOf(Player.NONE, Player.NONE, Player.NONE),
@@ -55,7 +50,7 @@ class GameViewModelTest {
 
     @Test
     fun testCheckForWinnerShouldWinWithColumnWin() = runTest {
-        val viewModel = GameViewModel(bluetoothController, testDispatcher)
+        val viewModel = GameViewModel(testDispatcher)
         val board = listOf(
             mutableListOf(Player.PLAYER_1, Player.NONE, Player.NONE),
             mutableListOf(Player.PLAYER_1, Player.NONE, Player.NONE),
@@ -67,7 +62,7 @@ class GameViewModelTest {
 
     @Test
     fun testCheckForWinnerShouldWinWithDiagonal() = runTest {
-        val viewModel = GameViewModel(bluetoothController, testDispatcher)
+        val viewModel = GameViewModel(testDispatcher)
         val board = listOf(
             mutableListOf(Player.PLAYER_1, Player.NONE, Player.NONE),
             mutableListOf(Player.NONE, Player.PLAYER_1, Player.NONE),
@@ -79,7 +74,7 @@ class GameViewModelTest {
 
     @Test
     fun testCheckIfCanResetShouldNotReset() = runTest {
-        val viewModel = GameViewModel(bluetoothController, testDispatcher)
+        val viewModel = GameViewModel(testDispatcher)
         viewModel.updateStateForTesting(
             listOf(
                 mutableListOf(Player.PLAYER_1, Player.NONE, Player.NONE),
@@ -92,7 +87,7 @@ class GameViewModelTest {
 
     @Test
     fun testCheckIfCanResetShouldReset() = runTest {
-        val viewModel = GameViewModel(bluetoothController, testDispatcher)
+        val viewModel = GameViewModel(testDispatcher)
         viewModel.updateStateForTesting(
             listOf(
                 mutableListOf(Player.PLAYER_1, Player.NONE, Player.NONE),
@@ -105,7 +100,7 @@ class GameViewModelTest {
 
     @Test
     fun testResetShouldResetTheBoard() = runTest {
-        val viewModel = GameViewModel(bluetoothController, testDispatcher)
+        val viewModel = GameViewModel(testDispatcher)
         viewModel.updateStateForTesting(
             listOf(
                 mutableListOf(Player.PLAYER_1, Player.NONE, Player.NONE),
