@@ -1,4 +1,4 @@
-package com.devstromo.advancedtictactoe.presentation
+package com.devstromo.advancedtictactoe.presentation.main
 
 import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.domain.GameModeStrategy

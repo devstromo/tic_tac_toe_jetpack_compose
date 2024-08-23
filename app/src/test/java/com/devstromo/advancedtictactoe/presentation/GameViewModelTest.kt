@@ -1,9 +1,9 @@
 package com.devstromo.advancedtictactoe.presentation
 
 import com.devstromo.advancedtictactoe.domain.Player
+import com.devstromo.advancedtictactoe.presentation.main.GameViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
@@ -12,8 +12,6 @@ import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.mockito.Mockito.mock
-import org.mockito.kotlin.whenever
 
 @ExperimentalCoroutinesApi
 class GameViewModelTest {

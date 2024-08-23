@@ -1,7 +1,7 @@
 package com.devstromo.advancedtictactoe.domain
 
-import com.devstromo.advancedtictactoe.presentation.GameUiState
-import com.devstromo.advancedtictactoe.presentation.GameViewModel
+import com.devstromo.advancedtictactoe.presentation.main.GameUiState
+import com.devstromo.advancedtictactoe.presentation.main.GameViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 
 fun interface GameModeStrategy {

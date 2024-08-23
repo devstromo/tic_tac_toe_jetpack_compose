@@ -1,4 +1,4 @@
-package com.devstromo.advancedtictactoe.presentation
+package com.devstromo.advancedtictactoe.presentation.main
 
 import android.annotation.SuppressLint
 import android.util.Log

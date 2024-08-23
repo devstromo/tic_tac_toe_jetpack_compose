@@ -25,8 +25,8 @@ import com.devstromo.advancedtictactoe.di.appModule
 import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.navigation.Screen
 import com.devstromo.advancedtictactoe.navigation.createRuleRoute
-import com.devstromo.advancedtictactoe.presentation.GameScreen
-import com.devstromo.advancedtictactoe.presentation.GameViewModel
+import com.devstromo.advancedtictactoe.presentation.main.GameScreen
+import com.devstromo.advancedtictactoe.presentation.main.GameViewModel
 import com.devstromo.advancedtictactoe.presentation.infos.GameModeInfoScreen
 import com.devstromo.advancedtictactoe.presentation.infos.GameModesInfoScreen
 import com.devstromo.advancedtictactoe.presentation.infos.HelpScreen

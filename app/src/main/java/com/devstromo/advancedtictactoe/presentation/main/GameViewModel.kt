@@ -1,4 +1,4 @@
-package com.devstromo.advancedtictactoe.presentation
+package com.devstromo.advancedtictactoe.presentation.main
 
 import android.content.Context
 import android.media.MediaPlayer

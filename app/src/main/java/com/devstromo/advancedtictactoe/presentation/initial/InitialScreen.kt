@@ -25,7 +25,7 @@ import com.devstromo.advancedtictactoe.config.helpers.setLocale
 import com.devstromo.advancedtictactoe.data.item.MenuItem
 import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.navigation.Screen
-import com.devstromo.advancedtictactoe.presentation.GameViewModel
+import com.devstromo.advancedtictactoe.presentation.main.GameViewModel
 import com.devstromo.advancedtictactoe.presentation.components.ConfigButton
 import com.devstromo.advancedtictactoe.presentation.components.MenuItemsList
 import com.devstromo.advancedtictactoe.presentation.components.dialog.LanguageDialog
