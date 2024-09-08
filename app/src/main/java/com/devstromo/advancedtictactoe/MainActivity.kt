@@ -1,5 +1,7 @@
 package com.devstromo.advancedtictactoe
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -22,6 +24,7 @@ import app.rive.runtime.kotlin.core.Rive
 import com.devstromo.advancedtictactoe.config.LocalAppLanguage
 import com.devstromo.advancedtictactoe.config.helpers.setLocale
 import com.devstromo.advancedtictactoe.di.appModule
+import com.devstromo.advancedtictactoe.di.notificationModule
 import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.navigation.Screen
 import com.devstromo.advancedtictactoe.navigation.createRuleRoute
@@ -51,7 +54,7 @@ class MainActivity : ComponentActivity() {
         startKoin {
             androidLogger()
             androidContext(this@MainActivity)
-            modules(appModule)
+            modules(listOf(appModule, notificationModule))
         }
         val prefs: SharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
         val language = prefs.getString("app_language", "en")
@@ -156,5 +159,17 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    private fun createNotificationChannel() {
+        val name = "Daily Reminder"
+        val descriptionText = "Reminder to play Tic Tac Toe"
+        val importance = NotificationManager.IMPORTANCE_DEFAULT
+        val channel = NotificationChannel("daily_reminder_channel", name, importance).apply {
+            description = descriptionText
+        }
+        val notificationManager: NotificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(channel)
     }
 }
