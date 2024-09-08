@@ -51,11 +51,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Rive.init(this)
-        startKoin {
-            androidLogger()
-            androidContext(this@MainActivity)
-            modules(listOf(appModule, notificationModule))
-        }
         val prefs: SharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
         val language = prefs.getString("app_language", "en")
         setLocale(this, language ?: "en")
