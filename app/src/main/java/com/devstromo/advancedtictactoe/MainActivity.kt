@@ -23,25 +23,20 @@ import androidx.navigation.navArgument
 import app.rive.runtime.kotlin.core.Rive
 import com.devstromo.advancedtictactoe.config.LocalAppLanguage
 import com.devstromo.advancedtictactoe.config.helpers.setLocale
-import com.devstromo.advancedtictactoe.di.appModule
-import com.devstromo.advancedtictactoe.di.notificationModule
 import com.devstromo.advancedtictactoe.domain.GameMode
 import com.devstromo.advancedtictactoe.navigation.Screen
 import com.devstromo.advancedtictactoe.navigation.createRuleRoute
-import com.devstromo.advancedtictactoe.presentation.main.GameScreen
-import com.devstromo.advancedtictactoe.presentation.main.GameViewModel
 import com.devstromo.advancedtictactoe.presentation.infos.GameModeInfoScreen
 import com.devstromo.advancedtictactoe.presentation.infos.GameModesInfoScreen
 import com.devstromo.advancedtictactoe.presentation.infos.HelpScreen
-import com.devstromo.advancedtictactoe.presentation.initial.InitialScreen
 import com.devstromo.advancedtictactoe.presentation.infos.rules.AIChallengeModeInfoScreen
 import com.devstromo.advancedtictactoe.presentation.infos.rules.AdvanceModeInfoScreen
 import com.devstromo.advancedtictactoe.presentation.infos.rules.ClassicModeInfoScreen
+import com.devstromo.advancedtictactoe.presentation.initial.InitialScreen
+import com.devstromo.advancedtictactoe.presentation.main.GameScreen
+import com.devstromo.advancedtictactoe.presentation.main.GameViewModel
 import com.devstromo.advancedtictactoe.ui.theme.AdvancedTicTacToeTheme
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.context.startKoin
 
 class MainActivity : ComponentActivity() {
 
@@ -51,6 +46,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Rive.init(this)
+        createNotificationChannel()
         val prefs: SharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
         val language = prefs.getString("app_language", "en")
         setLocale(this, language ?: "en")
