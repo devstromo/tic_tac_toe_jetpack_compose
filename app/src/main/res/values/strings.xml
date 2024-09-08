@@ -16,7 +16,7 @@
     <string name="player_one_win">You win!</string>
     <string name="player_two_wins">Your opponent wins!</string>
     <string name="draw_string">It\'s a draw!</string>
-    <string name="game_mode_advance_title">1v1 Advance</string>
+    <string name="game_mode_advance_title">Ultimate Duel</string>
     <string name="game_mode_online_title">1v1 Online</string>
     <string name="mode_against_bot">AI Challenge</string>
     <string name="mode_classic">Classic</string>
