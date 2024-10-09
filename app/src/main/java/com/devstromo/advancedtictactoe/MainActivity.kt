@@ -92,6 +92,7 @@ class MainActivity : ComponentActivity() {
             startDestination = Screen.Initial.route
         ) {
             composable(Screen.Initial.route) {
+                viewModel.resetGame()
                 InitialScreen(navController = navController, viewModel = viewModel)
             }
             composable(
