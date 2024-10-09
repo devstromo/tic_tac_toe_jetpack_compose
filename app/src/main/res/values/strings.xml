@@ -36,4 +36,6 @@
     <string name="mode_classic_details">Mode Classic details</string>
     <string name="game_mode_advance_details">1v1 Advance details</string>
     <string name="mode_against_bot_details">AI Challenge details</string>
+    <string name="leave_game">Do you really want to leave the game?</string>
+    <string name="leave_game_exit">Exit Game</string>
 </resources>

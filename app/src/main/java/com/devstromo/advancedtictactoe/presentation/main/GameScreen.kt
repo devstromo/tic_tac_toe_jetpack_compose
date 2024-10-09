@@ -70,6 +70,7 @@ fun GameScreen(
     val context = LocalContext.current
     val showDialog = remember { mutableStateOf(false) }
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+    val showBackDialog = remember { mutableStateOf(false) }
 
     LaunchedEffect(state.isGameOver) {
         if (state.isGameOver) {
@@ -116,6 +117,57 @@ fun GameScreen(
         )
     }
 
+    if (showBackDialog.value) {
+        AlertDialog(
+            onDismissRequest = { },
+            title = {
+                Text(text = stringResource(R.string.leave_game_exit))
+            },
+            text = {
+                Text(
+                    text = stringResource(R.string.leave_game)
+                )
+            },
+            dismissButton = {
+                Button(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(25),
+                    onClick = {
+                        showBackDialog.value = false
+                    }
+                ) {
+                    Text(
+                        modifier = Modifier
+                            .align(Alignment.CenterVertically)
+                            .padding(top = 10.dp),
+                        text = stringResource(id = R.string.title_cancel),
+                        textAlign = TextAlign.Center,
+                        style = typo.bodyLarge.copy(color = Color.White)
+                    )
+                }
+            },
+            confirmButton = {
+                Button(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(25),
+                    onClick = {
+                        showBackDialog.value = false
+                        navController.navigate(route = Screen.Initial.route)
+                    }
+                ) {
+                    Text(
+                        modifier = Modifier
+                            .align(Alignment.CenterVertically)
+                            .padding(top = 10.dp),
+                        text = stringResource(id = R.string.title_accept),
+                        textAlign = TextAlign.Center,
+                        style = typo.bodyLarge.copy(color = Color.White)
+                    )
+                }
+            }
+        )
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -149,8 +201,7 @@ fun GameScreen(
                             color = Color.Transparent,
                         ),
                     onClick = {
-                        viewModel.resetGame()
-                        navController.navigate(route = Screen.Initial.route)
+                        showBackDialog.value = true
                     },
                 ) {
                     Icon(
