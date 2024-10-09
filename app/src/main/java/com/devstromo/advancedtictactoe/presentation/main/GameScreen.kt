@@ -214,27 +214,7 @@ fun GameScreen(
             },
             scrollBehavior = scrollBehavior,
         )
-        Row(
-            modifier = Modifier.padding(vertical = 10.dp)
-        ) {
-            PlayerMarker(
-                state = PlayerMakerState(
-                    PlayerMarkerType.X,
-                    isSelected = state.currentPlayer == Player.PLAYER_1,
-                    itemsCount = state.player1MoveCount
-                ),
-                playerIconId = viewModel.player1Icon()
-            )
-            Spacer(modifier = Modifier.width(20.dp))
-            PlayerMarker(
-                state = PlayerMakerState(
-                    PlayerMarkerType.O,
-                    isSelected = state.currentPlayer == Player.PLAYER_2,
-                    itemsCount = state.player2MoveCount
-                ),
-                playerIconId = viewModel.player2Icon()
-            )
-        }
+        PlayersMakerContainer(state, viewModel)
         Spacer(modifier = Modifier.weight(1f))
         BoardContent(
             boardState = state.board,
@@ -247,6 +227,34 @@ fun GameScreen(
         )
         Spacer(modifier = Modifier.weight(1f))
         FooterButtons(viewModel, navController, ruleRoute)
+    }
+}
+
+@Composable
+private fun PlayersMakerContainer(
+    state: GameUiState,
+    viewModel: GameViewModel
+) {
+    Row(
+        modifier = Modifier.padding(vertical = 10.dp)
+    ) {
+        PlayerMarker(
+            state = PlayerMakerState(
+                PlayerMarkerType.X,
+                isSelected = state.currentPlayer == Player.PLAYER_1,
+                itemsCount = state.player1MoveCount
+            ),
+            playerIconId = viewModel.player1Icon()
+        )
+        Spacer(modifier = Modifier.width(20.dp))
+        PlayerMarker(
+            state = PlayerMakerState(
+                PlayerMarkerType.O,
+                isSelected = state.currentPlayer == Player.PLAYER_2,
+                itemsCount = state.player2MoveCount
+            ),
+            playerIconId = viewModel.player2Icon()
+        )
     }
 }
 
