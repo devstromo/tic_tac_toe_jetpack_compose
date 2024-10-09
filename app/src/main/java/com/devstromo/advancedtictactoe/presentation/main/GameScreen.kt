@@ -246,26 +246,35 @@ fun GameScreen(
             onItemSelected = viewModel::onItemSelected
         )
         Spacer(modifier = Modifier.weight(1f))
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(
-                    top = 10.dp,
-                    start = 25.dp,
-                    end = 25.dp
-                )
-        ) {
-            CustomButton(
-                text = stringResource(R.string.reset_game),
-                onClick = viewModel::resetGame,
-                isEnable = viewModel.canResetGame()
+        FooterButtons(viewModel, navController, ruleRoute)
+    }
+}
+
+@Composable
+private fun FooterButtons(
+    viewModel: GameViewModel,
+    navController: NavController,
+    ruleRoute: String
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                top = 10.dp,
+                start = 25.dp,
+                end = 25.dp
             )
-            Spacer(modifier = Modifier.height(10.dp))
-            CustomButton(
-                text = stringResource(id = R.string.title_game_rules),
-                onClick = { navController.navigate(ruleRoute) },
-            )
-        }
+    ) {
+        CustomButton(
+            text = stringResource(R.string.reset_game),
+            onClick = viewModel::resetGame,
+            isEnable = viewModel.canResetGame()
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        CustomButton(
+            text = stringResource(id = R.string.title_game_rules),
+            onClick = { navController.navigate(ruleRoute) },
+        )
     }
 }
 
