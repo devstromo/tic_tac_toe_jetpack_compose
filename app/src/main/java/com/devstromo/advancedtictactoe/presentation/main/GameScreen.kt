@@ -39,6 +39,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -71,6 +72,12 @@ fun GameScreen(
     val showDialog = remember { mutableStateOf(false) }
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     val showBackDialog = remember { mutableStateOf(false) }
+    val volumeOn = remember { mutableStateOf(true) }
+    val volumeIcon = if(volumeOn.value) {
+        painterResource(R.drawable.ic_volume)
+    } else {
+        painterResource(R.drawable.ic_volume_off)
+    }
 
     LaunchedEffect(state.isGameOver) {
         if (state.isGameOver) {
@@ -206,6 +213,16 @@ fun GameScreen(
                 ) {
                     Icon(
                         Icons.Rounded.Home,
+                        contentDescription = "Home",
+                        tint = Color.White,
+                        modifier = Modifier.size(40.dp)
+                    )
+                }
+            },
+            actions = {
+                IconButton(onClick = { volumeOn.value = !volumeOn.value }) {
+                    Icon(
+                       volumeIcon,
                         contentDescription = "Home",
                         tint = Color.White,
                         modifier = Modifier.size(40.dp)
