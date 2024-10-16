@@ -73,7 +73,7 @@ fun GameScreen(
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     val showBackDialog = remember { mutableStateOf(false) }
     val volumeOn = remember { mutableStateOf(true) }
-    val volumeIcon = if(volumeOn.value) {
+    val volumeIcon = if (volumeOn.value) {
         painterResource(R.drawable.ic_volume)
     } else {
         painterResource(R.drawable.ic_volume_off)
@@ -222,7 +222,7 @@ fun GameScreen(
             actions = {
                 IconButton(onClick = { volumeOn.value = !volumeOn.value }) {
                     Icon(
-                       volumeIcon,
+                        volumeIcon,
                         contentDescription = "Home",
                         tint = Color.White,
                         modifier = Modifier.size(40.dp)
@@ -238,7 +238,9 @@ fun GameScreen(
             isGameOver = state.isGameOver,
             nextMoveToRemove = state.nextMoveToRemove,
             playSound = { soundId ->
-                viewModel.playSound(context, soundId)
+                if (volumeOn.value) {
+                    viewModel.playSound(context, soundId)
+                }
             },
             onItemSelected = viewModel::onItemSelected
         )
