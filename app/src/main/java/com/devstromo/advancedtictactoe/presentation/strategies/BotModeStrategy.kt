@@ -5,6 +5,7 @@ import com.devstromo.advancedtictactoe.domain.Player
 import com.devstromo.advancedtictactoe.presentation.main.GameUiState
 import com.devstromo.advancedtictactoe.presentation.main.GameViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class BotModeStrategy : GameModeStrategy {
@@ -19,7 +20,9 @@ class BotModeStrategy : GameModeStrategy {
         newState = viewModel.applyAdvancedModeLogicIfNeeded(newState)
 
         if (viewModel.shouldBotMove(newState)) {
-            val botMove = withContext(dispatcher) { viewModel.calculateBestMove(newState.board) }
+            val botMove = withContext(Dispatchers.Default) {
+                viewModel.calculateBestMove(newState.board)
+            }
             newState = viewModel.makeMove(newState, botMove.first, botMove.second, Player.PLAYER_2)
         }
 

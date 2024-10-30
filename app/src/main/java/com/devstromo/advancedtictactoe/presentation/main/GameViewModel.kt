@@ -20,6 +20,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class GameViewModel(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
@@ -64,7 +65,9 @@ class GameViewModel(
                 dispatcher,
                 this@GameViewModel
             )
-            _state.value = newState
+            withContext(Dispatchers.Main) {
+                _state.value = newState
+            }
         }
     }
 
