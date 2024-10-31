@@ -36,4 +36,5 @@
     <string name="mode_against_bot_details">Duelo vs IA details</string>
     <string name="leave_game">¿Realmente quieres salir del juego?</string>
     <string name="leave_game_exit">Salir del juego</string>
+    <string name="reset_game_title">¿Realmente quieres reiniciar el juego?</string>
 </resources>
