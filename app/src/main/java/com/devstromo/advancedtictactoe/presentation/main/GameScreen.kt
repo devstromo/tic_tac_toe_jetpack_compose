@@ -72,6 +72,7 @@ fun GameScreen(
     val showDialog = remember { mutableStateOf(false) }
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     val showBackDialog = remember { mutableStateOf(false) }
+    val showRestartDialog = remember { mutableStateOf(false) }
     val volumeOn = remember { mutableStateOf(true) }
     val volumeIcon = if (volumeOn.value) {
         painterResource(R.drawable.ic_volume)
@@ -175,6 +176,57 @@ fun GameScreen(
         )
     }
 
+    if (showRestartDialog.value) {
+        AlertDialog(
+            onDismissRequest = { },
+            title = {
+                Text(text = stringResource(R.string.reset_game))
+            },
+            text = {
+                Text(
+                    text = stringResource(R.string.reset_game_title)
+                )
+            },
+            dismissButton = {
+                Button(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(25),
+                    onClick = {
+                        showRestartDialog.value = false
+                    }
+                ) {
+                    Text(
+                        modifier = Modifier
+                            .align(Alignment.CenterVertically)
+                            .padding(top = 10.dp),
+                        text = stringResource(id = R.string.title_cancel),
+                        textAlign = TextAlign.Center,
+                        style = typo.bodyLarge.copy(color = Color.White)
+                    )
+                }
+            },
+            confirmButton = {
+                Button(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(25),
+                    onClick = {
+                        showRestartDialog.value = false
+                        viewModel.resetGame()
+                    }
+                ) {
+                    Text(
+                        modifier = Modifier
+                            .align(Alignment.CenterVertically)
+                            .padding(top = 10.dp),
+                        text = stringResource(id = R.string.title_accept),
+                        textAlign = TextAlign.Center,
+                        style = typo.bodyLarge.copy(color = Color.White)
+                    )
+                }
+            }
+        )
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -245,7 +297,14 @@ fun GameScreen(
             onItemSelected = viewModel::onItemSelected
         )
         Spacer(modifier = Modifier.weight(1f))
-        FooterButtons(viewModel, navController, ruleRoute)
+        FooterButtons(
+            navController =   navController,
+            ruleRoute=  ruleRoute,
+            resetGameButtonIsEnabled = viewModel.canResetGame(),
+            onClickResetGameListener = {
+                showRestartDialog.value = !showRestartDialog.value
+            }
+        )
     }
 }
 
@@ -279,9 +338,10 @@ private fun PlayersMakerContainer(
 
 @Composable
 private fun FooterButtons(
-    viewModel: GameViewModel,
     navController: NavController,
-    ruleRoute: String
+    ruleRoute: String,
+    resetGameButtonIsEnabled: Boolean = false,
+    onClickResetGameListener: ()-> Unit
 ) {
     Column(
         modifier = Modifier
@@ -294,8 +354,8 @@ private fun FooterButtons(
     ) {
         CustomButton(
             text = stringResource(R.string.reset_game),
-            onClick = viewModel::resetGame,
-            isEnable = viewModel.canResetGame()
+            onClick = onClickResetGameListener,
+            isEnable = resetGameButtonIsEnabled
         )
         Spacer(modifier = Modifier.height(10.dp))
         CustomButton(
