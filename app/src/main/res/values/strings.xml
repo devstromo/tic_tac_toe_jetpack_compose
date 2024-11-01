@@ -38,5 +38,5 @@
     <string name="mode_against_bot_details">AI Challenge details</string>
     <string name="leave_game">Do you really want to leave the game?</string>
     <string name="leave_game_exit">Exit Game</string>
-    <string name="reset_game_title">Do you really want to leave the reset the game?</string>
+    <string name="reset_game_title">Do you really want to reset the game?</string>
 </resources>
